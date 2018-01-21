@@ -106,7 +106,4 @@ RUN mkdir -p /var/www/html/public/uploads/
 RUN chmod -R 0777 /var/www/html/storage/
 RUN chmod -R 0777 /var/www/html/public/uploads/
 
-# Custom ini file in php conf folder
-COPY config/custom.ini /usr/local/etc/php/conf.d/
-
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
