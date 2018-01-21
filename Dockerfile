@@ -2,7 +2,7 @@ FROM php:7.0.12-apache
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install the PHP extensions I need for my personnal project (gd, mbstring, opcache)
+# Install the PHP extensions I need for my personal project (gd, mbstring, opcache)
 RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev libpq-dev git mysql-client-5.5 wget \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
@@ -52,7 +52,6 @@ RUN a2enmod headers
 RUN a2enmod php7
 
 RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
-RUN curl -sL https://deb.nodesource.com/setup | bash -
 
 # Edit PHP INI
 RUN echo "memory_limit = 1G" > /usr/local/etc/php/php.ini
