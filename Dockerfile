@@ -53,8 +53,6 @@ RUN a2enmod php7
 
 RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
 RUN curl -sL https://deb.nodesource.com/setup | bash -
-RUN apt-get install -y nodejs build-essential
-RUN npm install -g phantomjs-prebuilt casperjs
 
 # Edit PHP INI
 RUN echo "memory_limit = 1G" > /usr/local/etc/php/php.ini
@@ -92,9 +90,9 @@ RUN chgrp -R www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R ug+rwx /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Change your local - here it's in french
-RUN echo "locales locales/default_environment_locale select fr_FR.UTF-8" | debconf-set-selections \
-&& echo "locales locales/locales_to_be_generated multiselect 'fr_FR.UTF-8 UTF-8'" | debconf-set-selections
-RUN echo "Europe/Paris" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+RUN echo "locales locales/default_environment_locale select en.UTF-8" | debconf-set-selections \
+&& echo "locales locales/locales_to_be_generated multiselect 'en.UTF-8 UTF-8'" | debconf-set-selections
+RUN echo "America/Los_Angeles" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
 # Create Laravel folders (mandatory)
 RUN mkdir -p /var/www/html/storage/framework

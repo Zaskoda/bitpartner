@@ -81,7 +81,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     <img src="img/partner.png" style="margin-bottom: -40px">
-                    Bit Parnter
+                    Bit Partner
                 </div>
 
             </div>
