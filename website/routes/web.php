@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/monitor', 'MonitorController@index');
+Route::get('/api/monitor', 'MonitorController@api');
+Route::post('/monitor', 'MonitorController@update');

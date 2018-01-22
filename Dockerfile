@@ -82,7 +82,6 @@ WORKDIR /var/www/html
 
 # Install and update laravel (rebuild into vendor folder)
 RUN composer install
-RUN composer update
 RUN php artisan migrate
 
 # Laravel writing rights
