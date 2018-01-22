@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y --force-yes \
  && docker-php-ext-install \
     pdo_dblib \
     pdo_pgsql
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Install Tokenizer
 RUN docker-php-ext-install tokenizer
