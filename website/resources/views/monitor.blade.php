@@ -45,8 +45,7 @@
                         <tr>
                             <th>Color</th>
                             <th>Time</th>
-                            <th>Temp</th>
-                            <th>Temp</th>
+                            <th>Temperature</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,8 +53,9 @@
                         <tr>
                             <td style="background-color: rgb({{ $reading->rgb }})">{{ $reading->lux }}</td>
                             <td>{{ Carbon\Carbon::parse($reading->timestamp)->format('m-d H:i') }}</td>
-                            <td>{{ round($reading->temperature,2) }} C</td>
-                            <td>{{ $reading->tempInF() }} F</td>
+                            <td>{{ round($reading->temperature,2) }} C
+                                /
+                                {{ $reading->tempInF() }} F</td>
                         </tr>
                     @endforeach
                     </tbody>
