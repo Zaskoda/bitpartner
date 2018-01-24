@@ -16,6 +16,7 @@ class CreateReports extends Migration
         //
         Schema::create('readings', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('reporter')->nullable();
             $table->string('acc')->nullable();
             $table->string('pressure')->nullable();
             $table->string('rgb')->nullable();
