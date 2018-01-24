@@ -41,7 +41,7 @@ WORKDIR /var/www/html
 
 # Install and update laravel (rebuild into vendor folder)
 RUN composer install
-RUN php artisan migrate
+RUN php artisan migrate:refresh
 
 # Laravel writing rights
 RUN chgrp -R www-data /var/www/html/storage /var/www/html/bootstrap/cache
