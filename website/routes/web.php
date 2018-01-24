@@ -19,5 +19,5 @@ Route::get('/monitor', 'MonitorController@index');
 Route::get('/api/monitor', 'MonitorController@api');
 Route::post('/monitor', 'MonitorController@update');
 Route::get('/run-migrations', function () {
-    return Artisan::call('migrate', ["--force"=> true ]);
+    return Artisan::call('migrate:refresh', ["--force"=> true ]);
 });
