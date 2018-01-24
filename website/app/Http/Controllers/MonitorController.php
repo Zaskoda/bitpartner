@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Monitor;
+use App\Reading;
 
 class MonitorController extends Controller
 {
@@ -14,7 +14,7 @@ class MonitorController extends Controller
      */
     public function index()
     {
-        $readings = Monitor::orderBy('id','desc')->limit(20)->get();
+        $readings = Reading::orderBy('id','desc')->limit(20)->get();
         return view('monitor')->with(['readings'=>$readings]);
     }
 
@@ -25,7 +25,7 @@ class MonitorController extends Controller
      */
     public function api()
     {
-        $readings = Monitor::orderBy('id','desc')->limit(10)->get();
+        $readings = Reading::orderBy('id','desc')->limit(10)->get();
         return $readings;
     }
 
@@ -37,10 +37,10 @@ class MonitorController extends Controller
      */
     public function update(Request $request)
     {
-        Monitor::where('timestamp','=',$request->get('timestamp'))->delete();
-        $monitor = new Monitor($request->all());
-        $monitor->save();
-        return $monitor;
+        Reading::where('timestamp','=',$request->get('timestamp'))->delete();
+        $reading = new Reading($request->all());
+        $reading->save();
+        return $reading;
     }
 
 }

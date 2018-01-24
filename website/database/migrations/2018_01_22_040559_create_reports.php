@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Monitor extends Migration
+class CreateReports extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class Monitor extends Migration
     public function up()
     {
         //
-        Schema::create('monitors', function (Blueprint $table) {
+        Schema::create('readings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('acc')->nullable();
             $table->string('pressure')->nullable();
@@ -35,6 +35,6 @@ class Monitor extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('monitors');
+        Schema::dropIfExists('readings');
     }
 }

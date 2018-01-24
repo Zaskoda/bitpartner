@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Monitor extends Model
+class Reading extends Model
 {
     public $timestamps = false;
     protected $fillable = [
