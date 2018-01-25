@@ -41,7 +41,6 @@ WORKDIR /var/www/html
 
 # Install and update laravel (rebuild into vendor folder)
 RUN composer install
-RUN php artisan migrate
 
 # Laravel writing rights
 RUN chgrp -R www-data /var/www/html/storage /var/www/html/bootstrap/cache
@@ -63,5 +62,7 @@ RUN mkdir -p /var/www/html/public/uploads/
 # Change folder permission
 RUN chmod -R 0777 /var/www/html/storage/
 RUN chmod -R 0777 /var/www/html/public/uploads/
+
+RUN php artisan migrate
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
