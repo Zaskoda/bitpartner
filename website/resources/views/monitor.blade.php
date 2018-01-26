@@ -43,20 +43,23 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Color</th>
+                            <th>Reporter</th>
                             <th>Time</th>
                             <th>Temperature</th>
+                            <th>Pressure</th>
+                            <th>Color</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($readings as $reading)
                         <tr>
-                            <td style="background-color: rgb({{ $reading->rgb }})">{{ $reading->lux }}</td>
-                            <td>{{ Carbon\Carbon::parse($reading->timestamp)->format('m-d H:i') }}</td>
                             <td>{{ $reading->reporter }}</td>
+                            <td>{{ Carbon\Carbon::parse($reading->timestamp)->format('m-d H:i') }}</td>
                             <td>{{ round($reading->temperature,2) }} C
                                 /
                                 {{ $reading->tempInF() }} F</td>
+                            <td>{{ $reading->pressure }}</td>
+                            <td style="background-color: rgb({{ $reading->rgb }})">{{ $reading->lux }}</td>
                         </tr>
                     @endforeach
                     </tbody>
