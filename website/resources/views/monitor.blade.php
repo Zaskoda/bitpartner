@@ -18,6 +18,9 @@
         <!-- Styles -->
         <style>
             html, body {
+                color: #ccc;
+                background: #666;
+
             }
 
             .content {
@@ -55,7 +58,7 @@
                         <tr>
                             <td>{{ $reading->reporter }}</td>
                             <td>{{ Carbon\Carbon::parse($reading->timestamp)->format('m-d H:i') }}</td>
-                            <td>{{ round($reading->temperature,2) }} C
+                            <td style="background-color: rgb({{ round($reading->temperature * 2 + 20) }},64,64);">{{ round($reading->temperature,2) }} C
                                 /
                                 {{ $reading->tempInF() }} F</td>
                             <td>{{ $reading->pressure }}</td>
