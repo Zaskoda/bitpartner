@@ -53,6 +53,7 @@
                         <tr>
                             <td style="background-color: rgb({{ $reading->rgb }})">{{ $reading->lux }}</td>
                             <td>{{ Carbon\Carbon::parse($reading->timestamp)->format('m-d H:i') }}</td>
+                            <td>{{ $reading->reporter }}</td>
                             <td>{{ round($reading->temperature,2) }} C
                                 /
                                 {{ $reading->tempInF() }} F</td>
