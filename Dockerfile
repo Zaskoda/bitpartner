@@ -11,12 +11,12 @@ RUN apt-get update && apt-get install -y apt-utils
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 RUN a2enmod rewrite
-RUN a2enmod expires
-RUN a2enmod mime
-RUN a2enmod filter
-RUN a2enmod deflate
-RUN a2enmod proxy_http
-RUN a2enmod headers
+# RUN a2enmod expires
+# RUN a2enmod mime
+# RUN a2enmod filter
+# RUN a2enmod deflate
+# RUN a2enmod proxy_http
+# RUN a2enmod headers
 RUN a2enmod php7
 
 RUN curl -sS https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
