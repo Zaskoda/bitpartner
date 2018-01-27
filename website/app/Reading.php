@@ -17,7 +17,8 @@ class Reading extends Model
         'moisture',
         'lux',
         'heading',
-        'timestamp'
+        'timestamp',
+        'reporter'
     ];
 
     function tempInF()
