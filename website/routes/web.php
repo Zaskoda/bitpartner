@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/monitor', 'MonitorController@index');
 Route::get('/api/monitor', 'MonitorController@api');
 Route::post('/monitor', 'MonitorController@update');
+Route::get('/dump', 'DumpController@dump');
 Route::get('/run-migrations', function () {
     return Artisan::call('migrate', ["--force"=> true ]);
 });
