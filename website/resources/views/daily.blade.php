@@ -15,6 +15,7 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 
+
         <!-- Styles -->
         <style>
             html, body {
@@ -42,7 +43,7 @@
                 </div>
             @endif
 
-            <div class="content">
+            <div class="content" id="app">
                 <div class="text-center">
                     <a class="btn btn-default" href="/monitor">all</a>
                     <a class="btn btn-default" href="/hourly">hourly</a>
@@ -51,6 +52,10 @@
                 <div class="text-center">
                 {{ $readings->links() }}
                 </div>
+
+
+                <line-chart :data="{@foreach ($readings as $reading) '{{ $reading->datestamp }}': {{ $reading->tempInF() }},  @endforeach}"></line-chart>
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -78,4 +83,6 @@
             </div>
         </div>
     </body>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="/js/app.js"></script> 
 </html>
