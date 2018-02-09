@@ -22,3 +22,7 @@ Route::get('/dump', 'DumpController@dump');
 Route::get('/run-migrations', function () {
     return Artisan::call('migrate', ["--force"=> true ]);
 });
+Route::get('/daily', 'DailyAverageController@index');
+Route::get('/daily/update', 'DailyAverageController@update');
+Route::get('/hourly', 'HourlyAverageController@index');
+Route::get('/hourly/update', 'HourlyAverageController@update');

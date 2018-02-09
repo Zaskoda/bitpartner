@@ -55,22 +55,22 @@
                     <thead>
                         <tr>
                             <th>Reporter</th>
-                            <th>Time</th>
+                            <th>Date</th>
                             <th>Temperature</th>
                             <th>Pressure</th>
-                            <th>Color</th>
+                            <th>Lux</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($readings as $reading)
                         <tr>
                             <td>{{ $reading->reporter }}</td>
-                            <td>{{ Carbon\Carbon::parse($reading->timestamp)->format('m-d H:i') }}</td>
-                            <td style="background-color: rgb({{ round($reading->temperature * 2 + 20) }},64,64);">{{ round($reading->temperature,2) }} C
+                            <td>{{ Carbon\Carbon::parse($reading->datestamp)->format('m-d') }} : {{ $reading->hourstamp }}</td>
+                            <td style="background-color: rgb({{ round($reading->temperature * 4) }},64,{{ max(0,160-$reading->temperature*4) }});">{{ round($reading->temperature,2) }} C
                                 /
                                 {{ $reading->tempInF() }} F</td>
                             <td>{{ $reading->pressure }}</td>
-                            <td style="background-color: rgb({{ $reading->rgb }})">{{ $reading->lux }}</td>
+                            <td style="">{{ $reading->lux }}</td>
                         </tr>
                     @endforeach
                     </tbody>
