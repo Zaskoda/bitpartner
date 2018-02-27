@@ -46,7 +46,7 @@ RUN composer install
 RUN chgrp -R www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R ug+rwx /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Change your local - here it's in french
+# Change your local 
 RUN echo "locales locales/default_environment_locale select en.UTF-8" | debconf-set-selections \
 && echo "locales locales/locales_to_be_generated multiselect 'en.UTF-8 UTF-8'" | debconf-set-selections
 RUN echo "America/Los_Angeles" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
