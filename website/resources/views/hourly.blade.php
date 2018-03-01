@@ -52,7 +52,7 @@
                 {{ $readings->links() }}
                 </div>
 
-                <line-chart :data="{@foreach ($readings as $reading) '{{ $reading->datestamp }} {{ $reading->hourstamp }}:00': {{ $reading->tempInF() }},  @endforeach}"></line-chart>
+                <line-chart :data="{@foreach ($readings->reverse() as $reading) '{{ $reading->datestamp }} {{ $reading->hourstamp }}:00': {{ $reading->tempInF() }},  @endforeach}"></line-chart>
 
                 <table class="table">
                     <thead>
@@ -69,7 +69,7 @@
                         <tr>
                             <td>{{ $reading->reporter }}</td>
                             <td>{{ Carbon\Carbon::parse($reading->datestamp)->format('m-d') }} : {{ $reading->hourstamp }}</td>
-                            <td style="background-color: rgb({{ round($reading->temperature * 4) }},64,{{ max(0,round(160-$reading->temperature*4) }}); color: #fff" class="text-center">{{ round($reading->temperature,2) }} C
+                            <td style="background-color: rgb({{ round($reading->temperature * 4) }},64,{{ max(0,round(160-$reading->temperature*4)) }}); color: #fff" class="text-center">{{ round($reading->temperature,2) }} C
                                 /
                                 {{ $reading->tempInF() }} F</td>
                             <td>{{ $reading->pressure }}</td>

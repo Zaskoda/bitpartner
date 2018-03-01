@@ -14,7 +14,7 @@ class MonitorController extends Controller
      */
     public function index()
     {
-        $readings = Reading::orderBy('id','desc')->paginate(20);
+        $readings = Reading::orderBy('id','desc')->paginate(40);
         return view('monitor')->with(['readings'=>$readings]);
     }
 

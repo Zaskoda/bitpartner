@@ -9,7 +9,7 @@ class HourlyAverageController extends Controller
 {
     public function index()
     {
-        $readings = HourlyAverage::orderBy('id','desc')->paginate(48);
+        $readings = HourlyAverage::orderBy('id','desc')->paginate(96);
         return view('hourly')->with(['readings'=>$readings]);
     }
 
