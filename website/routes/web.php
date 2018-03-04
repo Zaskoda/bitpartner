@@ -26,3 +26,10 @@ Route::get('/daily', 'DailyAverageController@index');
 Route::get('/daily/update', 'DailyAverageController@update');
 Route::get('/hourly', 'HourlyAverageController@index');
 Route::get('/hourly/update', 'HourlyAverageController@update');
+
+
+Route::resource('/coins', 'CoinController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

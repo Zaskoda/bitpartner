@@ -963,7 +963,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(10);
-module.exports = __webpack_require__(38);
+module.exports = __webpack_require__(41);
 
 
 /***/ }),
@@ -972,11 +972,11 @@ module.exports = __webpack_require__(38);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_chartkick__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_chartkick__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_chartkick___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_chartkick__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_chartkick__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_chartkick__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_chartkick___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_chartkick__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_highcharts__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_highcharts__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_highcharts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_highcharts__);
 
 /**
@@ -42926,22 +42926,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* 38 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */
-/***/ (function(module, exports) {
-
 /*
  * Chartkick.js
  * Create beautiful charts with one line of JavaScript
@@ -44762,7 +44746,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 
 /***/ }),
-/* 50 */
+/* 39 */
 /***/ (function(module, exports) {
 
 /*
@@ -44853,7 +44837,7 @@ module.exports = VueChartkick
 
 
 /***/ }),
-/* 51 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /*
@@ -45249,6 +45233,12 @@ B.prototype.setResponsive=function(f){var l=this.options.responsive,n=[],b=this.
 this.currentResponsive=void 0)};B.prototype.matchResponsiveRule=function(a,l){var n=a.condition;(n.callback||function(){return this.chartWidth<=f(n.maxWidth,Number.MAX_VALUE)&&this.chartHeight<=f(n.maxHeight,Number.MAX_VALUE)&&this.chartWidth>=f(n.minWidth,0)&&this.chartHeight>=f(n.minHeight,0)}).call(this)&&l.push(a._id)};B.prototype.currentOptions=function(f){function q(b,d,f,e){var c;a.objectEach(b,function(a,b){if(!e&&-1<G(b,["series","xAxis","yAxis"]))for(a=t(a),f[b]=[],c=0;c<a.length;c++)d[b][c]&&
 (f[b][c]={},q(a[c],d[b][c],f[b][c],e+1));else l(a)?(f[b]=n(a)?[]:{},q(a,d[b]||{},f[b],e+1)):f[b]=d[b]||null})}var u={};q(f,this.options,u,0);return u}})(L);return L});
 
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
