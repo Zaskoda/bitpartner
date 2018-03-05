@@ -10,7 +10,12 @@
                 <th>Genesis Date</th>
                 <th>Creator</th>
                 <th>Summary</th>
-                <th>Links</th>
+                <th>
+                    @auth
+                    <a href="/coins/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i></a></td>
+                    @endauth
+                    Links
+                </th>
             </tr>
         </thead>
         <tbody>
