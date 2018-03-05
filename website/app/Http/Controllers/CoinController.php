@@ -31,13 +31,15 @@ class CoinController extends Controller
 
     public function create()
     {
-        $this->middleware('auth');
+        if (!$this->checkRole()) return \Redirect::route('coins.index');
+
         return view('coin-create');
     }
 
     public function store(Request $request)
     {
-        $this->middleware('auth');
+        if (!$this->checkRole()) return \Redirect::route('coins.index');
+
         $coin = new Coin($request->all());
         if (!$coin->save()) {
             return back()->with('error', 'Unable to save coin');
@@ -47,14 +49,16 @@ class CoinController extends Controller
 
     public function edit($id)
     {
-        $this->middleware('auth');
+        if (!$this->checkRole()) return \Redirect::route('coins.index');
+
         $coin = Coin::findOrFail($id);
         return view('coin-edit')->with(['coin'=>$coin]);
     }
 
     public function update(Request $request, $id)
     {
-        $this->middleware('auth');
+        if (!$this->checkRole()) return \Redirect::route('coins.index');
+
         $coin = Coin::findOrFail($id);
         $coin->update($request->all());
         if (!$coin->save()) {
@@ -65,8 +69,16 @@ class CoinController extends Controller
 
     public function destroy()
     {
-        $this->middleware('auth');
+        if (!$this->checkRole()) return \Redirect::route('coins.index');
+
         Role::destroy($id);
         return \Redirect::route('coin.index')->with('message', 'Coin #'.$id.' has been deleted');
+    }
+
+    private function checkRole()
+    {
+        $user = \Auth::user();
+        if ((!$user) or (!$user->hasRole('sysop'))) return false;
+        return true;
     }
 }

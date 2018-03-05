@@ -11,9 +11,9 @@
                 <th>Creator</th>
                 <th>Summary</th>
                 <th>
-                    @auth
+                    @role('sysop')
                     <a href="/coins/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i></a></td>
-                    @endauth
+                    @endrole
                     Links
                 </th>
             </tr>
@@ -41,9 +41,9 @@
                         @if($coin->reddit)<a class="btn btn-default btn-xs" href="{{ $coin->reddit }}"><i class="fa fa-fw fa-reddit"></i></a>@endif
                         @if($coin->wikipedia)<a class="btn btn-default btn-xs" href="{{ $coin->wikipedia }}"><i class="fa fa-fw fa-wikipedia-w"></i></a>@endif
                         @if($coin->docs)<a class="btn btn-default btn-xs" href="{{ $coin->docs }}"><i class="fa fa-fw fa-book"></i></a>@endif
-                        @auth
+                        @role('sysop')
                         <a href="/coins/{{ $coin->id }}/edit" class="btn btn-xs btn-default"><i class="fa fa-fw fa-pencil"></i></a></td>
-                        @endauth
+                        @endrole
                     </div>
                 </td>
             </tr>
