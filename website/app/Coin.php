@@ -14,6 +14,11 @@ class Coin extends Model
         'website',
         'forked_from',
         'source',
-        'description'
+        'summary',
+        'description',
+        'paper',
+        'creator',
+        'twitter',
+        'logo'
     ];
 }

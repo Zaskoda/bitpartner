@@ -19,11 +19,11 @@ class CoinController extends Controller
 
     public function index()
     {
-        $coins = Coin::orderBy('id','desc')->paginate(60);
+        $coins = Coin::orderBy('genesis_date','asc')->paginate(60);
         return view('coins')->with(['coins'=>$coins]);
     }
 
-    public function show()
+    public function show($id)
     {
         $coin = Coin::findOrFail($id);
         return view('coin')->with(['coin'=>$coin]);
