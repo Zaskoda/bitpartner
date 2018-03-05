@@ -22,7 +22,7 @@
             @foreach ($coins as $coin)
             <tr class='clickable-row' onclick="window.location = '/coins/{{ $coin->id }}'" style=" cursor: pointer; ">
                 <td class="text-right">
-                    @if($coin->logo) <img src="{{ $coin->logo }}" style="height: 1em"> @endif
+                    @if($coin->logo) <a href="{{ $coin->logo }}"><img src="{{ $coin->logo }}" style="height: 1em"></a> @endif
                 </td>
                 <td>
                     <span class="badge"><small> {{ $coin->symbol }} </small> </span>
