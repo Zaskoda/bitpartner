@@ -65,6 +65,24 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="reddit" class="col-2-sm control-label">SubReddit</label>
+        <div class="col-10-sm">
+        {{ Form::text('reddit', null, ['placeholder'=>'https://', 'class'=>'form-control']) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="wikipedia" class="col-2-sm control-label">Wikipedia Entry</label>
+        <div class="col-10-sm">
+        {{ Form::text('wikipedia', null, ['placeholder'=>'https://', 'class'=>'form-control']) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="docs" class="col-2-sm control-label">Documentation</label>
+        <div class="col-10-sm">
+        {{ Form::text('docs', null, ['placeholder'=>'https://', 'class'=>'form-control']) }}
+        </div>
+    </div>
+    <div class="form-group">
         <label for="forked_from" class="col-1-sm  control-label">Forked From</label>
         <div class="col-10-sm">
         {{ Form::number('forked_from', null, ['placeholder'=>'id', 'class'=>'form-control']) }}

@@ -19,6 +19,9 @@ class Coin extends Model
         'paper',
         'creator',
         'twitter',
+        'reddit',
+        'docs',
+        'wikipedia',
         'logo'
     ];
 }
