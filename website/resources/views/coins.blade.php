@@ -28,7 +28,7 @@
                     <span class="badge"><small> {{ $coin->symbol }} </small> </span>
                     <b>{{ $coin->name }}</b> 
                 </td>
-                <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d',$coin->genesis_date)->toFormattedDateString() }}</td>
+                <td>@if($coin->genesis_date){{ \Carbon\Carbon::createFromFormat('Y-m-d',$coin->genesis_date)->toFormattedDateString() }}@endif</td>
                 <td>{{ $coin->creator }}</td>
                 <td><small>{{ $coin->summary }}</small></td>
                 <td>
