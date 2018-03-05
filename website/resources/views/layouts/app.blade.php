@@ -8,6 +8,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <meta property="og:image" content="/img/partner.png">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="200">
+    <meta property="og:image:height" content="272">
+
+
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
@@ -28,9 +35,11 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name') }}
-                    </a>
+                    <div style="min-width: 10em">
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            <img src="/img/partner_short.png" style="height: 2em" class="pull-left" alt="{{ config('app.name') }}" title="{{ config('app.name') }}"> &nbsp; {{ config('app.name') }}
+                        </a>
+                    </div>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
