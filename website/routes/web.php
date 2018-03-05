@@ -29,8 +29,12 @@ Route::get('/hourly/update', 'HourlyAverageController@update');
 
 Route::resource('/coins', 'CoinController');
 
-Auth::routes();
+Route::group(['middleware' => ['role:sysop']], function () {
+    Route::resource('/users', 'UserController');
+});
 
+Auth::routes();
+/*
 Route::get('/setup', function() {
     $role = \Spatie\Permission\Models\Role::create(['name' => 'sysop']);
     $user = \App\User::where('email','=','zaskoda@gmail.com')->firstOrFail();
@@ -43,5 +47,5 @@ Route::group(['middleware' => ['role:sysop']], function () {
         return "works";
     });
 });
-
+*/
 Route::get('/home', 'HomeController@index')->name('home');

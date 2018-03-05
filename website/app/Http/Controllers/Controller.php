@@ -10,4 +10,12 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    private function checkRole()
+    {
+        $user = \Auth::user();
+        if ((!$user) or (!$user->hasRole('sysop'))) return false;
+        return true;
+    }
+
 }

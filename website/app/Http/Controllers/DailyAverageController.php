@@ -15,6 +15,8 @@ class DailyAverageController extends Controller
 
     public function update()
     {
+        if (!$this->checkRole()) return \Redirect::route('coins.index');
+        
         DailyAverage::generate();
         return redirect('daily');
     }

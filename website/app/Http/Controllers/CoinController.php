@@ -75,10 +75,4 @@ class CoinController extends Controller
         return \Redirect::route('coin.index')->with('message', 'Coin #'.$id.' has been deleted');
     }
 
-    private function checkRole()
-    {
-        $user = \Auth::user();
-        if ((!$user) or (!$user->hasRole('sysop'))) return false;
-        return true;
-    }
 }

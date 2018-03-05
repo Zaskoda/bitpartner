@@ -15,6 +15,8 @@ class HourlyAverageController extends Controller
 
     public function update()
     {
+        if (!$this->checkRole()) return \Redirect::route('coins.index');
+        
         HourlyAverage::generate();
         return redirect('hourly');
     }

@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    Welcome to BitPartner. Why did you create an account? There's nothing to do here. ...yet
                 </div>
             </div>
         </div>

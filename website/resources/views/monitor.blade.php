@@ -28,7 +28,7 @@
             <tr>
                 <td>{{ $reading->reporter }}</td>
                 <td>{{ Carbon\Carbon::parse($reading->timestamp)->format('m-d H:i') }}</td>
-                <td style="background-color: rgb({{ round($reading->temperature * 2 + 20) }},64,64); color:#fff;" class="text-center">{{ round($reading->temperature,2) }} C
+                <td style="background-color: rgb({{ round($reading->temperature * 4) }},64,{{ max(0,round(160-$reading->temperature*4)) }}); color: #fff" class="text-center">{{ round($reading->temperature,2) }} C
                     /
                     {{ $reading->tempInF() }} F</td>
                 <td>{{ $reading->pressure }}</td>
