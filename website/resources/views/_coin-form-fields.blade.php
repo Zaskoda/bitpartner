@@ -13,7 +13,7 @@
     <div class="form-group">
         <label for="genesis_date" class="col-2-sm control-label">Genesis Date</label>
         <div class="col-10-sm">
-        {{ Form::date('genesis_date', '', ['class'=>'form-control']) }}
+        {{ Form::date('genesis_date', null, ['class'=>'form-control']) }}
         </div>
     </div>
     <div class="form-group">
