@@ -22,7 +22,7 @@
                     <p><i>{{ $coin->summary }}</i></p>
                     <p class="well">{{ $coin->description }}
                     </p>
-                    <div class="btn-group btn-group-justified">
+                    <div class="btn-group btn-grou-default btn-group-justified">
                         @if($coin->website)<a class="btn btn-default" href="{{ $coin->website }}"><i class="fa fa-fw fa-home"></i><br>Website</a>@endif
                             @if($coin->source)<a class="btn btn-default" href="{{ $coin->source }}"><i class="fa fa-fw fa-github-alt"></i><br>Source</a>@endif
                             @if($coin->paper)<a class="btn btn-default" href="{{ $coin->paper }}"><i class="fa fa-fw fa-file"></i><br>Paper</a>@endif
