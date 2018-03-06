@@ -10,10 +10,9 @@
                 {{ $coin->name }} <span class="badge">{{ $coin->symbol }}</span>
             </h2>
 
-
-            <div style="height: 4em; width: 4em; overflow: hidden;" class="text-center pull-right">
+            <div style="height: 8em; width: 8em; overflow: hidden;" class="text-center pull-right">
                 @if($coin->logo) 
-                    <img src="{{ $coin->logo }}" style="max-height: 100%; max-width: 100%">
+                    <a href="{{ $coin->logo }}"><img src="{{ $coin->logo }}" style="max-height: 100%; max-width: 100%"></a>
                 @endif
             </div>
             <p>Genesis::<br> {{ \Carbon\Carbon::createFromFormat('Y-m-d',$coin->genesis_date)->toFormattedDateString() }}</p>
@@ -22,10 +21,13 @@
             <p class="well">{{ $coin->description }}
             </p>
             <div class="btn-group btn-group-justified">
-                <a class="btn btn-default btn-xs" href="{{ $coin->website }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><br>Website</a>
-                <a class="btn btn-default btn-xs" href="{{ $coin->source }}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><br>Source</a>
-                <a class="btn btn-default btn-xs" href="{{ $coin->paper }}"><span class="glyphicon glyphicon-file" aria-hidden="true"></span><br>Paper</a>
-                <a class="btn btn-default btn-xs" href="{{ $coin->twitter }}"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span><br>Twitter</a>
+                @if($coin->website)<a class="btn btn-default" href="{{ $coin->website }}"><i class="fa fa-fw fa-home"></i><br>Website</a>@endif
+                    @if($coin->source)<a class="btn btn-default" href="{{ $coin->source }}"><i class="fa fa-fw fa-github-alt"></i><br>Source</a>@endif
+                    @if($coin->paper)<a class="btn btn-default" href="{{ $coin->paper }}"><i class="fa fa-fw fa-file"></i><br>Paper</a>@endif
+                    @if($coin->twitter)<a class="btn btn-default" href="{{ $coin->twitter }}"><i class="fa fa-fw fa-twitter"></i><br>Twitter</a>@endif
+                    @if($coin->reddit)<a class="btn btn-default" href="{{ $coin->reddit }}"><i class="fa fa-fw fa-reddit"></i><br>Reddit</a>@endif
+                    @if($coin->wikipedia)<a class="btn btn-default" href="{{ $coin->wikipedia }}"><i class="fa fa-fw fa-wikipedia-w"></i><br>Wikipedia</a>@endif
+                    @if($coin->docs)<a class="btn btn-default" href="{{ $coin->docs }}"><i class="fa fa-fw fa-book"></i><br>Docs</a>@endif
             </div>
             <div>{{ $coin->forked_from }}</div>
 
