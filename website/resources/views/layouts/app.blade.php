@@ -37,7 +37,7 @@
                     <!-- Branding Image -->
                     <div style="min-width: 10em">
                         <a class="navbar-brand" href="{{ url('/') }}">
-                            <img src="/img/partner_short.png" style="height: 2em" class="pull-left" alt="{{ config('app.name') }}" title="{{ config('app.name') }}"> &nbsp; {{ config('app.name') }}
+                            <img src="/img/bitpartner.png" style="height: 2.5em; margin-top: -10px" class="pull-left" alt="{{ config('app.name') }}" title="{{ config('app.name') }}">
                         </a>
                     </div>
                 </div>

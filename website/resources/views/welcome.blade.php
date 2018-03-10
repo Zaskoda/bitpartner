@@ -13,8 +13,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background-color: #fec260;
+                color: #000000;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
@@ -51,7 +51,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #442200;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -80,8 +80,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <img src="img/partner.png" style="margin-bottom: -40px">
-                    Bit Partner
+                    <img src="img/bitpartner.svg" style="max-width: 80%; max-height: 80%;" alt="BitPartner" title="BitPartner">
                 </div>
 
             </div>

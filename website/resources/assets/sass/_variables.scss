@@ -1,6 +1,6 @@
 
 // Body
-$body-bg: #f5f8fa;
+$body-bg: #fff0d0;
 
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
@@ -21,10 +21,10 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 $font-family-sans-serif: "Share Tech", sans-serif;
 $font-size-base: 14px;
 $line-height-base: 1.6;
-$text-color: #636b6f;
+$text-color: #3c2925;
 
 // Navbar
-$navbar-default-bg: #fff;
+$navbar-default-bg: #fec260;
 
 // Buttons
 $btn-default-color: $text-color;
@@ -36,3 +36,12 @@ $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels
 $panel-default-heading-bg: #fff;
+
+// Navbar links
+$navbar-default-link-color:                #640 !default;
+$navbar-default-link-hover-color:          #000 !default;
+$navbar-default-link-hover-bg:             transparent !default;
+$navbar-default-link-active-color:         #760 !default;
+$navbar-default-link-active-bg:            darken($navbar-default-bg, 6.5%) !default;
+$navbar-default-link-disabled-color:       #ccc !default;
+$navbar-default-link-disabled-bg: transparent !default;

@@ -18,6 +18,7 @@ class HourlyAverage extends Model
         'lux',
         'heading',
         'hourstamp',
+        'datestamp',
         'reporter'
     ];
 
