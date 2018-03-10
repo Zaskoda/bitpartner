@@ -13,11 +13,13 @@
                         <th width="10%">Genesis Date</th>
                         <th width="10%">Creator</th>
                         <th width="25%">Summary</th>
-                        <th width="35%">
-                            @role('sysop')
-                            <a href="/coins/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i></a></td>
-                            @endrole
+                        <th width="33%">
                             Links
+                        </th>
+                        <th width="2%" class="text-right">
+                            @role('sysop')
+                            <a href="/coins/create" class="btn btn-xs btn-success"><i class="fa fa-fw fa-plus"></i></a>
+                            @endrole
                         </th>
                     </tr>
                 </thead>
@@ -36,9 +38,8 @@
                         <td width="10%"><small>@if($coin->genesis_date){{ \Carbon\Carbon::createFromFormat('Y-m-d',$coin->genesis_date)->toFormattedDateString() }}@endif</small></td>
                         <td width="10%"><small>{{ $coin->creator }}</small></td>
                         <td width="25%"><small>{{ $coin->summary }}</small></td>
-                        <td width="35%">
+                        <td width="33%">
                             <div class="btn-group">
-                                <a class="btn btn-default btn-xs" href="/coins/{{ $coin->id }}"><i class="fa fa-fw fa-eye"></i></a>
                                 @if($coin->website)<a class="btn btn-default btn-xs" href="{{ $coin->website }}"><i class="fa fa-fw fa-home"></i></a>@endif
                                 @if($coin->source)<a class="btn btn-default btn-xs" href="{{ $coin->source }}"><i class="fa fa-fw fa-github-alt"></i></a>@endif
                                 @if($coin->paper)<a class="btn btn-default btn-xs" href="{{ $coin->paper }}"><i class="fa fa-fw fa-file"></i></a>@endif
@@ -46,6 +47,11 @@
                                 @if($coin->reddit)<a class="btn btn-default btn-xs" href="{{ $coin->reddit }}"><i class="fa fa-fw fa-reddit"></i></a>@endif
                                 @if($coin->wikipedia)<a class="btn btn-default btn-xs" href="{{ $coin->wikipedia }}"><i class="fa fa-fw fa-wikipedia-w"></i></a>@endif
                                 @if($coin->docs)<a class="btn btn-default btn-xs" href="{{ $coin->docs }}"><i class="fa fa-fw fa-book"></i></a>@endif
+                            </div>
+                        </td>
+                        <td width="2%" class="text-right">
+                            <div class="btn-group">
+                                <a class="btn btn-default btn-xs" href="/coins/{{ $coin->id }}"><i class="fa fa-fw fa-eye"></i></a>
                                 @role('sysop')
                                 <a href="/coins/{{ $coin->id }}/edit" class="btn btn-xs btn-default"><i class="fa fa-fw fa-pencil"></i></a></td>
                                 @endrole

@@ -8,14 +8,14 @@
         <title>Bit Partner</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Share+Tech:300,400,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <style>
             html, body {
                 background-color: #fec260;
                 color: #000000;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Share Tech', sans-serif;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
@@ -50,8 +50,23 @@
                 : top;
             }
 
+            a {
+                text-decoration: none;
+                padding: 10px;
+                color: #3c2925;
+            }
+            .button {
+                font-weight: bold;
+                font-size: 1.5em;
+                border-radius: 10px;
+                border: 4px solid #fff;
+                background: #f2d6c2;
+            }
+            .button:hover {
+                background: #fff;
+            }
             .links > a {
-                color: #442200;
+                color: #000000;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -79,8 +94,11 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    <img src="img/bitpartner.svg" style="max-width: 80%; max-height: 80%;" alt="BitPartner" title="BitPartner">
+                <div class="title m-b-md" style="max-width: 80%; max-height: 80%;">
+                    <img src="img/bitpartner.svg" style="max-width: 60%; max-height: 60%;" alt="BitPartner" title="BitPartner">
+                </div>
+                <div class="text-center">
+                        <a href="/coins" class="button" alt="Learn you some cryptos..." title="Learn you some cryptos...">Cryptocoins List</a>
                 </div>
 
             </div>
