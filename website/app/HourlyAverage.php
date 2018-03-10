@@ -25,6 +25,8 @@ class HourlyAverage extends Model
     //
     static function generate()
     {
+        $mostRecent = Reading::mostRecentTimestamp();
+
         $avg_readings = Reading::select(
             \DB::raw('            
             reporter,
@@ -38,14 +40,22 @@ class HourlyAverage extends Model
             date(timestamp) as datestamp,
             hour(timestamp) as hourstamp
             '))
-        ->groupBy('reporter','datestamp','hourstamp')
-        ->get();
+        ->groupBy('reporter','datestamp','hourstamp');
+
+        if ($mostRecent != null) {
+            $avg_readings = $avg_readings->
+                where('timestamp','>',\DB::RAW('DATE_SUB("'.$mostRecent.'",INTERVAL 2 HOUR)'));
+        }
+
+        $avg_readings = $avg_readings->get();
         foreach ($avg_readings as $avg_reading) 
         {
             HourlyAverage::where('hourstamp','=',$avg_reading->hourstamp)->where('datestamp','=',$avg_reading->datestamp)->delete();
             HourlyAverage::create($avg_reading->toArray());
         }
+
     }
+
     
     function tempInF()
     {

@@ -24,6 +24,8 @@ class DailyAverage extends Model
     //
     static function generate()
     {
+        $mostRecent = Reading::mostRecentTimestamp();
+
         $avg_readings = Reading::select(
             \DB::raw('            
             reporter,
@@ -36,9 +38,14 @@ class DailyAverage extends Model
             avg(heading) as heading,
             date(timestamp) as datestamp
             '))
-        ->groupBy('reporter','datestamp')
-        ->get();
+        ->groupBy('reporter','datestamp');
 
+        if ($mostRecent != null) {
+            $avg_readings = $avg_readings->
+                where('timestamp','>',\DB::RAW('DATE_SUB("'.$mostRecent.'",INTERVAL 2 DAY)'));
+        }
+
+        $avg_readings = $avg_readings->get();
         foreach ($avg_readings as $avg_reading) 
         {
             DailyAverage::where('datestamp','=',$avg_reading->datestamp)->delete();
