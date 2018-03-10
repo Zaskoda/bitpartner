@@ -64,7 +64,7 @@ class CoinController extends Controller
         if (!$coin->save()) {
             return back()->with('error', 'Unable to save coin');
         }
-        return \Redirect::route('coins.show',$id)->with('success', 'Coin #'.$coin->id.' has been update.');
+        return \Redirect::route('coins.show',$id)->with('success', 'Coin #'.$coin->id.' has been updated.');
     }
 
     public function destroy()
