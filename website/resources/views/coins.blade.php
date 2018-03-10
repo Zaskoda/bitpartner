@@ -35,9 +35,9 @@
                         <td width="9%">
                             <b>{{ $coin->name }}</b> 
                         </td>
-                        <td width="8%"><small>@if($coin->genesis_date){{ \Carbon\Carbon::createFromFormat('Y-m-d',$coin->genesis_date)->toFormattedDateString() }}@endif</small></td>
-                        <td width="10%"><small>{{ $coin->creator }}</small></td>
-                        <td width="26%"><small>{{ $coin->summary }}</small></td>
+                        <td width="8%">@if($coin->genesis_date){{ \Carbon\Carbon::createFromFormat('Y-m-d',$coin->genesis_date)->toFormattedDateString() }}@endif</td>
+                        <td width="10%">{{ $coin->creator }}</td>
+                        <td width="26%">{{ $coin->summary }}</td>
                         <td width="34%">
                             <div class="btn-group">
                                 @if($coin->website)<a class="btn btn-default btn-xs" href="{{ $coin->website }}"><i class="fa fa-fw fa-home"></i></a>@endif
@@ -52,7 +52,7 @@
                         <td width="6%" class="text-right">
                             <a class="btn btn-default btn-xs" href="/coins/{{ $coin->id }}"><i class="fa fa-fw fa-eye"></i></a>
                             @role('sysop')
-                            <a href="/coins/{{ $coin->id }}/edit" class="btn btn-xs btn-default"><i class="fa fa-fw fa-pencil"></i></a></td>
+                            <a href="/coins/{{ $coin->id }}/edit" class="btn btn-xs btn-info"><i class="fa fa-fw fa-pencil"></i></a></td>
                             @endrole
                         </td>
                     </tr>
