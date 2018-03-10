@@ -44,7 +44,7 @@ class CoinController extends Controller
         if (!$coin->save()) {
             return back()->with('error', 'Unable to save coin');
         }
-        return \Redirect::route('coins.index')->with('success', 'Coin #'.$coin->id.' has been added.');
+        return \Redirect::route('coins.show',$coin->id)->with('success', 'Coin #'.$coin->id.' has been added.');
     }
 
     public function edit($id)
