@@ -47,7 +47,6 @@
 
             .title {
                 font-size: 84px;
-                : top;
             }
 
             a {
@@ -59,6 +58,8 @@
                 font-weight: bold;
                 font-size: 1.5em;
                 border-radius: 10px;
+                margin: 1em;
+                padding: 1em;
                 border: 4px solid #fff;
                 background: #f2d6c2;
             }
@@ -76,7 +77,7 @@
             }
 
             .m-b-md {
-                margin-bottom: 30px;
+                margin-bottom: 0px;
             }
         </style>
     </head>
@@ -94,11 +95,15 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md" style="max-width: 80%; max-height: 80%;">
-                    <img src="img/bitpartner.svg" style="max-width: 60%; max-height: 60%;" alt="BitPartner" title="BitPartner">
+                <div class="title m-b-md">
+                    <div  style="max-width: 90%; max-height: 60%;">
+                        <img src="img/bitpartner.svg" style="max-width: 95%; max-height: 95%;" alt="BitPartner" title="BitPartner">
+                    </div>
                 </div>
                 <div class="text-center">
                         <a href="/coins" class="button" alt="Learn you some cryptos..." title="Learn you some cryptos...">Cryptocoins List</a>
+
+                        <a href="/monitor" class="button" alt="How hot is the mine?" title="How hot is the mine?">Mine Monitor</a>
                 </div>
 
             </div>
