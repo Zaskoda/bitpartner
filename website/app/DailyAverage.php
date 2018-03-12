@@ -22,7 +22,7 @@ class DailyAverage extends Model
     ];
 
     //
-    static function generate()
+    static function generate($all = false)
     {
         $mostRecent = Reading::mostRecentTimestamp();
 
@@ -40,7 +40,7 @@ class DailyAverage extends Model
             '))
         ->groupBy('reporter','datestamp');
 
-        if ($mostRecent != null) {
+        if (($mostRecent != null) and (!$all)) {
             $avg_readings = $avg_readings->
                 where('timestamp','>',\DB::RAW('DATE_SUB("'.$mostRecent.'",INTERVAL 2 DAY)'));
         }
@@ -53,6 +53,13 @@ class DailyAverage extends Model
         }
     }
     
+    static function mostRecentTimestamp()
+    {
+        $reading = self::select('datestamp')->orderBy('datestamp','desc')->limit(1)->first();
+        if ($reading != null) return $reading->datestamp;
+        return null;
+    }
+
     function tempInF()
     {
         return round($this->temperature * (9/5) + 32, 2);
