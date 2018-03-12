@@ -9,6 +9,7 @@ class DailyAverageController extends Controller
 {
     public function index()
     {
+        DailyAverage::generate();
         $readings = DailyAverage::orderBy('id','desc')->paginate(60);
         return view('daily')->with(['readings'=>$readings]);
     }
@@ -17,7 +18,7 @@ class DailyAverageController extends Controller
     {
         if (!$this->checkRole()) return \Redirect::route('coins.index');
         
-        DailyAverage::generate();
+        DailyAverage::generate(true);
         return redirect('daily');
     }
 }

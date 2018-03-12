@@ -9,6 +9,7 @@ class HourlyAverageController extends Controller
 {
     public function index()
     {
+        HourlyAverage::generate();
         $readings = HourlyAverage::orderBy('id','desc')->paginate(96);
         return view('hourly')->with(['readings'=>$readings]);
     }
@@ -17,7 +18,7 @@ class HourlyAverageController extends Controller
     {
         if (!$this->checkRole()) return \Redirect::route('coins.index');
         
-        HourlyAverage::generate();
+        HourlyAverage::generate(true);
         return redirect('hourly');
     }
 }
