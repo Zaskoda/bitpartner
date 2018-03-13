@@ -62,6 +62,7 @@
                 padding: 1em;
                 border: 4px solid #fff;
                 background: #f2d6c2;
+                display: inline-block;
             }
             .button:hover {
                 background: #fff;
@@ -100,10 +101,9 @@
                         <img src="img/bitpartner.svg" style="max-width: 95%; max-height: 95%;" alt="BitPartner" title="BitPartner">
                     </div>
                 </div>
-                <div class="text-center">
-                        <a href="/coins" class="button" alt="Learn you some cryptos..." title="Learn you some cryptos...">Cryptocoins List</a>
-
-                        <a href="/monitor" class="button" alt="How hot is the mine?" title="How hot is the mine?">Mine Monitor</a>
+                <div class="">
+                        <a href="/coins" class="button" alt="Learn you some cryptos..." title="Learn you some cryptos...">Cryptocoins&nbsp;List</a>
+                        <a href="/monitor" class="button" alt="How hot is the mine?" title="How hot is the mine?">Mine&nbsp;Monitor</a>
                 </div>
 
             </div>

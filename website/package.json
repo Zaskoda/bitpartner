@@ -19,6 +19,9 @@
     "vue": "^2.5.7"
   },
   "dependencies": {
-    "font-awesome": "^4.7.0"
+    "chartkick": "^2.3.3",
+    "font-awesome": "^4.7.0",
+    "highcharts": "^6.0.7",
+    "vue-chartkick": "^0.2.1"
   }
 }
