@@ -20,7 +20,8 @@ class CoinController extends Controller
     public function index()
     {
         $coins = Coin::orderBy('genesis_date','asc')->paginate(60);
-        return view('coins')->with(['coins'=>$coins]);
+        $last_updated = Coin::lastUpdated();
+        return view('coins')->with(['coins'=>$coins, 'last_updated'=> $last_updated]);
     }
 
     public function show($id)

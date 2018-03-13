@@ -3,6 +3,13 @@
 @section('content')
 
     <div class="panel">
+        <div class="panel-heading">
+            <p class="text-center"><b>Last Updated:</b> {{ \Carbon\Carbon::parse($last_updated)->toFormattedDateString() }}
+               <b>Total Coins Listed:</b> {{ $coins->count() }}  
+            </p>
+            <p class="text-center">The following list constains cryptocurrency coins which are open source and (mostly) decentralized. 
+            This list is a work-in-progress and is update irregularly as I learn about and collect information on new coins.</p>
+        </div>
         <div class="panel-body">
 
             @foreach ($coins as $coin)
