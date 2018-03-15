@@ -46,7 +46,8 @@
             }
 
             .title {
-                font-size: 84px;
+                text-align: center;
+                max-width: 1200px;
             }
 
             a {

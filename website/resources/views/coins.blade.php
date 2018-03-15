@@ -4,7 +4,7 @@
 
     <div class="panel">
         <div class="panel-heading">
-            <p class="text-center"><b>Last Updated:</b> {{ \Carbon\Carbon::parse($last_updated)->toFormattedDateString() }}
+            <p class="text-center"><b>Last Updated:</b> {{ \Carbon\Carbon::parse($last_updated)->toFormattedDateString() }}<br>
                <b>Total Coins Listed:</b> {{ $coins->count() }}  
             </p>
             <p class="text-center">The following list constains cryptocurrency coins which are open source and (mostly) decentralized. 

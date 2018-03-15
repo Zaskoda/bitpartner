@@ -33,6 +33,11 @@ Route::group(['middleware' => ['role:sysop']], function () {
     Route::resource('/users', 'UserController');
 });
 
+Route::get('/blockchain-jobs', 'JobController@index');
+Route::get('/icos', 'ICOController@index');
+Route::get('/blockchain-platforms', 'PlatformController@index');
+Route::get('/decentralized-exchanges', 'ExchangeController@index');
+
 Auth::routes();
 /*
 Route::get('/setup', function() {

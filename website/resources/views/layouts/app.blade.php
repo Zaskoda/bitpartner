@@ -45,7 +45,11 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="/coins">Coins</a></li>                        
+                        <li><a href="/coins">Coins</a></li>
+                        <li><a href="/blockchain-jobs">Jobs</a></li>
+                        <li><a href="/blockchain-platforms">Platforms</a></li>                        
+                        <li><a href="/icos">ICOs</a></li>
+                        <li><a href="/decentralized-exchanges">Exchanges</a></li>                        
                         <li><a href="/monitor">Monitor</a></li>
                         &nbsp;
                     </ul>
