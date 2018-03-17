@@ -26,7 +26,11 @@ class CoinController extends Controller
 
     public function show($id)
     {
-        $coin = Coin::findOrFail($id);
+        if (is_numeric($id)) {
+            $coin = Coin::findOrFail($id);
+        } else {
+            $coin = Coin::where('slug','=',$id)->firstOrFail();
+        }
         return view('coin')->with(['coin'=>$coin]);
     }
 

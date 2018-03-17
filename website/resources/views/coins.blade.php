@@ -4,10 +4,15 @@
 
     <div class="panel">
         <div class="panel-heading">
+        @role('sysop')
+            <a href="/coins/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i></a></td>
+        @endrole        
             <p class="text-center"><b>Last Updated:</b> {{ \Carbon\Carbon::parse($last_updated)->toFormattedDateString() }}<br>
                <b>Total Coins Listed:</b> {{ $coins->count() }}  
             </p>
-            <p class="text-center">The following list constains cryptocurrency coins which are open source and (mostly) decentralized. 
+            <p class="text-center">
+
+            The following list constains cryptocurrency coins which are open source and (mostly) decentralized. 
             This list is a work-in-progress and is update irregularly as I learn about and collect information on new coins.</p>
         </div>
         <div class="panel-body">
@@ -44,7 +49,7 @@
                     </div>
                     <div class="col-xs-4 col-sm-2 text-center">
                         <div class="">
-                            <a class="btn btn-default btn-xs btn-primary" href="/coins/{{ $coin->id }}"><i class="fa fa-fw fa-eye"></i> Details</a>
+                            <a class="btn btn-default btn-xs btn-primary" href="/coins/@if(empty($coin->slug)){{$coin->id}}@else{{$coin->slug}}@endif"><i class="fa fa-fw fa-eye"></i> Details</a>
                             @role('sysop')
                             <a href="/coins/{{ $coin->id }}/edit" class="btn btn-xs btn-info"><i class="fa fa-fw fa-1x fa-pencil"></i> Edit</a></td>
                             @endrole

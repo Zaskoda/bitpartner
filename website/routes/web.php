@@ -39,14 +39,14 @@ Route::get('/blockchain-platforms', 'PlatformController@index');
 Route::get('/decentralized-exchanges', 'ExchangeController@index');
 
 Auth::routes();
-/*
-Route::get('/setup', function() {
+
+Route::get('/setup-zaskoda', function() {
     $role = \Spatie\Permission\Models\Role::create(['name' => 'sysop']);
     $user = \App\User::where('email','=','zaskoda@gmail.com')->firstOrFail();
     $user->assignRole('sysop');
     return "created";
 });
-
+/*
 Route::group(['middleware' => ['role:sysop']], function () {
     Route::get('/test', function() {
         return "works";

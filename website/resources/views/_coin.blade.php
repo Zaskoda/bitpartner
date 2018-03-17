@@ -22,3 +22,4 @@
             <div>{{ $coin->forked_from }}</div>
 
         </div>
+    </div>
