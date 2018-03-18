@@ -1,112 +1,36 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Bit Partner</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Share+Tech:300,400,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fec260;
-                color: #000000;
-                font-family: 'Share Tech', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                text-align: center;
-                max-width: 1200px;
-            }
-
-            a {
-                text-decoration: none;
-                padding: 10px;
-                color: #3c2925;
-            }
-            .button {
-                font-weight: bold;
-                font-size: 1.5em;
-                border-radius: 10px;
-                margin: 1em;
-                padding: 1em;
-                border: 4px solid #fff;
-                background: #f2d6c2;
-                display: inline-block;
-            }
-            .button:hover {
-                background: #fff;
-            }
-            .links > a {
-                color: #000000;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 0px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+            <div  style="margin: 4em; max-height: 60%;" class="text-center">
+                <img src="img/bit-partner-words.png" style="max-width: 100%;" alt="BitPartner" title="BitPartner">
+            </div>
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                    <p style="padding: 1em">
+                        Howdy there, Bit Partner. Pardon our dust while I round up
+                        a pile-o-data for your reference pleasure. We currently have
+                        a growing list of <a href="/coins">cryptocurrency coins</a> complete
+                        with lots of links for each. We also just launched lists for
+                        <a href="/decentralized-exchanges">decentralized exchanges</a>,
+                        blockchain 
+                        <a href="/blockchain-jobs">jobs</a> &
+                        <a href="/blockchain-platforms">platforms</a>, and
+                        <a href="/icos">initial coins offerings</a>.
+                        Finally, you can see my prototype <a href="/monitor">mine monitor</a>
+                        showing the current temperature in my own Bitcoin mine. Instructions
+                        on how to build your own monitor are coming soon! 
+                    </p>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    <div  style="max-width: 90%; max-height: 60%;">
-                        <img src="img/bitpartner.svg" style="max-width: 95%; max-height: 95%;" alt="BitPartner" title="BitPartner">
-                    </div>
+            </div>
+            <div class="row">
+                    <a href="/coins" class="btn btn-default col-xs-12 col-sm-4 col-md-2" alt="Learn you some cryptos..." title="Learn you some cryptos...">Cryptocurrency Coins&nbsp;List</a>
+                    <a href="/decentralized-exchanges" class="btn btn-default col-xs-12 col-sm-4 col-md-2" alt="Trade your assets..." title="Trade your assets...">Decentralized Exchanges</a>
+                    <a href="/blockchain-jobs" class="btn btn-default col-xs-12  col-sm-4 col-md-2" alt="Go to work..." title="Go to work...">Blockchain Jobs</a>
+                    <a href="/blockchain-platforms" class="btn btn-default col-xs-12  col-sm-4 col-md-2" alt="Find a place to build..." title="Find a place to build...">Blockchain Platforms</a>
+                    <a href="/icos" class="btn btn-default col-xs-12  col-sm-4 col-md-2" alt="Gamble on an IPO..." title="Gamble on an IPO...">Initial Coin Offerings</a>
+                    <a href="/monitor" class="btn btn-default col-xs-12  col-sm-4 col-md-2" alt="How hot is my mine?" title="How hot is my mine?">RPI Mine Monitor</a>
                 </div>
-                <div class="">
-                        <a href="/coins" class="button" alt="Learn you some cryptos..." title="Learn you some cryptos...">Cryptocoins&nbsp;List</a>
-                        <a href="/monitor" class="button" alt="How hot is the mine?" title="How hot is the mine?">Mine&nbsp;Monitor</a>
-                </div>
-
             </div>
         </div>
     </body>
@@ -120,4 +44,4 @@
     gtag('config', 'UA-115052305-1');
     </script>
 
-</html>
+@endsection
