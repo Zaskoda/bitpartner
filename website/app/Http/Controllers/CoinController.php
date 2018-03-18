@@ -1,22 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Coin;
 
 class CoinController extends Controller
 {
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
-
     public function index()
     {
         $coins = Coin::orderBy('genesis_date','asc')->paginate(60);

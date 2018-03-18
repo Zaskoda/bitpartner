@@ -90,7 +90,7 @@
             </div>
         </nav>
 
-        <div class="container-fluid">
+        <div class="container">
         @include('layouts.alert')
         @yield('content')
         </div>

@@ -1,25 +1,31 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Traits\LastUpdate;
+use App\Exchange;
 
 use Illuminate\Http\Request;
 
 class ExchangeController extends Controller
 {
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
+    use LastUpdate;
 
     public function index()
     {
-        $msg = "<p>Stay tuned for a list of distribute exchanges, coming soon... </p>";
-        return view('content')->with(['content'=> $msg]);
+        $exchanges = Exchange::orderBy('genesis_date','asc')->paginate(60);
+        $last_updated = Exchange::lastUpdated();
+        return view('exchanges')->with(['exchanges'=>$exchanges, 'last_updated'=> $last_updated]);
     }
+
+    public function show($id)
+    {
+        if (is_numeric($id)) {
+            $exchange = Exchange::findOrFail($id);
+        } else {
+            $exchange = Exchange::where('slug','=',$id)->firstOrFail();
+        }
+        return view('exchange')->with(['exchange'=>$exchange]);
+    }
+
 
 }
