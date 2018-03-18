@@ -15,10 +15,10 @@
 
 
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Admin</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -45,12 +45,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="/coins">Coins</a></li>
-                        <li><a href="/blockchain-jobs">Jobs</a></li>
-                        <li><a href="/blockchain-platforms">Platforms</a></li>                        
-                        <li><a href="/icos">ICOs</a></li>
-                        <li><a href="/decentralized-exchanges">Exchanges</a></li>                        
-                        <li><a href="/monitor">Monitor</a></li>
+                        <li><a href="/">Back</a></li>
                         &nbsp;
                     </ul>
 
@@ -67,10 +62,6 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                @role('sysop|admin')
-                                    <li><a href="/admin/">Admin</a>
-                                    </li>
-                                @endrole
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -91,24 +82,45 @@
         </nav>
 
         <div class="container-fluid">
-        @include('layouts.alert')
-        @yield('content')
+            <div class="row">
+                <div class="col-sm-3 col-lg-2">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="{{ Request::is('admin') ? 'active' : '' }}"><a href="/admin/"><span class="fa fa-table fa-fw"></span> Dash</a></li>
+                                <li class="{{ Request::is('admin/coins*') ? 'active' : '' }}"><a href="/admin/coins/" ><span class="fa fa-bitcoin fa-fw"></span> Coins</a></li>
+
+                                <li class="{{ Request::is('blockchain-jobs') ? ' active' : '' }}"><a href="/admin/blockchain-jobs/"><span class="fa fa-briefcase fa-fw"></span> Jobs</a></li>
+                                <li class="{{ Request::is('icos') ? ' active' : '' }}"><a href="/admin/icos/"><span class="fa fa-calendar fa-fw"></span> ICOs</a></li>
+                                <li class="{{ Request::is('blockchain-platforms') ? ' active' : '' }}"><a href="/admin/blockchain-platforms/"><span class="fa fa-cloud fa-fw"></span> Platforms</a></li>
+                                <li class="{{ Request::is('decentralized-exchanges') ? ' active' : '' }}"><a href="/admin/decentralized-exchanges/"><span class="fa fa-exchange fa-fw"></span> Exchanges</a></li>
+
+                                @role('sysop')
+                                <li class="{{ Request::is('admin/users*') ? 'active' : '' }}"><a href="/admin/users/"><span class="fa fa-fw fa-users"></span> Users</a></li>
+                                <li class="{{ Request::is('admin/roles*') ? 'active' : '' }}"><a href="/admin/roles/"><span class="fa fa-fw fa-address-card"></span> Roles</a></li>                    
+                                @endrole
+                                <li class="warning"><a href="/"><span class="fa fa-arrow-left fa-fw"></span> Exit</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-lg-10">
+                    <div class="panel">
+                       <div class="panel-body">
+                            <ol class="breadcrumb">
+                                <li><a href="/admin/">Dash</a></li>
+                                @yield('breadcrumb')
+                            </ol>
+                            @include('layouts.alert')
+                            @yield('content')
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115052305-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-115052305-1');
-    </script>
-
+    <script src="{{ asset('js/admin.js') }}"></script>
 
 </body>
 </html>

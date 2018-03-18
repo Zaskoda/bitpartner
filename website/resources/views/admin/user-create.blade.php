@@ -1,4 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('breadcrumb')
+<li><a href="/admin/users">Users</a></li>
+<li><a href="/admin/users/create">Add New User</a></li>
+@endsection
 
 @section('content')
 
@@ -8,7 +13,7 @@
                 <div class="panel-body">
                     {!! Form::open(['route' => ['users.store'],'method' => 'POST']) !!}
 
-                    @include('_user-form-fields')
+                    @include('admin._user-form-fields')
                     
                     <div class="form-group">
                         <label for="password" class="col-2-sm control-label">Password</label>
@@ -16,6 +21,13 @@
                         {{ Form::text('password', null, ['placeholder'=>'ChangeMe12...', 'class'=>'form-control']) }}
                         </div>
                     </div>
+
+
+                    @foreach($roles as $role)
+                        <p>{!! 
+                        Form::checkbox('roles['.$role->id.']','1', false) 
+                        !!} {{ $role->name }}</p>
+                    @endforeach
 
                     <div class="form-group">
                     {{ Form::submit('Create!',['class'=>'form-control']) }}

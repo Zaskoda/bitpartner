@@ -32,6 +32,5 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        @endforeach @endif
-        
+        @endforeach @endif        
 </div>

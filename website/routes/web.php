@@ -15,42 +15,60 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/monitor', 'MonitorController@index');
-Route::get('/api/monitor', 'MonitorController@api');
-Route::post('/monitor', 'MonitorController@update');
-Route::get('/dump', 'DumpController@dump');
-Route::get('/run-migrations', function () {
+Route::get('monitor', 'MonitorController@index');
+Route::get('api/monitor', 'MonitorController@api');
+Route::post('monitor', 'MonitorController@update');
+Route::get('dump', 'DumpController@dump');
+
+Route::get('daily', 'DailyAverageController@index');
+Route::get('hourly', 'HourlyAverageController@index');
+
+
+Route::get('run-migrations', function () {
     return Artisan::call('migrate', ["--force"=> true ]);
 });
-Route::get('/daily', 'DailyAverageController@index');
-Route::get('/daily/update', 'DailyAverageController@update');
-Route::get('/hourly', 'HourlyAverageController@index');
-Route::get('/hourly/update', 'HourlyAverageController@update');
 
-Route::resource('/coins', 'CoinController');
+Route::resource('coins', 'CoinController', ['only'=>['index','show']]);
+Route::get('blockchain-jobs', 'JobController@index', ['only'=>['index','show']]);
+Route::get('icos', 'ICOController@index', ['only'=>['index','show']]);
+Route::get('blockchain-platforms', 'PlatformController@index', ['only'=>['index','show']]);
+Route::get('decentralized-exchanges', 'ExchangeController@index', ['only'=>['index','show']]);
 
-Route::group(['middleware' => ['role:sysop']], function () {
-    Route::resource('/users', 'UserController');
+Route::middleware('auth')->group(function() { 
+    
+    Route::namespace('Admin')->prefix('admin')->group(function(){
+
+        Route::middleware(['role:sysop|admin'])->group(function () {
+            Route::get('/', 'DashboardController@index');
+            Route::resource('coins', 'CoinController');
+            Route::resource('blockchain-jobs', 'JobController');
+            Route::resource('icos', 'ICOController');
+            Route::resource('blockchain-platforms', 'PlatformController');
+            Route::resource('decentralized-exchanges', 'ExchangeController');
+        });
+
+        Route::middleware(['role:sysop'])->group(function () {
+            Route::resource('users', 'UserController');
+            Route::resource('roles', 'RoleController');
+        });
+    });
+
+    Route::middleware(['role:sysop'])->group(function () {
+        Route::get('hourly/update-all', 'HourlyAverageController@update');
+        Route::get('daily/update-all', 'DailyAverageController@update');
+    });
+    
 });
 
-Route::get('/blockchain-jobs', 'JobController@index');
-Route::get('/icos', 'ICOController@index');
-Route::get('/blockchain-platforms', 'PlatformController@index');
-Route::get('/decentralized-exchanges', 'ExchangeController@index');
+
 
 Auth::routes();
 
-Route::get('/setup-zaskoda', function() {
+Route::get('setup-zaskoda', function() {
     $role = \Spatie\Permission\Models\Role::create(['name' => 'sysop']);
     $user = \App\User::where('email','=','zaskoda@gmail.com')->firstOrFail();
     $user->assignRole('sysop');
     return "created";
 });
-/*
-Route::group(['middleware' => ['role:sysop']], function () {
-    Route::get('/test', function() {
-        return "works";
-    });
-});
-*/
+
 Route::get('/home', 'HomeController@index')->name('home');

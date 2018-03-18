@@ -5,7 +5,7 @@
     <div class="panel">
         <div class="panel-heading">
         @role('sysop')
-            <a href="/coins/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i></a></td>
+            <a href="/admin/coins/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i></a></td>
         @endrole        
             <p class="text-center"><b>Last Updated:</b> {{ \Carbon\Carbon::parse($last_updated)->toFormattedDateString() }}<br>
                <b>Total Coins Listed:</b> {{ $coins->count() }}  
@@ -16,6 +16,7 @@
             This list is a work-in-progress and is update irregularly as I learn about and collect information on new coins.</p>
         </div>
         <div class="panel-body">
+            <div class="text-center">{{ $coins->links() }}</div>
 
             @foreach ($coins as $coin)
                 <div class="row">
@@ -51,13 +52,15 @@
                         <div class="">
                             <a class="btn btn-default btn-xs btn-primary" href="/coins/@if(empty($coin->slug)){{$coin->id}}@else{{$coin->slug}}@endif"><i class="fa fa-fw fa-eye"></i> Details</a>
                             @role('sysop')
-                            <a href="/coins/{{ $coin->id }}/edit" class="btn btn-xs btn-info"><i class="fa fa-fw fa-1x fa-pencil"></i> Edit</a></td>
+                            <a href="/admin/coins/{{ $coin->id }}/edit" class="btn btn-xs btn-info"><i class="fa fa-fw fa-1x fa-pencil"></i> Edit</a></td>
                             @endrole
                         </div>
                     </div>
                 </div>
                 <hr>
             @endforeach
+
+            <div class="text-center">{{ $coins->links() }}</div>
         </div>
     </div>
 
