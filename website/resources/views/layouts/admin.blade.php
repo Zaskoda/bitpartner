@@ -89,13 +89,10 @@
                             <ul class="nav nav-pills nav-stacked">
                                 <li class="{{ Request::is('admin') ? 'active' : '' }}"><a href="/admin/"><span class="fa fa-table fa-fw"></span> Dashboard</a></li>
                                 <li class="{{ Request::is('admin/coins*') ? 'active' : '' }}"><a href="/admin/coins/" ><span class="fa fa-bitcoin fa-fw"></span> Coins</a></li>
-
-                                <li class="{{ Request::is('decentralized-exchanges') ? ' active' : '' }}"><a href="/admin/decentralized-exchanges/"><span class="fa fa-exchange fa-fw"></span> Exchanges</a></li>
-                                <li class="{{ Request::is('icos') ? ' active' : '' }}"><a href="/admin/icos/"><span class="fa fa-calendar fa-fw"></span> ICOs</a></li>
-
-                                <li class="{{ Request::is('blockchain-jobs') ? ' active' : '' }}"><a href="/admin/blockchain-jobs/"><span class="fa fa-briefcase fa-fw"></span> Jobs</a></li>
-                                <li class="{{ Request::is('blockchain-platforms') ? ' active' : '' }}"><a href="/admin/blockchain-platforms/"><span class="fa fa-cloud fa-fw"></span>  Platforms</a></li>
-
+                                <li class="{{ Request::is('admin/decentralized-exchanges') ? ' active' : '' }}"><a href="/admin/decentralized-exchanges/"><span class="fa fa-exchange fa-fw"></span> Exchanges</a></li>
+                                <li class="{{ Request::is('admin/blockchain-jobs') ? ' active' : '' }}"><a href="/admin/blockchain-jobs/"><span class="fa fa-briefcase fa-fw"></span> Jobs</a></li>
+                                <li class="{{ Request::is('admin/blockchain-platforms') ? ' active' : '' }}"><a href="/admin/blockchain-platforms/"><span class="fa fa-cloud fa-fw"></span>  Platforms</a></li>
+                                <li class="{{ Request::is('admin/icos') ? ' active' : '' }}"><a href="/admin/icos/"><span class="fa fa-calendar fa-fw"></span> ICOs</a></li>
                                 @role('sysop')
                                 <li class="{{ Request::is('admin/users*') ? 'active' : '' }}"><a href="/admin/users/"><span class="fa fa-fw fa-users"></span> Users</a></li>
                                 <li class="{{ Request::is('admin/roles*') ? 'active' : '' }}"><a href="/admin/roles/"><span class="fa fa-fw fa-address-card"></span> Roles</a></li>                    

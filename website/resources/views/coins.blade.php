@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <div class="panel">
+    <div class="panel panel-default">
         <div class="panel-heading">
-        @role('sysop')
+        @role('sysop|admin')
             <a href="/admin/coins/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i></a></td>
         @endrole        
             <p class="text-center"><b>Last Updated:</b> {{ \Carbon\Carbon::parse($last_updated)->toFormattedDateString() }}<br>
@@ -12,7 +12,7 @@
             </p>
             <p class="text-center">
 
-            The following list constains cryptocurrency coins which are open source and (mostly) decentralized. 
+            The following list constains cryptocurrency coins which are open source and (mostly) decentralized. <br>
             This list is a work-in-progress and is update irregularly as I learn about and collect information on new coins.</p>
         </div>
         <div class="panel-body">

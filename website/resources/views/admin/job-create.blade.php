@@ -14,14 +14,13 @@
                     {!! Form::open(['route' => ['blockchain-jobs.store'],'method' => 'POST']) !!}
                     
                     @include('admin._job-form-fields')
-
                     
                     <div class="form-group">
                         <div class="col-md-6">
                             <a href="/admin/blockchain-jobs/" class="form-control btn btn-default">Cancel</a>
                         </div>
                         <div class="col-md-6">
-                            {{ Form::submit('Jobs!',['class'=>'form-control btn btn-success']) }}
+                            {{ Form::submit('Create Job!',['class'=>'form-control btn btn-success']) }}
                         </div>
                     </div>
 

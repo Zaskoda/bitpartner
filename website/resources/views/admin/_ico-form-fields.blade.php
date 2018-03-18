@@ -1,6 +1,6 @@
 
                     <div class="form-group">
-                        <label for="title" class="col-2-sm control-label">ICO Name</label>
+                        <label for="title" class="col-2-sm control-label">ICO Title</label>
                         <div class="col-10-sm">
                         {{ Form::text('title', null, ['placeholder'=>'ico...', 'class'=>'form-control']) }}
                         </div>

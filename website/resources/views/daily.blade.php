@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="panel">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <div class="text-center">
                 <a class="btn btn-default" href="/monitor">all</a>

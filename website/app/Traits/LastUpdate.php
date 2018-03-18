@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait LastUpdate {
+trait LastUpdated {
    
     static function lastUpdated()
     {

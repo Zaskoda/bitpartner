@@ -21,6 +21,13 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="location" class="col-2-sm control-label">Location</label>
+                        <div class="col-10-sm">
+                        {{ Form::text('location', null, ['placeholder'=>'...', 'class'=>'form-control']) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="company_website" class="col-2-sm control-label">Company Website</label>
                         <div class="col-10-sm">
                         {{ Form::text('company_website', null, ['placeholder'=>'http://...', 'class'=>'form-control']) }}

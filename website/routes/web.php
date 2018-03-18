@@ -29,10 +29,10 @@ Route::get('run-migrations', function () {
 });
 
 Route::resource('coins', 'CoinController', ['only'=>['index','show']]);
-Route::get('blockchain-jobs', 'JobController@index', ['only'=>['index','show']]);
-Route::get('icos', 'ICOController@index', ['only'=>['index','show']]);
-Route::get('blockchain-platforms', 'PlatformController@index', ['only'=>['index','show']]);
-Route::get('decentralized-exchanges', 'ExchangeController@index', ['only'=>['index','show']]);
+Route::resource('blockchain-jobs', 'JobController', ['only'=>['index','show']]);
+Route::resource('icos', 'ICOController', ['only'=>['index','show']]);
+Route::resource('blockchain-platforms', 'PlatformController', ['only'=>['index','show']]);
+Route::resource('decentralized-exchanges', 'ExchangeController', ['only'=>['index','show']]);
 
 Route::middleware('auth')->group(function() { 
     

@@ -4,10 +4,13 @@ namespace App;
 use App\Reading;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\LastUpdated;
 
 class DailyAverage extends Model
 {
 
+    use LastUpdated;
+    
     public $timestamps = false;
     protected $fillable = [
         'acc',

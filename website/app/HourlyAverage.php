@@ -1,13 +1,16 @@
 <?php
 
 namespace App;
-use App\Reading;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\LastUpdated;
+use App\Reading;
 
 class HourlyAverage extends Model
 {
 
+    use LastUpdated;
+    
     public $timestamps = false;
     protected $fillable = [
         'acc',

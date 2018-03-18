@@ -8,8 +8,9 @@
     <table class="table table-hover table-condensed">
         <thead>
             <tr>
-                <th>Name</th>
+                <th></th>
                 <th>Post Date</th>
+                <th>Name</th>
                 <th>Company</th>
                 <th colspan="2" class="text-right">
                     <a href="/admin/blockchain-jobs/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Add New Job</a></td>
@@ -20,10 +21,13 @@
             @foreach ($jobs as $job)
             <tr>
                 <td>
-                    {{ $job->title }}
+                    <a class="btn btn-default btn-xs btn-primary" href="/blockchain-jobs/{{ $job->id }}"><i class="fa fa-fw fa-eye"></i> View</a>
                 </td>
                 <td>
                     {{ $job->post_date }}
+                </td>
+                <td>
+                    {{ $job->title }}
                 </td>
                 <td>
                     {{ $job->company }}

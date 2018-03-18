@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\LastUpdated;
 
 class Coin extends Model
 {
     //
+    use LastUpdated;
+
     protected $fillable = [
         'name',
         'symbol',
@@ -45,10 +48,4 @@ class Coin extends Model
         return $clean;
     }
 
-    static function lastUpdated()
-    {
-        $recent = self::select('updated_at')->orderBy('updated_at','desc')->limit(1)->first();
-        if ($recent) return $recent->updated_at;
-        return null;
-    }
 }

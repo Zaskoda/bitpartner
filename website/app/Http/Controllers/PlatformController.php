@@ -10,7 +10,7 @@ class PlatformController extends Controller
 {
     public function index()
     {
-        $platforms = Platform::orderBy('genesis_date','asc')->paginate(60);
+        $platforms = Platform::paginate(60);
         $last_updated = Platform::lastUpdated();
         return view('platforms')->with(['platforms'=>$platforms, 'last_updated'=> $last_updated]);
     }

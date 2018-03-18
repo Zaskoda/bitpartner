@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Traits\LastUpdate;
 use App\Job;
 
 use Illuminate\Http\Request;
@@ -10,7 +9,7 @@ class JobController extends Controller
 {
     public function index()
     {
-        $jobs = Job::orderBy('genesis_date','asc')->paginate(60);
+        $jobs = Job::paginate(60);
         $last_updated = Job::lastUpdated();
         return view('jobs')->with(['jobs'=>$jobs, 'last_updated'=> $last_updated]);
     }

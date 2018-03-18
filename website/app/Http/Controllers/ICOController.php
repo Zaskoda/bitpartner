@@ -10,7 +10,7 @@ class ICOController extends Controller
 {
     public function index()
     {
-        $icos = ICO::orderBy('genesis_date','asc')->paginate(60);
+        $icos = ICO::paginate(60);
         $last_updated = ICO::lastUpdated();
         return view('icos')->with(['icos'=>$icos, 'last_updated'=> $last_updated]);
     }
