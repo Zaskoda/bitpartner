@@ -5,7 +5,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
         @role('sysop|admin')
-            <a href="/admin/distributed-exchanges/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i></a>
+            <a href="/admin/decentralized-exchanges/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i></a>
         @endrole        
             <p class="text-center"><b>Last Updated:</b> {{ \Carbon\Carbon::parse($last_updated)->toFormattedDateString() }}
             </p>
