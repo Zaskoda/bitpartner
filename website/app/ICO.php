@@ -14,7 +14,7 @@ class ICO extends Model
     protected $fillable = [
         'title',
         'description',
-        'accounce_link',
+        'announce_link',
         'company_website',
         'company',
         'company_link',

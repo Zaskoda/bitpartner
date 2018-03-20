@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-<li><a href="/admin/coins">Users</a></li>
-<li><a href="/admin/coins/{{ $coin->id }}/edit">Editing {{ $coin->name }}</a></li>
+<li><a href="/admin/coins"><i class="fa fa-bitcoin fa-fw"></i> Coins</a></li>
+<li><a href="/admin/coins/{{ $coin->id }}/edit"><i class="fa fa-fw fa-1x fa-pencil"></i> Editing {{ $coin->name }}</a></li>
 @endsection
 
 @section('content')

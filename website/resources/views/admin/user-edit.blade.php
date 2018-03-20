@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-<li><a href="/admin/users">Users</a></li>
-<li><a href="/admin/users/{{$user->id}}/edit">Edit User #{{$user->id}}</a></li>
+<li><a href="/admin/users"><i class="fa fa-fw fa-users"></i> Users</a></li>
+<li><a href="/admin/users/{{$user->id}}/edit"><i class="fa fa-fw fa-1x fa-pencil"></i> Edit User #{{$user->id}}</a></li>
 @endsection
 
 @section('content')

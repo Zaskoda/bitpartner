@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-<li><a href="/admin/icos/">ICOs</a></li>
+<li><a href="/admin/icos/"><i class="fa fa-calendar fa-fw"></i> ICOs</a></li>
 <li><a href="/admin/icos/create/">Add New ICO</a></li>
 @endsection
 

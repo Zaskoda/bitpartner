@@ -3,11 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\LastUpdated;
 
 class Reading extends Model
 {
-    use LastUpdated;
     
     public $timestamps = false;
     protected $fillable = [

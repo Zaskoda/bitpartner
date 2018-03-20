@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-<li><a href="/admin/roles">Roles</a></li>
+<li><a href="/admin/roles"><i class="fa fa-fw fa-address-card"></i> Roles</a></li>
 @endsection
 
 @section('content')

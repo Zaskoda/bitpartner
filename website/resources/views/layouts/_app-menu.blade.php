@@ -21,7 +21,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-
+                        <li>
+                                <li><a href="/articles">Articles</a></li>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                 Resource Lists <span class="caret"></span>
@@ -37,10 +39,13 @@
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                Tools <span class="caret"></span>
+                                RPI Mine Monitor <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                            <li><a href="/monitor">RPI Mine Monitor</a></li>
+                            <li><a href="/rpi-mine-monitor-how-to">How To Build</a></li>
+                            <li><a href="/monitor">Raw Feed (2 min interval)</a></li>
+                            <li><a href="/monitor/hourly">Hourly Average</a></li>
+                            <li><a href="/monitor/daily">Daily Average</a></li>
                             </ul>
                         </li>
 

@@ -14,11 +14,4 @@ class DailyAverageController extends Controller
         return view('daily')->with(['readings'=>$readings]);
     }
 
-    public function update()
-    {
-        if (!$this->checkRole()) return \Redirect::route('coins.index');
-        
-        DailyAverage::generate(true);
-        return redirect('daily');
-    }
 }

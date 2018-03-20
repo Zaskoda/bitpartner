@@ -5,18 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\LastUpdated;
 
-class Job extends Model
+class Page extends Model
 {
     use LastUpdated;
     
     protected $fillable = [
+        'slug',
         'title',
-        'source',
-        'description',
-        'company',
-        'company_link',
-        'location',
-        'post_date'
+        'body'
     ];
 
 }

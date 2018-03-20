@@ -2,7 +2,7 @@
 
 @section('breadcrumb')
 <li><a href="/admin/icos/">ICOs</a></li>
-<li><a href="/admin/icos/{{$ico->id}}/edit">Edit ICO {{$ico->title}}</a></li>
+<li><a href="/admin/icos/{{$ico->id}}/edit"><i class="fa fa-fw fa-1x fa-pencil"></i> Edit ICO {{$ico->title}}</a></li>
 @endsection
 
 @section('content')

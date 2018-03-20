@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-<li><a href="/admin/decentralized-exchanges/"><i class="fa fa-exchange fa-fw"></i> Exchanges</a></li>
-<li><a href="/admin/decentralized-exchanges/create/"><span class="fa fa-fw fa-plus"></span> Add New Exchange</a></li>
+<li><a href="/admin/articles/"><i class="fa fa-sticky-note fa-fw"></i> Articles</a></li>
+<li><a href="/admin/articles/create/"><span class="fa fa-fw fa-plus"></span> Add New Article</a></li>
 @endsection
 
 @section('content')
@@ -11,15 +11,16 @@
         <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
             <div class="panel">
                 <div class="panel-body">
-                    {!! Form::open(['route' => ['decentralized-exchanges.store'],'method' => 'POST']) !!}
+                    {!! Form::open(['route' => ['articles.store'],'method' => 'POST']) !!}
                     
-                    @include('admin._exchange-form-fields')
+                    @include('admin._article-form-fields')
+                    
                     <div class="form-group">
                         <div class="col-md-6">
-                            <button href="/decentralized-exchanges/" class="form-control btn btn-default col-md-6">Cancel</button>
+                            <a href="/admin/articles/" class="form-control btn btn-default">Cancel</a>
                         </div>
                         <div class="col-md-6">
-                            {{ Form::submit('Create!',['class'=>'form-control btn btn-success col-md-6']) }}
+                            {{ Form::submit('Create Article!',['class'=>'form-control btn btn-success']) }}
                         </div>
                     </div>
 

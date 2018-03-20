@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-<li><a href="/admin/blockchain-platforms/"><i class="fa fa-cloud fa-fw"></i> Platforms</a></li>
-<li><a href="/admin/blockchain-platforms/{{$platform->id}}/edit"><i class="fa fa-fw fa-1x fa-pencil"></i> Edit Platform {{$platform->name}}</a></li>
+<li><a href="/admin/pages/"><i class="fa fa-sticky-note fa-fw"></i> Pages</a></li>
+<li><a href="/admin/pages/{{$page->id}}/edit"><i class="fa fa-fw fa-1x fa-pencil"></i> Edit Page {{$page->name}}</a></li>
 @endsection
 
 @section('content')
@@ -10,13 +10,13 @@
         <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
             <div class="panel">
                 <div class="panel-body">
-                    {!! Form::model($platform, ['route' => ['blockchain-platforms.update', $platform],'method' => 'PUT']) !!}
+                    {!! Form::model($page, ['route' => ['pages.update', $page],'method' => 'PUT']) !!}
                 
-                    @include('admin._platform-form-fields')
+                    @include('admin._page-form-fields')
 
                     <div class="form-group">
                         <div class="col-md-6">
-                            <a href="/admin/blockchain-platforms" class="form-control btn btn-default">Cancel</a>
+                            <a href="/admin/pages" class="form-control btn btn-default">Cancel</a>
                         </div>
                         <div class="col-md-6">
                             {{ Form::submit('Update!',['class'=>'form-control btn btn-success']) }}

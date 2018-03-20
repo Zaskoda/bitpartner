@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-<li><a href="/admin/decentralized-exchanges">Exchanges</a></li>
+<li><a href="/admin/decentralized-exchanges"><i class="fa fa-exchange fa-fw"></i> Exchanges</a></li>
 @endsection
 
 @section('content')

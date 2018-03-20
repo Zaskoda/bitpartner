@@ -1,38 +1,38 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-<li><a href="/admin/icos"><i class="fa fa-calendar fa-fw"></i> ICOs</a></li>
+<li><a href="/admin/pages"><i class="fa fa- fa-fw"></i> Static Content</a></li>
 @endsection
 
 @section('content')
     <table class="table table-hover table-condensed">
         <thead>
             <tr>
+                <th></th>
                 <th>Title</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>Slug</th>
                 <th colspan="2" class="text-right">
-                    <a href="/admin/icos/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Add New ICO</a></td>
+                    <a href="/admin/pages/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Add New StaticContent</a></td>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($icos as $ico)
+            @foreach ($pages as $page)
             <tr>
                 <td>
-                    {{ $ico->title }}
+                    <a class="btn btn-default btn-xs btn-primary" href="/{{ $page->slug }}"><i class="fa fa-fw fa-eye"></i> View</a>
                 </td>
                 <td>
-                    {{ $ico->start_date }}
+                    {{ $page->title }}
                 </td>
                 <td>
-                    {{ $ico->end_date }}
+                    {{ $page->slug }}
                 </td>
                 <td class="text-right">
-                    <a href="/admin/icos/{{ $ico->id }}/edit" class="btn btn-xs btn-info"><i class="fa fa-fw fa-1x fa-pencil"></i> Edit</a>
+                    <a href="/admin/pages/{{ $page->id }}/edit" class="btn btn-xs btn-info"><i class="fa fa-fw fa-1x fa-pencil"></i> Edit</a>
                 </td>
                 <td class="text-right">
-                    {!! Form::open(['url' => url('/admin/icos/'.$ico->id.'/'), 
+                    {!! Form::open(['url' => url('/admin/pages/'.$page->id.'/'), 
                                                 'class'=> "pull-right", 
                                                 'method'=>'delete', 
                                                 'style'=>"display:inline",

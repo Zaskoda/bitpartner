@@ -14,11 +14,4 @@ class HourlyAverageController extends Controller
         return view('hourly')->with(['readings'=>$readings]);
     }
 
-    public function update()
-    {
-        if (!$this->checkRole()) return \Redirect::route('coins.index');
-        
-        HourlyAverage::generate(true);
-        return redirect('hourly');
-    }
 }

@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-<li><a href="/admin/blockchain-platforms/">Platforms</a></li>
-<li><a href="/admin/blockchain-platforms/create/">Add New Platform</a></li>
+<li><a href="/admin/blockchain-platforms/"><i class="fa fa-cloud fa-fw"></i> Platforms</a></li>
+<li><a href="/admin/blockchain-platforms/create/"><span class="fa fa-fw fa-plus"></span> Add New Platform</a></li>
 @endsection
 
 @section('content')

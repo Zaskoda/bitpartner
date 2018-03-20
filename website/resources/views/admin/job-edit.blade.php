@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-<li><a href="/admin/blockchain-jobs/">Jobs</a></li>
-<li><a href="/admin/blockchain-jobs/{{$job->id}}/edit">Edit Job {{$job->name}}</a></li>
+<li><a href="/admin/blockchain-jobs/"><i class="fa fa-briefcase fa-fw"></i> Jobs</a></li>
+<li><a href="/admin/blockchain-jobs/{{$job->id}}/edit"><i class="fa fa-fw fa-1x fa-pencil"></i> Edit Job {{$job->name}}</a></li>
 @endsection
 
 @section('content')

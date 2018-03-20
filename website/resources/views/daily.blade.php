@@ -6,7 +6,7 @@
             <div class="text-center">
                 <a class="btn btn-default" href="/monitor">all</a>
                 <a class="btn btn-default" href="/hourly">hourly</a>
-                <a class="btn btn-default" href="/daily">daily</a>
+                <a class="btn btn-default active" href="/daily">daily</a>
             </div>
         </div>
         <div class="panel-body">

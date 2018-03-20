@@ -7,7 +7,6 @@ use App\Traits\LastUpdated;
 
 class Coin extends Model
 {
-    //
     use LastUpdated;
 
     protected $fillable = [

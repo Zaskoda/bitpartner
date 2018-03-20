@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('breadcrumb')
-<li><a href="/admin/coins">Coins</a></li>
+<li><a href="/admin/coins"><i class="fa fa-bitcoin fa-fw"></i> Coins</a></li>
 @endsection
 
 @section('content')

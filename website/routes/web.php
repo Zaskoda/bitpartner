@@ -20,14 +20,15 @@ Route::get('api/monitor', 'MonitorController@api');
 Route::post('monitor', 'MonitorController@update');
 Route::get('dump', 'DumpController@dump');
 
-Route::get('daily', 'DailyAverageController@index');
-Route::get('hourly', 'HourlyAverageController@index');
+Route::get('monitor/daily', 'DailyAverageController@index');
+Route::get('monitor/hourly', 'HourlyAverageController@index');
 
 
 Route::get('run-migrations', function () {
     return Artisan::call('migrate', ["--force"=> true ]);
 });
 
+Route::resource('articles', 'ArticleController', ['only'=>['index','show']]);
 Route::resource('coins', 'CoinController', ['only'=>['index','show']]);
 Route::resource('blockchain-jobs', 'JobController', ['only'=>['index','show']]);
 Route::resource('icos', 'ICOController', ['only'=>['index','show']]);
@@ -40,24 +41,29 @@ Route::middleware('auth')->group(function() {
 
         Route::middleware(['role:sysop|admin'])->group(function () {
             Route::get('/', 'DashboardController@index');
+            Route::resource('pages', 'PageController');
+            Route::resource('articles', 'ArticleController');
             Route::resource('coins', 'CoinController');
             Route::resource('blockchain-jobs', 'JobController');
             Route::resource('icos', 'ICOController');
             Route::resource('blockchain-platforms', 'PlatformController');
             Route::resource('decentralized-exchanges', 'ExchangeController');
+            Route::resource('monitors', 'MonitorsController');
         });
 
         Route::middleware(['role:sysop'])->group(function () {
             Route::resource('users', 'UserController');
             Route::resource('roles', 'RoleController');
-        });
+            Route::get('monitor/hourly/update-all', 'HourlyAverageController@update');
+            Route::get('monitor/daily/update-all', 'DailyAverageController@update');
+            });
     });
+   
+});
 
-    Route::middleware(['role:sysop'])->group(function () {
-        Route::get('hourly/update-all', 'HourlyAverageController@update');
-        Route::get('daily/update-all', 'DailyAverageController@update');
-    });
-    
+Route::get('/rpi-mine-monitor-how-to', function () {
+    $page = \App\Page::where('slug','=','rpi-mine-monitor-how-to')->firstOrFail();
+    return view('page')->with(['page'=>$page]);
 });
 
 

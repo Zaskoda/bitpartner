@@ -1095,16 +1095,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "0.17.0",
+            "version": "0.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "3b4c2224524776a584de663c7a04bc8eb2e1544d"
+                "reference": "38b2fca6b8493abd9314fcf6b5b042cfba6a0f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/3b4c2224524776a584de663c7a04bc8eb2e1544d",
-                "reference": "3b4c2224524776a584de663c7a04bc8eb2e1544d",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/38b2fca6b8493abd9314fcf6b5b042cfba6a0f11",
+                "reference": "38b2fca6b8493abd9314fcf6b5b042cfba6a0f11",
                 "shasum": ""
             },
             "require": {
@@ -1119,10 +1119,10 @@
                 "commonmark/commonmark.js": "0.28",
                 "erusev/parsedown": "~1.0",
                 "michelf/php-markdown": "~1.4",
-                "mikehaertl/php-shellcommand": "~1.2.0",
-                "phpunit/phpunit": "~5.7|~6.5",
-                "scrutinizer/ocular": "~1.1",
-                "symfony/finder": "~3.0|~4.0"
+                "mikehaertl/php-shellcommand": "^1.2",
+                "phpunit/phpunit": "^5.7|^6.5",
+                "scrutinizer/ocular": "^1.1",
+                "symfony/finder": "^3.0|^4.0"
             },
             "suggest": {
                 "league/commonmark-extras": "Library of useful extensions including smart punctuation"
@@ -1160,7 +1160,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2017-12-30T22:08:48+00:00"
+            "time": "2018-03-18T13:01:30+00:00"
         },
         {
             "name": "league/flysystem",
