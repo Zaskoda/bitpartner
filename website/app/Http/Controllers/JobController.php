@@ -9,7 +9,7 @@ class JobController extends Controller
 {
     public function index()
     {
-        $jobs = Job::paginate(60);
+        $jobs = Job::orderBy('post_date','desc')->paginate(60);
         $last_updated = Job::lastUpdated();
         return view('jobs')->with(['jobs'=>$jobs, 'last_updated'=> $last_updated]);
     }
