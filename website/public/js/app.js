@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 41);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -972,9 +972,9 @@ window._ = __webpack_require__(10);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(12);
+    window.$ = window.jQuery = __webpack_require__(12);
 
-  __webpack_require__(13);
+    __webpack_require__(13);
 } catch (e) {}
 
 /**
@@ -996,9 +996,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+
+var api_token = document.head.querySelector('meta[name="api-token"]');
+
+if (api_token) {
+    window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + api_token.content;
+} else {
+    console.error('API token not found');
 }
 
 /**
@@ -45185,16 +45193,18 @@ this.currentResponsive=void 0)};B.prototype.matchResponsiveRule=function(a,l){va
 
 
 /***/ }),
-/* 39 */
+/* 39 */,
+/* 40 */,
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(40);
-__webpack_require__(41);
-module.exports = __webpack_require__(42);
+__webpack_require__(42);
+__webpack_require__(43);
+module.exports = __webpack_require__(45);
 
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45236,13 +45246,14 @@ var app = new Vue({
 });
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 42 */
+/* 44 */,
+/* 45 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

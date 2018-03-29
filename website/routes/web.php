@@ -40,7 +40,11 @@ Route::middleware('auth')->group(function() {
     Route::namespace('Admin')->prefix('admin')->group(function(){
 
         Route::middleware(['role:sysop|admin'])->group(function () {
+            Route::namespace('Api')->prefix('api')->group(function(){
+                Route::resource('images', 'ImageController');
+            });
             Route::get('/', 'DashboardController@index');
+            Route::resource('images', 'ImageController');
             Route::resource('pages', 'PageController');
             Route::resource('articles', 'ArticleController');
             Route::resource('coins', 'CoinController');
@@ -65,7 +69,6 @@ Route::get('/rpi-mine-monitor-how-to', function () {
     $page = \App\Page::where('slug','=','rpi-mine-monitor-how-to')->firstOrFail();
     return view('page')->with(['page'=>$page]);
 });
-
 
 
 Auth::routes();

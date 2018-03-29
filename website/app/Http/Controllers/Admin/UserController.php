@@ -31,6 +31,7 @@ class UserController extends AdminController
         $request_values = $request->all();
         $request_values['password'] = \Hash::make($request_values['password']);
         $user = new User($request_values);
+        $user->generate_token();
         if (!$user->save()) {
             return back()->with('error', 'Unable to save user');
         }

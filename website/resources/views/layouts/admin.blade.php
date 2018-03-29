@@ -7,6 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="api-token" content="{{ \Auth::user()->api_token }}">
 
     <meta property="og:image" content="/img/partner.png">
     <meta property="og:image:type" content="image/jpeg">
@@ -19,18 +20,20 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
 </head>
 <body>
-    <div id="app">
+    <div>
         @include('layouts._app-menu')
 
-        <div class="container">
+        <div class="container" id="admin">
             <div class="row">
                 <div class="col-sm-3 col-lg-2">
                     <div class="panel">
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
                                 <li class="{{ Request::is('admin') ? 'active' : '' }}"><a href="/admin/"><i class="fa fa-table fa-fw"></i> Dashboard</a></li>
+                                <li class="{{ Request::is('admin/images*') ? 'active' : '' }}"><a href="/admin/images"><i class="fa fa-image fa-fw"></i> Images</a></li>
                                 <li class="{{ Request::is('admin/pages*') ? 'active' : '' }}"><a href="/admin/pages"><i class="fa fa-leanpub fa-fw"></i> Pages</a></li>
                                 <li class="{{ Request::is('admin/articles*') ? 'active' : '' }}"><a href="/admin/articles"><i class="fa fa-sticky-note fa-fw"></i> Articles</a></li>
                                 <li class="{{ Request::is('admin/coins*') ? 'active' : '' }}"><a href="/admin/coins/" ><i class="fa fa-bitcoin fa-fw"></i> Coins</a></li>

@@ -31,6 +31,6 @@
                     <div class="form-group">
                         <label for="body" class="col-2-sm control-label">Body</label>
                         <div class="col-10-sm">
-                        {{ Form::textarea('body', null, ['placeholder'=>'leave blank to auto-generate...', 'class'=>'form-control']) }}
+                        {{ Form::textarea('body', null, ['placeholder'=>'You can use markdown here', 'class'=>'form-control']) }}
                         </div>
                     </div>

@@ -24,6 +24,8 @@ Vue.use(VueChartkick, { Chartkick });
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-const app = new Vue({
-    el: '#app'
+Vue.component('image-uploader', require('./components/_image-uploader.vue'));
+
+const admin = new Vue({
+    el: '#admin'
 });
