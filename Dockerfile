@@ -3,8 +3,8 @@ FROM php:7.2.1-apache
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install the PHP extensions I need for my personal project (gd, mbstring, opcache)
-RUN apt-get update && apt-get install -y libpq-dev git mysql-client wget \
-	&& docker-php-ext-install mbstring php-gd
+RUN apt-get update && apt-get install -y git mysql-client wget \
+	&& docker-php-ext-install mbstring php7-gd
 RUN apt-get update && apt-get install -y apt-utils 
 RUN sudo apt-get install -y nfs-common
 
