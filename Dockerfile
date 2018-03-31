@@ -4,8 +4,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install the PHP extensions I need for my personal project (gd, mbstring, opcache)
 RUN apt-get update && apt-get install -y libpq-dev git mysql-client wget \
-	&& docker-php-ext-install mbstring
+	&& docker-php-ext-install mbstring php-gd
 RUN apt-get update && apt-get install -y apt-utils 
+RUN sudo apt-get install nfs-common
 
 # Install mysql extension
 RUN docker-php-ext-install mysqli pdo pdo_mysql
@@ -38,6 +39,9 @@ ADD ./website /var/www/html
 
 # Change working directory
 WORKDIR /var/www/html
+
+RUN mkdir -p /var/www/html/public/media/
+RUN sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 fs-b40f9e1d.efs.us-west-2.amazonaws.com:/ /var/www/html/public/media/
 
 # Install and update laravel (rebuild into vendor folder)
 RUN composer install
