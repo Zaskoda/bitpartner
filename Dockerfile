@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y libpq-dev git mysql-client wget \
 	&& docker-php-ext-install mbstring php-gd
 RUN apt-get update && apt-get install -y apt-utils 
-RUN apt-get install -y nfs-common
+# RUN apt-get install -y nfs-common
 
 # Install mysql extension
 RUN docker-php-ext-install mysqli pdo pdo_mysql
