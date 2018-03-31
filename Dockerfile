@@ -10,7 +10,16 @@ RUN apt-get update && apt-get install -y apt-utils
 RUN sudo apt-get install -y nfs-common
 
 # Install mysql extension
-RUN docker-php-ext-install mysqli pdo pdo_mysql gd
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+RUN apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng12-dev \
+    && docker-php-ext-install -j$(nproc) iconv mcrypt \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd
 
 RUN a2enmod rewrite
 # RUN a2enmod expires
