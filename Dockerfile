@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y libpq-dev git mysql-client wget \
 	&& docker-php-ext-install mbstring php-gd
 RUN apt-get update && apt-get install -y apt-utils 
+RUN sudo apt-get install -y nfs-common
 
 # Install mysql extension
 RUN docker-php-ext-install mysqli pdo pdo_mysql
@@ -57,7 +58,7 @@ RUN mkdir -p /var/www/html/storage/framework/sessions
 RUN mkdir -p /var/www/html/storage/framework/views
 RUN mkdir -p /var/www/html/storage/meta
 RUN mkdir -p /var/www/html/storage/cache
-RUN mkdir -p /var/www/html/public/uploads/
+RUN mkdir -p /var/www/html/public/uploads
 
 # Change folder permission
 RUN chmod -R 0777 /var/www/html/storage/
