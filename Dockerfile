@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install the PHP extensions I need for my personal project (gd, mbstring, opcache)
 RUN apt-get update && apt-get install -y git mysql-client wget \
-	&& docker-php-ext-install mbstring php-gd
+	&& docker-php-ext-install mbstring
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
