@@ -3,10 +3,12 @@ FROM php:7.2.1-apache
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install the PHP extensions I need for my personal project (gd, mbstring, opcache)
+
+RUN apt-get update && apt-get install software-properties-common python-software-properties
+RUN  add-apt-repository ppa:ondrej/php
 RUN apt-get update && apt-get install -y git mysql-client wget \
 	&& docker-php-ext-install mbstring
 RUN apt-get update && apt-get install -y apt-utils 
-RUN  add-apt-repository ppa:ondrej/php
 RUN sudo apt-get install -y nfs-common php7.2-gd
 
 # Install mysql extension
