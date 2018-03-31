@@ -3,15 +3,8 @@ FROM php:7.2.1-apache
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install the PHP extensions I need for my personal project (gd, mbstring, opcache)
-
 RUN apt-get update && apt-get install -y git mysql-client wget \
-	&& docker-php-ext-install mbstring
-RUN apt-get update && apt-get install -y apt-utils 
-#RUN sudo apt-get install -y nfs-common
-
-# Install mysql extension
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-
+	&& docker-php-ext-install mbstring php-gd
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -20,6 +13,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) iconv mcrypt \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
+
+# Install mysql extension
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 RUN a2enmod rewrite
 # RUN a2enmod expires
@@ -68,14 +64,11 @@ RUN mkdir -p /var/www/html/storage/framework/sessions
 RUN mkdir -p /var/www/html/storage/framework/views
 RUN mkdir -p /var/www/html/storage/meta
 RUN mkdir -p /var/www/html/storage/cache
-RUN mkdir -p /var/www/html/public/uploads
+RUN mkdir -p /var/www/html/public/uploads/
 
 # Change folder permission
 RUN chmod -R 0777 /var/www/html/storage/
 RUN chmod -R 0777 /var/www/html/public/uploads/
-
-# Mount EFS
-RUN mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 fs-b40f9e1d.efs.us-west-2.amazonaws.com:/ /var/www/html/public/uploads
 
 RUN php artisan migrate
 
