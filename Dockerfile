@@ -7,10 +7,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y git mysql-client wget \
 	&& docker-php-ext-install mbstring
 RUN apt-get update && apt-get install -y apt-utils 
-RUN sudo apt-get install -y nfs-common php7.0-gd
+RUN sudo apt-get install -y nfs-common
 
 # Install mysql extension
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql gd
 
 RUN a2enmod rewrite
 # RUN a2enmod expires
