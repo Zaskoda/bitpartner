@@ -6,7 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y git mysql-client wget \
 	&& docker-php-ext-install mbstring
 RUN apt-get update && apt-get install -y apt-utils 
-RUN sudo apt-get install -y nfs-common php7.0-gd
+RUN  add-apt-repository ppa:ondrej/php
+RUN sudo apt-get install -y nfs-common php7.2-gd
 
 # Install mysql extension
 RUN docker-php-ext-install mysqli pdo pdo_mysql
@@ -63,6 +64,9 @@ RUN mkdir -p /var/www/html/public/uploads
 # Change folder permission
 RUN chmod -R 0777 /var/www/html/storage/
 RUN chmod -R 0777 /var/www/html/public/uploads/
+
+# Mount EFS
+RUN mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 fs-b40f9e1d.efs.us-west-2.amazonaws.com:/ /var/www/html/public/uploads
 
 RUN php artisan migrate
 
