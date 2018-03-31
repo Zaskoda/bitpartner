@@ -5,14 +5,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install the PHP extensions I need for my personal project (gd, mbstring, opcache)
 RUN apt-get update && apt-get install -y git mysql-client wget \
 	&& docker-php-ext-install mbstring
-RUN apt-get update && apt-get install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libmcrypt-dev \
-        libpng12-dev \
-    && docker-php-ext-install -j$(nproc) iconv mcrypt \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd
 
 # Install mysql extension
 RUN docker-php-ext-install mysqli pdo pdo_mysql
