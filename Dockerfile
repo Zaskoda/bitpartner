@@ -4,7 +4,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install the PHP extensions I need for my personal project (gd, mbstring, opcache)
 RUN apt-get update && apt-get install -y git mysql-client wget \
-	&& docker-php-ext-install mbstring nfs-client nfs-common 
+	&& docker-php-ext-install mbstring
+RUN apt-get install nfs-client
+RUN apt-get install nfs-common 
+
 
 # Install mysql extension
 RUN docker-php-ext-install mysqli pdo pdo_mysql
