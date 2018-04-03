@@ -56,7 +56,6 @@ RUN mkdir -p /var/www/html/storage/framework/sessions
 RUN mkdir -p /var/www/html/storage/framework/views
 RUN mkdir -p /var/www/html/storage/meta
 RUN mkdir -p /var/www/html/storage/cache
-RUN mkdir -p /var/www/html/public/media/
 
 # Change folder permission
 RUN chmod -R 0777 /var/www/html/storage/
