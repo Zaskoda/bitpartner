@@ -5,9 +5,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install the PHP extensions I need for my personal project (gd, mbstring, opcache)
 RUN apt-get update && apt-get install -y git mysql-client wget \
 	&& docker-php-ext-install mbstring
-RUN apt-get install -y nfs-client
-RUN apt-get install -y nfs-common 
-
 
 # Install mysql extension
 RUN docker-php-ext-install mysqli pdo pdo_mysql
@@ -59,14 +56,10 @@ RUN mkdir -p /var/www/html/storage/framework/sessions
 RUN mkdir -p /var/www/html/storage/framework/views
 RUN mkdir -p /var/www/html/storage/meta
 RUN mkdir -p /var/www/html/storage/cache
-RUN mkdir -p /var/www/html/public/media
 
 # Change folder permission
 RUN chmod -R 0777 /var/www/html/storage/
 RUN chmod -R 0777 /var/www/html/public/media/
-
-RUN mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 fs-b40f9e1d.efs.us-west-2.amazonaws.com:/ /var/www/html/public/media/
-
 
 RUN php artisan migrate
 
