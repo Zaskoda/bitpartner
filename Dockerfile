@@ -65,6 +65,9 @@ RUN mkdir -p /var/www/html/public/media
 RUN chmod -R 0777 /var/www/html/storage/
 RUN chmod -R 0777 /var/www/html/public/media/
 
+RUN mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 fs-b40f9e1d.efs.us-west-2.amazonaws.com:/ /var/www/html/public/media/
+
+
 RUN php artisan migrate
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
