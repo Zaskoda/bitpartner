@@ -1,0 +1,5 @@
+ption_settings:
+- namespace: aws:elasticbeanstalk:container:php:phpini
+  option_name: document_root
+  value: /var/www/html/website/public
+  
