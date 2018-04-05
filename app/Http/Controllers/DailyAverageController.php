@@ -10,7 +10,7 @@ class DailyAverageController extends Controller
     public function index()
     {
         DailyAverage::generate();
-        $readings = DailyAverage::orderBy('id','desc')->paginate(60);
+        $readings = DailyAverage::orderBy('id','desc')->paginate(90);
         return view('daily')->with(['readings'=>$readings]);
     }
 
