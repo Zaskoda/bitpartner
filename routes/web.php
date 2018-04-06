@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('sensors', 'SensorsController@index');
+Route::get('sensors/{id}', 'SensorsController@show');
+
+
 Route::get('monitor', 'MonitorController@index');
 Route::get('api/monitor', 'MonitorController@api');
 Route::post('monitor', 'MonitorController@update');
@@ -25,7 +29,13 @@ Route::get('monitor/hourly', 'HourlyAverageController@index');
 
 
 Route::get('run-migrations', function () {
-    return Artisan::call('migrate', ["--force"=> true ]);
+    Artisan::call('migrate', ["--force"=> true ]);
+    return "migrated...";
+});
+
+Route::get('fix-stuff', function () {
+    App\Sensor::fixStuff();
+    return "fixed...";
 });
 
 Route::resource('articles', 'ArticleController', ['only'=>['index','show']]);

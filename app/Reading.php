@@ -33,4 +33,10 @@ class Reading extends Model
         if ($reading != null) return $reading->timestamp;
         return null;
     }
+
+    public function sensor()
+    {
+        return $this->hasOne('App\Sensor','id','sensor_id');
+    }
+
 }
