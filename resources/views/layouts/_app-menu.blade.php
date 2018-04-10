@@ -65,6 +65,8 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    <li><a href="/home/">Home</a>
+                                    </li>
                                 @role('sysop|admin')
                                     <li><a href="/admin/">Admin</a>
                                     </li>
