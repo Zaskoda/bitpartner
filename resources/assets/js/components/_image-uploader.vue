@@ -146,7 +146,7 @@ export default {
             uploadImg(formData)
                 .then(x => {
                     this.currentState = STATE_READY;
-                    window.location = '/admin/images';
+//                    window.location = '/admin/images';
                 })
                 .catch(err => {
                     this.uploadError = "failed uploading, try again";
