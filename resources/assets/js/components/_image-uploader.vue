@@ -95,7 +95,7 @@
 
 //Image Upload
 function uploadImg(formData) {
-    const url = '/admin/api/images/';
+    const url = '/admin/api/images';
     return axios.post(url, formData)
         // get data
         .then(x => x.data)
