@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function() {
             Route::resource('images', 'ImageController');
             Route::resource('pages', 'PageController');
             Route::resource('articles', 'ArticleController');
+            Route::resource('sensors', 'SensorController');
             Route::resource('coins', 'CoinController');
             Route::resource('blockchain-jobs', 'JobController');
             Route::resource('icos', 'ICOController');

@@ -14,7 +14,14 @@
                         </div>
                     @endif
 
-                    Welcome to BitPartner. Why did you create an account? There's nothing to do here. ...yet
+                    <div class="btn-group btn-group-justified">
+                    @foreach($sensors as $sensor)
+                        <a href="/sensors/{{$sensor->id}}" class="btn btn-justified btn-default">
+                            {{ $sensor->id }}:{{ $sensor->readings->count() }} | <b>{{ $sensor->name }}</b>
+                        </a>
+                    @endforeach
+                    </div>
+
                 </div>
             </div>
         </div>

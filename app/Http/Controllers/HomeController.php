@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Sensor;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $sensors = Sensor::where('user_id','=',\Auth::user()->id)->get();
+        return view('home')->with(['sensors'=>$sensors]);
     }
 }

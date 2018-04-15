@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Sensor extends Model
 {
     protected $fillable = [
-        'name'
+        'name',
+        'user_id',
+        'api_token'
     ];
 
     static function fixStuff()
@@ -15,6 +17,7 @@ class Sensor extends Model
         self::createFromSensorData();
         self::assignReadingsToSensor();
     }
+
 
     static function createFromSensorData()
     {
@@ -45,5 +48,10 @@ class Sensor extends Model
     public function readings()
     {
         return $this->hasMany('App\Reading','sensor_id','id');
+    }
+
+    public function user()
+    {
+        return $this->hasOne('App\User','id','user_id');
     }
 }
