@@ -31,6 +31,7 @@
                     {{ $sensor->name }}
                 </td>
                 <td>
+                    <a href="/admin/sensors/{{ $sensor->id }}/refresh-token" onclick="return confirm('Generate New API Token?')" class="btn btn-xs btn-info pull-right"><i class="fa fa-fw fa-1x fa-key"></i><i class="fa fa-fw fa-1x fa-refresh"></i></a>
                     {{ $sensor->api_token }}
                 </td>
                 <td>

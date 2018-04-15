@@ -21,6 +21,7 @@ Route::get('sensors/{id}', 'SensorsController@show');
 
 Route::get('monitor', 'MonitorController@index');
 Route::get('api/monitor', 'MonitorController@api');
+Route::get('api/sensors/store-reading', 'Api/SensorController@storeReading');
 Route::post('monitor', 'MonitorController@update');
 Route::get('dump', 'DumpController@dump');
 
@@ -58,12 +59,13 @@ Route::middleware('auth')->group(function() {
             Route::resource('pages', 'PageController');
             Route::resource('articles', 'ArticleController');
             Route::resource('sensors', 'SensorController');
+            Route::get('sensors/{id}/refresh-token', 'SensorController@refreshToken');
             Route::resource('coins', 'CoinController');
             Route::resource('blockchain-jobs', 'JobController');
             Route::resource('icos', 'ICOController');
             Route::resource('blockchain-platforms', 'PlatformController');
             Route::resource('decentralized-exchanges', 'ExchangeController');
-            Route::resource('monitors', 'MonitorsController');
+            //Route::resource('monitors', 'MonitorsController');
         });
 
         Route::middleware(['role:sysop'])->group(function () {

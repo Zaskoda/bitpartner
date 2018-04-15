@@ -46,7 +46,6 @@ class SensorController extends AdminController
 
     public function edit($id)
     {
-
         $sensor = Sensor::findOrFail($id);
         return view('admin.sensor-edit')->with(['sensor'=>$sensor]);
     }
@@ -61,6 +60,15 @@ class SensorController extends AdminController
             return back()->with('error', 'Unable to save sensor');
         }
         return redirect('/admin/sensors/')->with('success', 'Sensor #'.$sensor->id.' has been updated.');
+    }
+
+    public function refreshToken($id)
+    {
+        $sensor = Sensor::findOrFail($id);
+        if (!$sensor->refreshToken()) {
+            return back()->with('error', 'Unable to refresh sensor '.$id.' token');
+        }
+        return back()->with('success', 'Sensor '.$id.' token refreshed.');
     }
 
     public function destroy($id)

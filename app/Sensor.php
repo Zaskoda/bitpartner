@@ -45,6 +45,12 @@ class Sensor extends Model
         }
     }
 
+    public function refreshToken()
+    {
+        $this->update(['api_token'=>\DB::RAW('UUID()')]);
+        return true;
+    }
+
     public function readings()
     {
         return $this->hasMany('App\Reading','sensor_id','id');
