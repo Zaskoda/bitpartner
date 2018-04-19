@@ -20,8 +20,10 @@ Route::get('sensors/{id}', 'SensorsController@show');
 
 
 Route::get('monitor', 'MonitorController@index');
+Route::namespace('Api')->prefix('api')->group(function(){
+    Route::post('sensors/store-reading', 'SensorController@storeReading');
+});
 Route::get('api/monitor', 'MonitorController@api');
-Route::get('api/sensors/store-reading', 'Api/SensorController@storeReading');
 Route::post('monitor', 'MonitorController@update');
 Route::get('dump', 'DumpController@dump');
 
