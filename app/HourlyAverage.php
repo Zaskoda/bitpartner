@@ -20,7 +20,7 @@ class HourlyAverage extends Model
         'heading',
         'hourstamp',
         'datestamp',
-        'reporter'
+        'sensor_id'
     ];
 
     //
@@ -30,7 +30,7 @@ class HourlyAverage extends Model
 
         $avg_readings = Reading::select(
             \DB::raw('            
-            reporter,
+            sensor_id,
             avg(acc) as acc,
             avg(pressure) as pressure,
             avg(soiltemp) as soiltemp,
@@ -41,7 +41,7 @@ class HourlyAverage extends Model
             date(timestamp) as datestamp,
             hour(timestamp) as hourstamp
             '))
-        ->groupBy('reporter','datestamp','hourstamp');
+        ->groupBy('sensor_id','datestamp','hourstamp');
 
         if (($mostRecent != null) and (!$all)) {
             $avg_readings = $avg_readings->
@@ -67,5 +67,10 @@ class HourlyAverage extends Model
     function tempInF()
     {
         return round($this->temperature * (9/5) + 32, 2);
+    }
+    
+    public function sensor()
+    {
+        return $this->hasOne('App\Sensor','id','sensor_id');
     }
 }

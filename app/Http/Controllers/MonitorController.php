@@ -12,9 +12,13 @@ class MonitorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $readings = Reading::orderBy('id','desc')->paginate(40);
+        $readings = Reading::orderBy('id','desc');
+        if ($request->get('sensor')) {
+            $readings = $readings->where('sensor_id',(int)$request->get('sensor'));
+        }
+        $readings = $readings->paginate(60);
         return view('monitor')->with(['readings'=>$readings]);
     }
 

@@ -20,7 +20,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Reporter</th>
+                        <th>Sensor</th>
                         <th>Date</th>
                         <th>Temperature</th>
                         <th>Pressure</th>
@@ -30,7 +30,7 @@
                 <tbody>
                 @foreach($readings as $reading)
                     <tr>
-                        <td>{{ $reading->reporter }}</td>
+                        <td>@if($reading->sensor)<a href="?sensor={{ $reading->sensor->id }}">{{ $reading->sensor->name }}</a>@else{{ $reading->sensor_id }}@endif</td>
                         <td>{{ Carbon\Carbon::parse($reading->datestamp)->format('m-d') }} : {{ $reading->hourstamp }}</td>
                         <td style="background-color: rgb({{ round($reading->temperature * 4) }},64,{{ max(0,round(160-$reading->temperature*4)) }}); color: #fff" class="text-center">{{ round($reading->temperature,2) }} C
                             /

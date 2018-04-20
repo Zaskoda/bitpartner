@@ -31,6 +31,28 @@ class Sensor extends Model
                 $newSensor->save();
             }
         }
+
+        $reporters = HourlyAverage::select('reporter')->groupBy('reporter')->get();
+        foreach($reporters as $reporter) {
+            if (empty($reporter->reporter)) {
+                $reporter->reporter = 'empty';
+            }
+            if (self::where('name','=',$reporter->reporter)->count() == 0) {
+                $newSensor = self::create(['name' => $reporter->reporter]);
+                $newSensor->save();
+            }
+        }
+
+        $reporters = DailyAverage::select('reporter')->groupBy('reporter')->get();
+        foreach($reporters as $reporter) {
+            if (empty($reporter->reporter)) {
+                $reporter->reporter = 'empty';
+            }
+            if (self::where('name','=',$reporter->reporter)->count() == 0) {
+                $newSensor = self::create(['name' => $reporter->reporter]);
+                $newSensor->save();
+            }
+        }
     }
 
     static function assignReadingsToSensor()
@@ -39,8 +61,12 @@ class Sensor extends Model
         foreach($sensors as $sensor) {
             if ($sensor->name == 'empty') {
                 Reading::whereNull('reporter')->update(['sensor_id'=> $sensor->id]);
+                HourlyAverage::whereNull('reporter')->update(['sensor_id'=> $sensor->id]);
+                DailyAverage::whereNull('reporter')->update(['sensor_id'=> $sensor->id]);
             } else {
                 Reading::where('reporter','=',$sensor->name)->update(['sensor_id'=> $sensor->id]);
+                HourlyAverage::where('reporter','=',$sensor->name)->update(['sensor_id'=> $sensor->id]);
+                DailyAverage::where('reporter','=',$sensor->name)->update(['sensor_id'=> $sensor->id]);
             }
         }
     }

@@ -42,7 +42,7 @@
                                 <li class="{{ Request::is('admin/blockchain-platforms*') ? ' active' : '' }}"><a href="/admin/blockchain-platforms/"><i class="fa fa-cloud fa-fw"></i>  Platforms</a></li>
                                 <li class="{{ Request::is('admin/icos*') ? ' active' : '' }}"><a href="/admin/icos/"><i class="fa fa-calendar fa-fw"></i> ICOs</a></li>
                                 @role('sysop')
-                                <li class="{{ Request::is('admin/sensors*') ? 'active' : '' }}"><a href="/admin/sensors/"><i class="fa fa-fw fa-users"></i> Sensors</a></li>
+                                <li class="{{ Request::is('admin/sensors*') ? 'active' : '' }}"><a href="/admin/sensors/"><i class="fa fa-fw fa-thermometer"></i> Sensors</a></li>
                                 <li class="{{ Request::is('admin/users*') ? 'active' : '' }}"><a href="/admin/users/"><i class="fa fa-fw fa-users"></i> Users</a></li>
                                 <li class="{{ Request::is('admin/roles*') ? 'active' : '' }}"><a href="/admin/roles/"><i class="fa fa-fw fa-address-card"></i> Roles</a></li>                    
                                 @endrole

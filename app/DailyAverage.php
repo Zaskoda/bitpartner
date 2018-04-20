@@ -18,7 +18,7 @@ class DailyAverage extends Model
         'lux',
         'heading',
         'datestamp',
-        'reporter'
+        'sensor_id'
     ];
 
     //
@@ -28,7 +28,7 @@ class DailyAverage extends Model
 
         $avg_readings = Reading::select(
             \DB::raw('            
-            reporter,
+            sensor_id,
             avg(acc) as acc,
             avg(pressure) as pressure,
             avg(soiltemp) as soiltemp,
@@ -38,7 +38,7 @@ class DailyAverage extends Model
             avg(heading) as heading,
             date(timestamp) as datestamp
             '))
-        ->groupBy('reporter','datestamp');
+        ->groupBy('sensor_id','datestamp');
 
         if (($mostRecent != null) and (!$all)) {
             $avg_readings = $avg_readings->
@@ -63,5 +63,10 @@ class DailyAverage extends Model
     function tempInF()
     {
         return round($this->temperature * (9/5) + 32, 2);
+    }
+
+    public function sensor()
+    {
+        return $this->hasOne('App\Sensor','id','sensor_id');
     }
 }
