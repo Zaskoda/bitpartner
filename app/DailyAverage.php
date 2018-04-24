@@ -18,7 +18,9 @@ class DailyAverage extends Model
         'lux',
         'heading',
         'datestamp',
-        'sensor_id'
+        'sensor_id',
+        'lowtemp',
+        'hightemp',
     ];
 
     //
@@ -33,6 +35,8 @@ class DailyAverage extends Model
             avg(pressure) as pressure,
             avg(soiltemp) as soiltemp,
             avg(temperature) as temperature,
+            min(temperature) as lowtemp,
+            max(temperature) as hightemp,
             avg(moisture) as moisture,
             avg(lux) as lux,
             avg(heading) as heading,

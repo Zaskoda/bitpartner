@@ -2,6 +2,8 @@
 
 @section('content')
 
+        <rico>
+        </rico>
     <div class="panel panel-default">
         <div class="panel-heading">
             {{ $sensor->name }}

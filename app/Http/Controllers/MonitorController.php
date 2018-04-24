@@ -43,6 +43,9 @@ class MonitorController extends Controller
     {
         Reading::where('timestamp','=',$request->get('timestamp'))->delete();
         $reading = new Reading($request->all());
+        if ($request->get('reporter') == 'Sensor 01') {
+            $reading->sensor_id = 2;
+        }
         $reading->save();
         return $reading;
     }

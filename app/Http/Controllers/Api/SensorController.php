@@ -9,6 +9,18 @@ use App\Reading;
 class SensorController extends ApiController
 {
 
+    public function show(Request $request, $id)
+    {
+        if ($request->get(''))
+        if (is_numeric($id)) {
+            $sensor = Sensor::where('id','=',$id)->with(['readings'=>function($query) {
+                    $query->paginate(100);
+                }])->firstOrFail();
+            if ($sensor) return $sensor;
+        }
+        return false;
+    }
+
     public function storeReading(Request $request)
     {
         $sensor = Sensor::where('api_token','=',$request->get('api_token'))->firstOrFail();
