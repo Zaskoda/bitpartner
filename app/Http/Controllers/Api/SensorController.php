@@ -11,14 +11,13 @@ class SensorController extends ApiController
 
     public function show(Request $request, $id)
     {
-        if ($request->get(''))
         if (is_numeric($id)) {
             $sensor = Sensor::where('id','=',$id)->with(['readings'=>function($query) {
                     $query->paginate(100);
                 }])->firstOrFail();
             if ($sensor) return $sensor;
         }
-        return false;
+        abort(404, 'Sensor not found.');
     }
 
     public function storeReading(Request $request)
