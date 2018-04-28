@@ -55,7 +55,6 @@ class PageController extends AdminController
 
         $page = Page::findOrFail($id);
         $page->update($request->all());
-        $page->user_id = \Auth::user()->id;
         if (!$page->save()) {
             return back()->with('error', 'Unable to save page');
         }

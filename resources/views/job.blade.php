@@ -12,12 +12,9 @@
                         {{ $job->title }} <span class="badge">{{ $job->post_date }}</span>
                     </h2>
                     <a href="{{ $job->source }}" class="pull-right btn btn-default">Apply <i class="fa fa-fw fa-arrow-right"></i></a>
-                    <p>Company: {{ $job->company }}</p>
+                    <p>Company: @if(strlen($job->company_link) > 0)<a href="{{ $job->company_link }}"></a> @else {{ $job->company }} @endif</p>
                     <p>Location: {{ $job->location }}</p>
-                    <div class="well">
-                        {!! \Markdown::convertToHtml($job->description) !!}
-                    </div>
-
+                    <div class="well">{!! \Markdown::convertToHtml($job->description) !!}</div>
                 </div>
             </div>
         </div>

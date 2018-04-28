@@ -28,9 +28,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="company_website" class="col-2-sm control-label">Company Website</label>
+                        <label for="company_link" class="col-2-sm control-label">Company Website</label>
                         <div class="col-10-sm">
-                        {{ Form::text('company_website', null, ['placeholder'=>'http://...', 'class'=>'form-control']) }}
+                        {{ Form::text('company_link', null, ['placeholder'=>'http://...', 'class'=>'form-control']) }}
                         </div>
                     </div>
 
