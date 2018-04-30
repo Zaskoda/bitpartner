@@ -13,7 +13,7 @@ class SensorController extends ApiController
     {
         if (is_numeric($id)) {
             $sensor = Sensor::where('id','=',$id)->with(['readings'=>function($query) {
-                    $query->paginate(100);
+                    $query->paginate(20);
                 }])->firstOrFail();
             if ($sensor) return $sensor;
         }
