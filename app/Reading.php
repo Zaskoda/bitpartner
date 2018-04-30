@@ -19,7 +19,11 @@ class Reading extends Model
         'lux',
         'heading',
         'timestamp',
-        'reporter'
+        'reporter',
+        'red',
+        'green',
+        'blue',
+        'sensor_id'
     ];
 
     function tempInF()

@@ -43,6 +43,8 @@
                             </a>
                             <ul class="dropdown-menu">
                             <li><a href="/rpi-mine-monitor-how-to">How To Build</a></li>
+                            <li><a href="/sensors">Sensors</a></li>
+                            <li>-</li>
                             <li><a href="/monitor">Raw Feed (2 min interval)</a></li>
                             <li><a href="/monitor/hourly">Hourly Average</a></li>
                             <li><a href="/monitor/daily">Daily Average</a></li>

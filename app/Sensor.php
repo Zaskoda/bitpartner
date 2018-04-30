@@ -18,6 +18,10 @@ class Sensor extends Model
         self::assignReadingsToSensor();
     }
 
+    public function lastReading()
+    {
+        return ($this->readings()->orderBy('timestamp','desc')->first());
+    }
 
     static function createFromSensorData()
     {

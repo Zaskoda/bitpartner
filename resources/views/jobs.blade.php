@@ -7,28 +7,30 @@
     @endrole        
     <h1>Blockchain (and related...) Jobs <span class="badge">Last updated: {{ \Carbon\Carbon::parse($last_updated)->toFormattedDateString() }}</span></h1>
     <div class="text-center">{{ $jobs->links() }}</div>
-
-            <div class="row">
                 @foreach ($jobs as $job)
-                    <div class="col-xs-6 col-md-4">
-                        <div style="min-height:16em" class="panel">
-                            <div class="panel-body">                        
-                            <div class="text-center lead"><a href="/blockchain-jobs/{{ $job->id }}">{{ $job->title }}</a></div>
-                            <div class="row">
-                                <div class="col-sm-4 text-right">Company:</div><div class="col-sm-8">{{ $job->company }}  </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 text-right">Location: </div><div class="col-sm-8">{{ $job->location }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 text-right">Posted: </div><div class="col-sm-8">{{ \Carbon\Carbon::parse($job->post_date)->toFormattedDateString() }}</div>
-                            </div>
-                                <div><a href="/blockchain-jobs/{{ $job->id }}" class="btn btn-block btn-default">read more...</a></div>
-                            </div>
+                <div class="row">
+
+                        <div class="btn-group btn-group-justified" style="margin-bottom: 0.5em;">
+                            <a href="/blockchain-jobs/{{ $job->id }}" class="btn btn-justified btn-default">
+                                <div class="row">
+                                    <div class="col-sm-2 text-left">
+                                    <i class="fa fa-fw fa-briefcase"></i><small> {{ \Carbon\Carbon::parse($job->post_date)->toFormattedDateString() }}</small>
+                                    </div>
+
+                                    <div class="col-sm-5 text-left">
+                                         <small>{{ $job->title }}</small>
+                                    </div>
+
+                                    <div class="col-sm-5 text-right">
+                                        <small>{{ $job->company }}, {{ $job->location }}</small>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                @endforeach
+
             </div>
+
+                @endforeach
     
             <div class="text-center">{{ $jobs->links() }}</div>
         </div>
