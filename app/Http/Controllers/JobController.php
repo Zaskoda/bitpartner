@@ -11,7 +11,7 @@ class JobController extends Controller
     {
         $jobs = Job::orderBy('post_date','desc')->paginate(60);
         $last_updated = Job::lastUpdated();
-        return view('jobs')->with(['jobs'=>$jobs, 'last_updated'=> $last_updated]);
+        return view('jobs')->with(['jobs'=>$jobs, 'last_updated'=> $last_updated, 'title'=>'Blockchain and Cryptocurrency Jobs']);
     }
 
     public function show($id)
@@ -21,7 +21,7 @@ class JobController extends Controller
         } else {
             $job = Job::where('slug','=',$id)->firstOrFail();
         }
-        return view('job')->with(['job'=>$job]);
+        return view('job')->with(['job'=>$job, 'title'=>$job->title.' - Bit Partner']);
     }
 
 }

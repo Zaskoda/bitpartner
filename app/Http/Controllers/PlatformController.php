@@ -12,7 +12,7 @@ class PlatformController extends Controller
     {
         $platforms = Platform::paginate(60);
         $last_updated = Platform::lastUpdated();
-        return view('platforms')->with(['platforms'=>$platforms, 'last_updated'=> $last_updated]);
+        return view('platforms')->with(['platforms'=>$platforms, 'last_updated'=> $last_updated, 'title' => 'Blockchain Platforms - Bit Partner']);
     }
 
     public function show($id)
@@ -22,7 +22,7 @@ class PlatformController extends Controller
         } else {
             $platform = Platform::where('slug','=',$id)->firstOrFail();
         }
-        return view('platform')->with(['platform'=>$platform]);
+        return view('platform')->with(['platform'=>$platform, 'title'=> $platform->name.' - Bit Partner']);
     }
 
 }

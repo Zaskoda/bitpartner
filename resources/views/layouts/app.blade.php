@@ -15,7 +15,7 @@
 
 
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title or 'Bit Partner' }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

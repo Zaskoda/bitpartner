@@ -11,7 +11,7 @@ class ArticleController extends Controller
             where('publish_date','<','NOW()')->
             orderBy('created_at','desc')->paginate(10);
         $last_updated = Article::lastUpdated();
-        return view('articles')->with(['articles'=>$articles]);
+        return view('articles')->with(['articles'=>$articles,'title'=>'Duke Pickett\'s Crypto Outpost']);
     }
 
     public function show($id)
@@ -21,7 +21,7 @@ class ArticleController extends Controller
         } else {
             $article = Article::where('slug','=',$id)->firstOrFail();
         }
-        return view('article')->with(['article'=>$article]);
+        return view('article')->with(['article'=>$article,'title'=>$article->title.' - Bit Partner']);
     }
 
 }

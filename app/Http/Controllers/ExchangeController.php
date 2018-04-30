@@ -11,7 +11,7 @@ class ExchangeController extends Controller
     {
         $exchanges = Exchange::paginate(60);
         $last_updated = Exchange::lastUpdated();
-        return view('exchanges')->with(['exchanges'=>$exchanges, 'last_updated'=> $last_updated]);
+        return view('exchanges')->with(['exchanges'=>$exchanges, 'last_updated'=> $last_updated, 'title'=>'Decentralized Exchanges - Bit Partner']);
     }
 
 }

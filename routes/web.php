@@ -83,7 +83,7 @@ Route::middleware('auth')->group(function() {
 
 Route::get('/rpi-mine-monitor-how-to', function () {
     $page = \App\Page::where('slug','=','rpi-mine-monitor-how-to')->firstOrFail();
-    return view('page')->with(['page'=>$page]);
+    return view('page')->with(['page'=>$page,'title'=>$page->title.' - Bit Partner']);
 });
 
 

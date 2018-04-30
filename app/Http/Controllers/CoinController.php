@@ -9,7 +9,7 @@ class CoinController extends Controller
     {
         $coins = Coin::orderBy('genesis_date','asc')->paginate(60);
         $last_updated = Coin::lastUpdated();
-        return view('coins')->with(['coins'=>$coins, 'last_updated'=> $last_updated]);
+        return view('coins')->with(['coins'=>$coins, 'last_updated'=> $last_updated, 'title'=>'Cryptocurrencies - Bit Partner']);
     }
 
     public function show($id)
@@ -19,7 +19,7 @@ class CoinController extends Controller
         } else {
             $coin = Coin::where('slug','=',$id)->firstOrFail();
         }
-        return view('coin')->with(['coin'=>$coin]);
+        return view('coin')->with(['coin'=>$coin, 'title'=>$coin->name.' - Bit Partner']);
     }
 
 }

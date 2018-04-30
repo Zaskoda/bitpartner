@@ -15,7 +15,7 @@ class SensorsController extends Controller
     public function index()
     {
         $sensors = Sensor::orderBy('name','desc')->paginate(40);
-        return view('sensors')->with(['sensors'=>$sensors]);
+        return view('sensors')->with(['sensors'=>$sensors, 'title'=>'RPI Mine Monitor Sensors']);
     }
 
     public function show($id)
@@ -25,7 +25,7 @@ class SensorsController extends Controller
         } else {
             $sensor = Sensor::where('name','=',$id)->firstOrFail();
         }
-        return view('sensor')->with(['sensor'=>$sensor]);
+        return view('sensor')->with(['sensor'=>$sensor,'title' => $sensor->name.' - Bit Partner']);
     }
 
 }

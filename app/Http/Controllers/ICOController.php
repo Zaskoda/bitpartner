@@ -12,7 +12,7 @@ class ICOController extends Controller
     {
         $icos = ICO::paginate(60);
         $last_updated = ICO::lastUpdated();
-        return view('icos')->with(['icos'=>$icos, 'last_updated'=> $last_updated]);
+        return view('icos')->with(['icos'=>$icos, 'last_updated'=> $last_updated, 'title'=>'Initial Coin Offerings']);
     }
 
     public function show($id)
@@ -22,7 +22,7 @@ class ICOController extends Controller
         } else {
             $ico = ICO::where('slug','=',$id)->firstOrFail();
         }
-        return view('ico')->with(['ico'=>$ico]);
+        return view('ico')->with(['ico'=>$ico, 'title'=>$ico->title.' - Bit Partner']);
     }
 
 }
