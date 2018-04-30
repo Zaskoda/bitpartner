@@ -1,11 +1,14 @@
 <template>
 <div class="doghouse" >
+        <h1>sensor: <b>{{ this.sensor.name }}</b></h1>
 
         <svg width="100%" viewBox="0 0 480 120" style="" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <rect x="25" width="455" height="180" style="fill:#ffe09d;" />
+            <g v-for="(n, index) in 10" >
+                <line x1="0" :y1="n * 10" x2="480" :y2="n * 10"   stroke="#cc8866" style="stroke-width:2;"/>
+            </g>
             <g>
-
                 <line x1="0" y1="0"   :x2="480" :y2="0"   stroke="#cc8866" style="stroke-width:1;"/>
                 <text x="2" y="5" font-family="Verdana" font-size="4" > 60c / 140f </text>
                 <line x1="0" y1="10"  :x2="480" :y2="10"  stroke="#ff3300" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
@@ -42,9 +45,14 @@
             </g>
             <polyline :points="this.sensor.points" fill="none" stroke="#cc6600" stroke-width="1px" style="stroke-linejoin: round;"/>
         </svg>
-        <button v-on:click="pageLeft()" class="btn btn-default">&lt;</button>
-        {{ this.page }}
-        <button v-on:click="pageRight()" class="btn btn-default">&gt;</button>
+        <p class="text-center">
+            <button v-on:click="pageLeft()" class="btn btn-default">&lt;</button>
+            {{ this.page }}
+            <button v-on:click="pageRight()" class="btn btn-default">&gt;</button>
+        </p>
+        <p>
+            <input type="text" :value="this.sensorid">
+        </p>
 </div>
 </template>
 
@@ -79,7 +87,7 @@ export default {
 
         var urlstring = window.location.pathname;
         var urlparts = urlstring.split('/');
-        this.sensorid = urlparts[2];
+        this.sensorid = this.sensorId;
         this.fetchSensor();
     },
     watch: {
@@ -87,6 +95,7 @@ export default {
     computed: {
     },
     props: [
+      'sensorId'
     ],
     data() {
         return {
@@ -108,6 +117,11 @@ export default {
                         alert('error loading product: '+JSON.stringify(err.message));
                     });
             } 
+        },
+        keepRefreshing() {
+            var self = this;
+            self.fetchSensor();
+            setTimeout(function(){ self.keepRefreshing() }, 50000);
         },
         loadSensor(sensor) {
             if (isNaN(sensor.id)) return;

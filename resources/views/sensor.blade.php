@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-        <rico>
+        <rico v-bind:sensor-id="{{ $sensor->id }}">
         </rico>
     <div class="panel panel-default">
         <div class="panel-heading">
