@@ -1,50 +1,46 @@
 <template>
 <div class="doghouse" >
-        <h1>sensor: <b>{{ this.sensor.name }}</b></h1>
+    <h1>sensor: <b>{{ this.sensor.name }}</b></h1>
 
-        <svg width="100%" viewBox="0 0 480 120" style="" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <rect x="25" width="455" height="180" style="fill:#ffe09d;" />
-            <g v-for="(n, index) in 10" >
-                <line x1="0" :y1="n * 10" x2="480" :y2="n * 10"   stroke="#cc8866" style="stroke-width:2;"/>
-            </g>
-            <g>
-                <line x1="0" y1="0"   :x2="480" :y2="0"   stroke="#cc8866" style="stroke-width:1;"/>
-                <text x="2" y="5" font-family="Verdana" font-size="4" > 60c / 140f </text>
-                <line x1="0" y1="10"  :x2="480" :y2="10"  stroke="#ff3300" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
-                <text x="2" y="15" font-family="Verdana" font-size="4" > 55c / 131f </text>
-                <line x1="0" y1="20"  :x2="480" :y2="20"  stroke="#ee4400" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
-                <text x="2" y="25" font-family="Verdana" font-size="4" > 50c / 122f </text>
-                <line x1="0" y1="30"  :x2="480" :y2="30"  stroke="#dd4411" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
-                <text x="2" y="35" font-family="Verdana" font-size="4" > 45c / 113f </text>
-                <line x1="0" y1="40"  :x2="480" :y2="40"  stroke="#cc5522" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
-                <text x="2" y="45" font-family="Verdana" font-size="4" > 40c / 104f </text>
-                <line x1="0" y1="50"  :x2="480" :y2="50"  stroke="#bb5533" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
-                <text x="2" y="55" font-family="Verdana" font-size="4" > 35c / 95f </text>
-                <line x1="0" y1="60"  :x2="480" :y2="60"  stroke="#aa6644" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
-                <text x="2" y="65" font-family="Verdana" font-size="4" > 30c / 86f </text>
-                <line x1="0" y1="70"  :x2="480" :y2="70"  stroke="#996655" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
-                <text x="2" y="75" font-family="Verdana" font-size="4" > 25c / 77f </text>
-                <line x1="0" y1="80"  :x2="480" :y2="80"  stroke="#887766" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
-                <text x="2" y="85" font-family="Verdana" font-size="4" > 20c / 68f </text>
-                <line x1="0" y1="90"  :x2="480" :y2="90"  stroke="#777777" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
-                <text x="2" y="95" font-family="Verdana" font-size="4" > 15c / 59f </text>
-                <line x1="0" y1="100" :x2="480" :y2="100" stroke="#667788" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
-                <text x="2" y="105" font-family="Verdana" font-size="4" > 10c / 50f </text>
-                <line x1="0" y1="110" :x2="480" :y2="110" stroke="#556699" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
-                <text x="2" y="115" font-family="Verdana" font-size="4" > 5c / 41f </text>
-                <line x1="25" y1="120" :x2="480" :y2="120" stroke="#4466aa" style="stroke-width:0.25;" stroke-dasharray="3,1"/>
+            <ul class="nav nav-tabs nav-justified">
+                <li v-bind:class="{ active: showRealtime }">
+                    <a v-on:click="switchRealtime()" href="#">Realtime Readings</a>
+                </li>
+                <li v-bind:class="{ active: showHourly }">
+                    <a v-on:click="switchHourly()" href="#">Hourly Digest</a>
+                </li>
+                <li v-bind:class="{ active: showDaily }">
+                    <a class="nav-tab" v-on:click="switchDaily()" href="#">Daily digest</a>
+                </li>
+            </ul>
 
-                <line x1="25"   y1="0"   :x2="25"   :y2="120"   stroke="#cc8866" style="stroke-width:1;"/>
-                <line x1="480" y1="0"   :x2="480" :y2="120"   stroke="#cc8866" style="stroke-width:1;"/>
-            </g>
-            <g>
-                <line :x1="reading.bar.x" :y1="reading.bar.top" :x2="reading.bar.x" :y2="reading.bar.bottom" stroke-linecap="round"  :stroke="reading.bar.color" style="stroke-width:4;" v-for="reading in this.sensor.readings" v-bind:key="reading.id"/>
-                <text font-color="#fff" :x="reading.bar.x+2" :y="(reading.bar.top+1)"  :transform="'rotate(-90,'+reading.bar.x+','+reading.bar.top+')'" font-family="Verdana" font-size="4" v-for="reading in this.sensor.readings" v-bind:key="reading.id" >{{ reading.temperature }}c / {{ reading.temperatureF }}f</text>
-                <circle :cx="reading.bar.x" :cy="reading.bar.y"  r="2" :fill="reading.bar.color" style="stroke-width:4;" v-for="reading in this.sensor.readings" v-bind:key="reading.id"/>
-            </g>
-            <polyline :points="this.sensor.points" fill="none" stroke="#cc6600" stroke-width="1px" style="stroke-linejoin: round;"/>
-        </svg>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <svg width="100%" viewBox="0 0 480 160" style="" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <rect x="25" width="455" height="180" style="fill:#ffe09d;" />
+                <g v-for="(n, index) in 12" >
+                    <line x1="0" :y1="n * 10" x2="480" :y2="n * 10"   stroke="#886622" style="stroke-width:0.3;"/>
+                </g>
+                <g>
+                    <text x="2" y="7" font-family="Verdana" font-size="4" > {{ this.graph.toptemp }}c </text>
+
+                    <text x="2" y="115" font-family="Verdana" font-size="4" > {{ this.graph.bottomtemp }}c </text>
+
+                    <line x1="25"   y1="0"   :x2="25"   :y2="120"   stroke="#cc8866" style="stroke-width:1;"/>
+                    <line x1="480" y1="0"   :x2="480" :y2="120"   stroke="#cc8866" style="stroke-width:1;"/>
+                </g>
+                <g>
+                    <line :x1="reading.bar.x" :y1="reading.bar.top" :x2="reading.bar.x" :y2="reading.bar.bottom" stroke-linecap="round"  :stroke="reading.bar.color" style="stroke-width:4;" v-for="reading in this.sensor.readings" v-bind:key="reading.id"/>
+                    <text font-color="#fff" :x="reading.bar.x+2" :y="(reading.bar.top+1)"  :transform="'rotate(-90,'+reading.bar.x+','+reading.bar.top+')'" font-family="Verdana" font-size="4" v-for="reading in this.sensor.readings" v-bind:key="reading.id" >{{ reading.temperature }}c / {{ reading.temperatureF }}f</text>
+                    <circle :cx="reading.bar.x" :cy="reading.bar.y"  r="2" :fill="reading.bar.color" style="stroke-width:4;" v-for="reading in this.sensor.readings" v-bind:key="reading.id"/>
+                </g>
+                <polyline :points="this.sensor.points" fill="none" stroke="#cc6600" stroke-width="1px" style="stroke-linejoin: round;"/>
+                <rect x="0" y="120" width="480" height="40" style="fill:rgb(128,92,64);" />
+            </svg>
+        </div>
+    </div>
+    
         <p class="text-center">
             <button v-on:click="pageLeft()" class="btn btn-default">&lt;</button>
             {{ this.page }}
@@ -84,7 +80,6 @@ function rgbToHex(r, g, b) {
 export default {
     name: 'rico',
     mounted() {
-
         var urlstring = window.location.pathname;
         var urlparts = urlstring.split('/');
         this.sensorid = this.sensorId;
@@ -95,14 +90,23 @@ export default {
     computed: {
     },
     props: [
-      'sensorId'
+      'sensorId',
     ],
     data() {
         return {
             sensor: {},
             drawdata: {},
             page: 1,
-            sensorid: 0
+            sensorid: 0,
+            showRealtime: true,
+            showHourly: false,
+            showDaily: false,
+            graph: {
+                height: 120,
+                width: 480,
+                toptemp: 65,
+                bottomtemp: 0,
+            }
         }
     },
     methods: {
@@ -117,6 +121,22 @@ export default {
                         alert('error loading product: '+JSON.stringify(err.message));
                     });
             } 
+        },
+        switchRealtime() {;
+            this.showRealtime = true;
+            this.showHourly = false;
+            this.showDaily = false;
+        },
+        switchHourly() {
+            this.showRealtime = false;
+            this.showHourly = true;
+            this.showDaily = false;
+
+        },
+        switchDaily() {
+            this.showRealtime = false;
+            this.showHourly = false;
+            this.showDaily = true;
         },
         keepRefreshing() {
             var self = this;

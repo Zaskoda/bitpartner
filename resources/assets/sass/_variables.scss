@@ -45,3 +45,12 @@ $navbar-default-link-active-color:         #760 !default;
 $navbar-default-link-active-bg:            darken($navbar-default-bg, 6.5%) !default;
 $navbar-default-link-disabled-color:       #ccc !default;
 $navbar-default-link-disabled-bg: transparent !default;
+
+//== Tabs
+$nav-tabs-border-color:                     #444 !default;
+$nav-tabs-link-hover-border-color:          #444 !default;
+
+$nav-tabs-active-bg:             #000 !default;
+$nav-tabs-active-link-hover-bg:             #fff !default;
+$nav-tabs-active-link-hover-color:          #888 !default;
+$nav-tabs-active-link-hover-border-color:   #ddd !default;

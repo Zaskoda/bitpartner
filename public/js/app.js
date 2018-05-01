@@ -46362,10 +46362,6 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 //
 //
 //
-//
-//
-//
-//
 
 
 //Sensor fetch
@@ -46388,7 +46384,6 @@ function rgbToHex(r, g, b) {
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'rico',
     mounted: function mounted() {
-
         var urlstring = window.location.pathname;
         var urlparts = urlstring.split('/');
         this.sensorid = this.sensorId;
@@ -46403,7 +46398,16 @@ function rgbToHex(r, g, b) {
             sensor: {},
             drawdata: {},
             page: 1,
-            sensorid: 0
+            sensorid: 0,
+            showRealtime: true,
+            showHourly: false,
+            showDaily: false,
+            graph: {
+                height: 120,
+                width: 480,
+                toptemp: 65,
+                bottomtemp: 0
+            }
         };
     },
 
@@ -46419,6 +46423,22 @@ function rgbToHex(r, g, b) {
                     alert('error loading product: ' + JSON.stringify(err.message));
                 });
             }
+        },
+        switchRealtime: function switchRealtime() {
+            ;
+            this.showRealtime = true;
+            this.showHourly = false;
+            this.showDaily = false;
+        },
+        switchHourly: function switchHourly() {
+            this.showRealtime = false;
+            this.showHourly = true;
+            this.showDaily = false;
+        },
+        switchDaily: function switchDaily() {
+            this.showRealtime = false;
+            this.showHourly = false;
+            this.showDaily = true;
         },
         keepRefreshing: function keepRefreshing() {
             var self = this;
@@ -46500,430 +46520,214 @@ var render = function() {
   return _c("div", { staticClass: "doghouse" }, [
     _c("h1", [_vm._v("sensor: "), _c("b", [_vm._v(_vm._s(this.sensor.name))])]),
     _vm._v(" "),
-    _c(
-      "svg",
-      {
-        attrs: {
-          width: "100%",
-          viewBox: "0 0 480 120",
-          xmlns: "http://www.w3.org/2000/svg",
-          "xmlns:xlink": "http://www.w3.org/1999/xlink"
-        }
-      },
-      [
-        _c("rect", {
-          staticStyle: { fill: "#ffe09d" },
-          attrs: { x: "25", width: "455", height: "180" }
-        }),
-        _vm._v(" "),
-        _vm._l(10, function(n, index) {
-          return _c("g", [
-            _c("line", {
-              staticStyle: { "stroke-width": "2" },
-              attrs: {
-                x1: "0",
-                y1: n * 10,
-                x2: "480",
-                y2: n * 10,
-                stroke: "#cc8866"
-              }
-            })
-          ])
-        }),
-        _vm._v(" "),
-        _c("g", [
-          _c("line", {
-            staticStyle: { "stroke-width": "1" },
-            attrs: { x1: "0", y1: "0", x2: 480, y2: 0, stroke: "#cc8866" }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "5",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 60c / 140f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "0",
-              y1: "10",
-              x2: 480,
-              y2: 10,
-              stroke: "#ff3300",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "15",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 55c / 131f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "0",
-              y1: "20",
-              x2: 480,
-              y2: 20,
-              stroke: "#ee4400",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "25",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 50c / 122f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "0",
-              y1: "30",
-              x2: 480,
-              y2: 30,
-              stroke: "#dd4411",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "35",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 45c / 113f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "0",
-              y1: "40",
-              x2: 480,
-              y2: 40,
-              stroke: "#cc5522",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "45",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 40c / 104f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "0",
-              y1: "50",
-              x2: 480,
-              y2: 50,
-              stroke: "#bb5533",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "55",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 35c / 95f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "0",
-              y1: "60",
-              x2: 480,
-              y2: 60,
-              stroke: "#aa6644",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "65",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 30c / 86f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "0",
-              y1: "70",
-              x2: 480,
-              y2: 70,
-              stroke: "#996655",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "75",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 25c / 77f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "0",
-              y1: "80",
-              x2: 480,
-              y2: 80,
-              stroke: "#887766",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "85",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 20c / 68f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "0",
-              y1: "90",
-              x2: 480,
-              y2: 90,
-              stroke: "#777777",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "95",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 15c / 59f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "0",
-              y1: "100",
-              x2: 480,
-              y2: 100,
-              stroke: "#667788",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "105",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 10c / 50f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "0",
-              y1: "110",
-              x2: 480,
-              y2: 110,
-              stroke: "#556699",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "text",
-            {
-              attrs: {
-                x: "2",
-                y: "115",
-                "font-family": "Verdana",
-                "font-size": "4"
-              }
-            },
-            [_vm._v(" 5c / 41f ")]
-          ),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "0.25" },
-            attrs: {
-              x1: "25",
-              y1: "120",
-              x2: 480,
-              y2: 120,
-              stroke: "#4466aa",
-              "stroke-dasharray": "3,1"
-            }
-          }),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "1" },
-            attrs: { x1: "25", y1: "0", x2: 25, y2: 120, stroke: "#cc8866" }
-          }),
-          _vm._v(" "),
-          _c("line", {
-            staticStyle: { "stroke-width": "1" },
-            attrs: { x1: "480", y1: "0", x2: 480, y2: 120, stroke: "#cc8866" }
-          })
-        ]),
-        _vm._v(" "),
+    _c("ul", { staticClass: "nav nav-tabs nav-justified" }, [
+      _c("li", { class: { active: _vm.showRealtime } }, [
         _c(
-          "g",
+          "a",
+          {
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                _vm.switchRealtime()
+              }
+            }
+          },
+          [_vm._v("Realtime Readings")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("li", { class: { active: _vm.showHourly } }, [
+        _c(
+          "a",
+          {
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                _vm.switchHourly()
+              }
+            }
+          },
+          [_vm._v("Hourly Digest")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("li", { class: { active: _vm.showDaily } }, [
+        _c(
+          "a",
+          {
+            staticClass: "nav-tab",
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                _vm.switchDaily()
+              }
+            }
+          },
+          [_vm._v("Daily digest")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-body" }, [
+        _c(
+          "svg",
+          {
+            attrs: {
+              width: "100%",
+              viewBox: "0 0 480 160",
+              xmlns: "http://www.w3.org/2000/svg",
+              "xmlns:xlink": "http://www.w3.org/1999/xlink"
+            }
+          },
           [
-            _vm._l(this.sensor.readings, function(reading) {
-              return _c("line", {
-                key: reading.id,
-                staticStyle: { "stroke-width": "4" },
-                attrs: {
-                  x1: reading.bar.x,
-                  y1: reading.bar.top,
-                  x2: reading.bar.x,
-                  y2: reading.bar.bottom,
-                  "stroke-linecap": "round",
-                  stroke: reading.bar.color
-                }
-              })
+            _c("rect", {
+              staticStyle: { fill: "#ffe09d" },
+              attrs: { x: "25", width: "455", height: "180" }
             }),
             _vm._v(" "),
-            _vm._l(this.sensor.readings, function(reading) {
-              return _c(
+            _vm._l(12, function(n, index) {
+              return _c("g", [
+                _c("line", {
+                  staticStyle: { "stroke-width": "0.3" },
+                  attrs: {
+                    x1: "0",
+                    y1: n * 10,
+                    x2: "480",
+                    y2: n * 10,
+                    stroke: "#886622"
+                  }
+                })
+              ])
+            }),
+            _vm._v(" "),
+            _c("g", [
+              _c(
                 "text",
                 {
-                  key: reading.id,
                   attrs: {
-                    "font-color": "#fff",
-                    x: reading.bar.x + 2,
-                    y: reading.bar.top + 1,
-                    transform:
-                      "rotate(-90," +
-                      reading.bar.x +
-                      "," +
-                      reading.bar.top +
-                      ")",
+                    x: "2",
+                    y: "7",
                     "font-family": "Verdana",
                     "font-size": "4"
                   }
                 },
-                [
-                  _vm._v(
-                    _vm._s(reading.temperature) +
-                      "c / " +
-                      _vm._s(reading.temperatureF) +
-                      "f"
-                  )
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _vm._l(this.sensor.readings, function(reading) {
-              return _c("circle", {
-                key: reading.id,
-                staticStyle: { "stroke-width": "4" },
+                [_vm._v(" " + _vm._s(this.graph.toptemp) + "c ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "text",
+                {
+                  attrs: {
+                    x: "2",
+                    y: "115",
+                    "font-family": "Verdana",
+                    "font-size": "4"
+                  }
+                },
+                [_vm._v(" " + _vm._s(this.graph.bottomtemp) + "c ")]
+              ),
+              _vm._v(" "),
+              _c("line", {
+                staticStyle: { "stroke-width": "1" },
+                attrs: { x1: "25", y1: "0", x2: 25, y2: 120, stroke: "#cc8866" }
+              }),
+              _vm._v(" "),
+              _c("line", {
+                staticStyle: { "stroke-width": "1" },
                 attrs: {
-                  cx: reading.bar.x,
-                  cy: reading.bar.y,
-                  r: "2",
-                  fill: reading.bar.color
+                  x1: "480",
+                  y1: "0",
+                  x2: 480,
+                  y2: 120,
+                  stroke: "#cc8866"
                 }
               })
+            ]),
+            _vm._v(" "),
+            _c(
+              "g",
+              [
+                _vm._l(this.sensor.readings, function(reading) {
+                  return _c("line", {
+                    key: reading.id,
+                    staticStyle: { "stroke-width": "4" },
+                    attrs: {
+                      x1: reading.bar.x,
+                      y1: reading.bar.top,
+                      x2: reading.bar.x,
+                      y2: reading.bar.bottom,
+                      "stroke-linecap": "round",
+                      stroke: reading.bar.color
+                    }
+                  })
+                }),
+                _vm._v(" "),
+                _vm._l(this.sensor.readings, function(reading) {
+                  return _c(
+                    "text",
+                    {
+                      key: reading.id,
+                      attrs: {
+                        "font-color": "#fff",
+                        x: reading.bar.x + 2,
+                        y: reading.bar.top + 1,
+                        transform:
+                          "rotate(-90," +
+                          reading.bar.x +
+                          "," +
+                          reading.bar.top +
+                          ")",
+                        "font-family": "Verdana",
+                        "font-size": "4"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(reading.temperature) +
+                          "c / " +
+                          _vm._s(reading.temperatureF) +
+                          "f"
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _vm._l(this.sensor.readings, function(reading) {
+                  return _c("circle", {
+                    key: reading.id,
+                    staticStyle: { "stroke-width": "4" },
+                    attrs: {
+                      cx: reading.bar.x,
+                      cy: reading.bar.y,
+                      r: "2",
+                      fill: reading.bar.color
+                    }
+                  })
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("polyline", {
+              staticStyle: { "stroke-linejoin": "round" },
+              attrs: {
+                points: this.sensor.points,
+                fill: "none",
+                stroke: "#cc6600",
+                "stroke-width": "1px"
+              }
+            }),
+            _vm._v(" "),
+            _c("rect", {
+              staticStyle: { fill: "rgb(128,92,64)" },
+              attrs: { x: "0", y: "120", width: "480", height: "40" }
             })
           ],
           2
-        ),
-        _vm._v(" "),
-        _c("polyline", {
-          staticStyle: { "stroke-linejoin": "round" },
-          attrs: {
-            points: this.sensor.points,
-            fill: "none",
-            stroke: "#cc6600",
-            "stroke-width": "1px"
-          }
-        })
-      ],
-      2
-    ),
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c("p", { staticClass: "text-center" }, [
       _c(
