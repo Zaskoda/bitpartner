@@ -13,7 +13,7 @@
                     </h2>
                     <a href="{{ $job->source }}" class="pull-right btn btn-default">Apply <i class="fa fa-fw fa-arrow-right"></i></a>
                     <a href="/blockchain-jobs/" class="pull-left btn btn-default"><i class="fa fa-fw fa-arrow-left"></i> Browse</a>
-                    <p class="text-center">Company: @if(strlen($job->company_link) > 0)<a href="{{ $job->company_link }}"></a> @else {{ $job->company }} @endif</p>
+                    <p class="text-center">Company: @if(strlen($job->company_link) > 0)<a href="{{ $job->company_link }}">{{ $job->company }}</a> @else {{ $job->company }} @endif</p>
                     <p class="text-center">Location: {{ $job->location }}</p>
                     <div class="well">{!! \Markdown::convertToHtml($job->description) !!}</div>
                 </div>
