@@ -55,7 +55,6 @@ class SensorController extends AdminController
 
         $sensor = Sensor::findOrFail($id);
         $sensor->update($request->all());
-        $sensor->user_id = \Auth::user()->id;
         if (!$sensor->save()) {
             return back()->with('error', 'Unable to save sensor');
         }

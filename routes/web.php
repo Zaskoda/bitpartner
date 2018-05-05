@@ -86,6 +86,11 @@ Route::get('/rpi-mine-monitor-how-to', function () {
     return view('page')->with(['page'=>$page,'title'=>$page->title.' - Bit Partner']);
 });
 
+Route::get('/rpi-mine-monitor-about', function () {
+    $page = \App\Page::where('slug','=','rpi-mine-monitor-about')->firstOrFail();
+    return view('page')->with(['page'=>$page,'title'=>$page->title.' - Bit Partner']);
+});
+
 
 Auth::routes();
 

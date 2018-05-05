@@ -20,11 +20,7 @@ class SensorsController extends Controller
 
     public function show($id)
     {
-        if (is_numeric($id)) {
-            $sensor = Sensor::findOrFail($id);
-        } else {
-            $sensor = Sensor::where('name','=',$id)->firstOrFail();
-        }
+        $sensor = Sensor::where('id',(int) $id)->where('user_id',\Auth::user()->id)->firstOrFail();
         return view('sensor')->with(['sensor'=>$sensor,'title' => $sensor->name.' - Bit Partner']);
     }
 

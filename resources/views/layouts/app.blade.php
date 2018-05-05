@@ -59,6 +59,18 @@
     gtag('config', 'UA-115052305-1');
     </script>
 
-
+<footer>
+    <div class="container">
+        <hr>
+        <div class="row">
+            <div class="text-center">
+                <a class="btn btn-default btn-lg" href="https://twitter.com/bitpartner"><i class="fa fa-twitter fa-fw"></i> Twitter</a>
+                <a class="btn btn-default btn-lg" href="https://github.com/DukePickett"><i class="fa fa-github fa-fw"></i> Github</a>
+                <a class="btn btn-default btn-lg" href="http://t.me/bitpartnerio"><i class="fa fa-telegram fa-fw"></i> Telegram</a>
+            </div>
+        </div>
+        <hr>
+    </div>  
+</footer>
 </body>
 </html>

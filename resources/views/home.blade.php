@@ -8,6 +8,12 @@
                         </div>
                     @endif
 
+                    <h1>Dashboard</h1>
+                    <a href="">My Profile</a>
+                    <a href="">Change Password</a>
+                    <a href="">New Sensor</a>
+
+                    <h2>My Sensors</h2>
                     @foreach($sensors as $sensor)
                     <div class="row">
                         <div class="btn-group btn-group-justified" style="margin-bottom: 0.5em;">

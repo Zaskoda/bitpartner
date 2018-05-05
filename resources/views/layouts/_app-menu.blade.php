@@ -15,6 +15,7 @@
                         <a class="navbar-brand" href="{{ url('/') }}">
                             <img src="/img/bitpartner.png" style="height: 2.5em; margin-top: -10px" class="pull-left" alt="{{ config('app.name') }}" title="{{ config('app.name') }}">
                         </a>
+
                     </div>
                 </div>
 
@@ -22,7 +23,15 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li>
+                            @guest
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                            @else
+                                <li><a href="/home">Dashboard</a></li>
+                            @endguest
+                        </li>
+                        <li>
                                 <li><a href="/articles">Articles</a></li>
+                                <li><a href="/blockchain-jobs">Jobs</a></li>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -39,15 +48,17 @@
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                RPI Mine Monitor <span class="caret"></span>
+                                Duke's RPI Mine Monitor <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                            <li><a href="/rpi-mine-monitor-how-to">How To Build</a></li>
-                            <li><a href="/sensors">Sensors</a></li>
-                            <li>-</li>
-                            <li><a href="/monitor">Raw Feed (2 min interval)</a></li>
-                            <li><a href="/monitor/hourly">Hourly Average</a></li>
-                            <li><a href="/monitor/daily">Daily Average</a></li>
+                                <li><a href="/rpi-mine-monitor-about">About the Monitor</a></li>
+                                <li><a href="/rpi-mine-monitor-how-to">How-To Build Guide</a></li>
+                                <li><a href="https://github.com/DukePickett/rpi-mine-monitor">Source Code on Github</a></li>                            
+                            @guest
+                                <li><a href="{{ route('register') }}">Get an Account</a></li>
+                            @else
+                                <li><a href="/sensors">View My Sensors</a></li>
+                            @endif
                             </ul>
                         </li>
 
@@ -67,7 +78,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="/home/">Home</a>
+                                    <li><a href="/home/">Dashboard</a>
                                     </li>
                                 @role('sysop|admin')
                                     <li><a href="/admin/">Admin</a>
@@ -88,6 +99,9 @@
                             </li>
                         @endguest
                     </ul>
+
+
+
                 </div>
             </div>
         </nav>
