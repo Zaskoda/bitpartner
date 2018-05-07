@@ -10,6 +10,7 @@
             <tr>
                 <th>img</th>
                 <th>slug</th>
+                <th>sizes</th>
                 <th colspan="2" class="text-right">
                     <a href="/admin/images/create" class="btn btn-xs btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Add New Image</a></td>
                 </th>
@@ -27,6 +28,8 @@
                 <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}.jpg">
                     {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}.jpg
                     </a>
+                </td>
+                <td>
                 [ <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-xs.jpg">xs</a> |
                 <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-sm.jpg">sm</a> |
                 <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-md.jpg">md</a> |

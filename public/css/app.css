@@ -11403,3 +11403,7 @@ button.close {
   clip: auto;
 }
 
+div.page img {
+  max-width: 100%;
+}
+

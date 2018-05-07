@@ -12,7 +12,7 @@
                         {{ $page->title }} 
                     </h2>
                     <hr>
-                    <div>
+                    <div class="page">
                         {!! \Markdown::convertToHtml($page->body) !!}
                     </div>
 
