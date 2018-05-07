@@ -22,7 +22,7 @@ class Image extends Model
     public function processUpload($imageFile)
     {
         $extension = $imageFile->getClientOriginalExtension();
-        $this->filename = $this->cleanString($imageFile->getFilename().'-'.rand(10000,99999));
+        $this->filename = $this->cleanString($imageFile->getClientOriginalName().'-'.rand(10000,99999));
 
         list($width, $height, $imgtype, $attr) = getimagesize($imageFile);
 
