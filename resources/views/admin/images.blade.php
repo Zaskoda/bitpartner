@@ -26,23 +26,12 @@
                 <td>
                 <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}.jpg">
                     {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}.jpg
-                    </a><br>
-                []    
-                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-xs.jpg">
-                    xs
-                    </a> |
-                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-sm.jpg">
-                    sm
-                    </a> |
-                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-md.jpg">
-                    md
-                    </a> |
-                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-lg.jpg">
-                    lg
-                    </a> |
-                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-xl.jpg">
-                    xl
-                    </a> ]
+                    </a>
+                [ <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-xs.jpg">xs</a> |
+                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-sm.jpg">sm</a> |
+                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-md.jpg">md</a> |
+                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-lg.jpg">lg</a> |
+                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-xl.jpg">xl</a> ]
                 </td>
                 <td class="text-right">
                     {!! Form::open(['url' => url('/admin/images/'.$image->id.'/'), 
