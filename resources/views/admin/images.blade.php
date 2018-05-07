@@ -26,6 +26,18 @@
                 <td>
                 <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}.jpg">
                     {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}.jpg
+                    </a><br>
+                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-xs.jpg">
+                    {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-xs.jpg
+                    </a><br>
+                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-sm.jpg">
+                    {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-sm.jpg
+                    </a><br>
+                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-md.jpg">
+                    {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-md.jpg
+                    </a><br>
+                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-lg.jpg">
+                    {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-lg.jpg
                     </a>
                 </td>
                 <td class="text-right">
