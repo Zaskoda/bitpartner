@@ -15,7 +15,8 @@ class Image extends Model
             'xs' => 16,
             'sm' => 64,
             'md' => 200,
-            'lg' => 400    
+            'lg' => 400,
+            'xl' => 800    
         ];
     
     public function processUpload($imageFile)
