@@ -27,18 +27,22 @@
                 <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}.jpg">
                     {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}.jpg
                     </a><br>
+                []    
                 <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-xs.jpg">
-                    {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-xs.jpg
-                    </a><br>
+                    xs
+                    </a> |
                 <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-sm.jpg">
-                    {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-sm.jpg
-                    </a><br>
+                    sm
+                    </a> |
                 <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-md.jpg">
-                    {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-md.jpg
-                    </a><br>
+                    md
+                    </a> |
                 <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-lg.jpg">
-                    {{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-lg.jpg
-                    </a>
+                    lg
+                    </a> |
+                <a href="{{ \Config::get('app.image_uri_base')  }}{{ $image->filename }}-xl.jpg">
+                    xl
+                    </a> ]
                 </td>
                 <td class="text-right">
                     {!! Form::open(['url' => url('/admin/images/'.$image->id.'/'), 
