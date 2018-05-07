@@ -85,9 +85,9 @@ class Image extends Model
 
         foreach ($this->scaled_sizes AS $type => $dim) {
             $file = \Config::get('app.image_path') . $this->filename . '-'.$type. '.jpg';
-            unlink($file);
+            @unlink($file);
         }
-        unlink(\Config::get('app.image_path') . $this->filename . '.jpg');
+        @unlink(\Config::get('app.image_path') . $this->filename . '.jpg');
         
         parent::delete();
     }
