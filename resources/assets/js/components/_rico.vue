@@ -145,7 +145,7 @@ export default {
         },
         loadSensor(sensor) {
             if (isNaN(sensor.id)) return;
-            history.pushState({ id: sensor.id }, "Sensor", "/sensors/"+sensor.id);
+            history.pushState({ id: sensor.id }, "Sensor", "/dash/sensors/"+sensor.id);
             this.sensor = this.renderGraphData(sensor);
         },
         renderGraphData(sensor) {
