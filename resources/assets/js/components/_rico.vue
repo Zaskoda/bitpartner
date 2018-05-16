@@ -158,7 +158,7 @@ export default {
                 reading.bar.bottom = y+2;
                 reading.bar.y = y;
                 reading.bar.x = x;
-                reading.temperatureF = Math.round(reading.temperature * 1.8 + 32,2);
+                reading.temperatureF = Math.round(reading.temperature * 1.8 + 32.2);
                 reading.temperature = Math.round(reading.temperature,2);
                 reading.bar.color= rgbToHex(reading.red,reading.green,reading.blue);
                 sensor.points += x+','+y+' ';

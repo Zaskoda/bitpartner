@@ -26,7 +26,7 @@
                             @guest
                             <li><a href="{{ route('register') }}">Register</a></li>
                             @else
-                                <li><a href="/home">Dashboard</a></li>
+                                <li><a href="/dash">Dashboard</a></li>
                             @endguest
                         </li>
                         <li>
