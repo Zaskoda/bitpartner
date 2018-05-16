@@ -24,9 +24,8 @@
                     <ul class="nav navbar-nav">
                         <li>
                             @guest
-                            <li><a href="{{ route('register') }}">Register</a></li>
                             @else
-                                <li><a href="/dash">Dashboard</a></li>
+                                <li><a href="/dash">My Dashboard</a></li>
                             @endguest
                         </li>
                         <li>
