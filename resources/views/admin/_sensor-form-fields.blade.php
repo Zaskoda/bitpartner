@@ -13,7 +13,6 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
                         <label for="summary" class="col-2-sm control-label">Owner</label>
                         <div class="col-10-sm">

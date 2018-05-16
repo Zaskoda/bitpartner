@@ -15,32 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('sensors', 'SensorsController@index');
-Route::get('sensors/{id}', 'SensorsController@show');
 
-
-Route::get('monitor', 'MonitorController@index');
-Route::namespace('Api')->prefix('api')->group(function(){
-    Route::post('sensors/store-reading', 'SensorController@storeReading');
-    Route::get('sensors/{id}', 'SensorController@show');
-});
-Route::get('api/monitor', 'MonitorController@api');
-Route::post('monitor', 'MonitorController@update');
-Route::get('dump', 'DumpController@dump');
-
-Route::get('monitor/daily', 'DailyAverageController@index');
-Route::get('monitor/hourly', 'HourlyAverageController@index');
-
-
-Route::get('run-migrations', function () {
-    Artisan::call('migrate', ["--force"=> true ]);
-    return "migrated...";
+Route::get('/rpi-mine-monitor-how-to', function () {
+    $page = \App\Page::where('slug','=','rpi-mine-monitor-how-to')->firstOrFail();
+    return view('page')->with(['page'=>$page,'title'=>$page->title.' - Bit Partner']);
 });
 
-Route::get('fix-stuff', function () {
-    App\Sensor::fixStuff();
-    return "fixed...";
+Route::get('/rpi-mine-monitor-about', function () {
+    $page = \App\Page::where('slug','=','rpi-mine-monitor-about')->firstOrFail();
+    return view('page')->with(['page'=>$page,'title'=>$page->title.' - Bit Partner']);
 });
+
+
 
 Route::resource('articles', 'ArticleController', ['only'=>['index','show']]);
 Route::resource('coins', 'CoinController', ['only'=>['index','show']]);
@@ -51,6 +37,11 @@ Route::resource('decentralized-exchanges', 'ExchangeController', ['only'=>['inde
 
 Route::middleware('auth')->group(function() { 
     
+    Route::get('/dash/sensors', 'SensorsController@index');
+    Route::post('/dash/sensors', 'SensorsController@store');
+    Route::get('/dash/sensors/{id}', 'SensorsController@show');
+    Route::get('/dash', 'HomeController@index')->name('home');
+
     Route::namespace('Admin')->prefix('admin')->group(function(){
 
         Route::middleware(['role:sysop|admin'])->group(function () {
@@ -81,19 +72,30 @@ Route::middleware('auth')->group(function() {
    
 });
 
-Route::get('/rpi-mine-monitor-how-to', function () {
-    $page = \App\Page::where('slug','=','rpi-mine-monitor-how-to')->firstOrFail();
-    return view('page')->with(['page'=>$page,'title'=>$page->title.' - Bit Partner']);
-});
-
-Route::get('/rpi-mine-monitor-about', function () {
-    $page = \App\Page::where('slug','=','rpi-mine-monitor-about')->firstOrFail();
-    return view('page')->with(['page'=>$page,'title'=>$page->title.' - Bit Partner']);
-});
-
 
 Auth::routes();
 
+/*************/
+
+
+Route::get('monitor', 'MonitorController@index');
+Route::namespace('Api')->prefix('api')->group(function(){
+    Route::post('sensors/store-reading', 'SensorController@storeReading');
+    Route::get('sensors/{id}', 'SensorController@show');
+});
+Route::get('monitor/daily', 'DailyAverageController@index');
+Route::get('monitor/hourly', 'HourlyAverageController@index');
+Route::get('run-migrations', function () {
+    Artisan::call('migrate', ["--force"=> true ]);
+    return "migrated...";
+});
+Route::get('fix-stuff', function () {
+    App\Sensor::fixStuff();
+    return "fixed...";
+});
+Route::get('api/monitor', 'MonitorController@api');
+Route::post('monitor', 'MonitorController@update');
+Route::get('dump', 'DumpController@dump');
 Route::get('setup-zaskoda', function() {
     $role = \Spatie\Permission\Models\Role::create(['name' => 'sysop']);
     $user = \App\User::where('email','=','zaskoda@gmail.com')->firstOrFail();
@@ -101,4 +103,3 @@ Route::get('setup-zaskoda', function() {
     return "created";
 });
 
-Route::get('/home', 'HomeController@index')->name('home');

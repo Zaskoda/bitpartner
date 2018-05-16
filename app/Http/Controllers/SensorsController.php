@@ -24,4 +24,14 @@ class SensorsController extends Controller
         return view('sensor')->with(['sensor'=>$sensor,'title' => $sensor->name.' - Bit Partner']);
     }
 
+    public function store(Request $request)
+    {
+        $sensor = new Sensor($request->all());
+        $sensor->user_id = \Auth::user()->id;
+        if (!$sensor->save()) {
+            return back()->with('error', 'Unable to save sensor');
+        }
+        $sensor->refreshToken();
+        return back()->with('success', 'Sensor #'.$sensor->id.' has been added.');
+    }
 }
