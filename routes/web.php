@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/dash/sensors', 'SensorsController@index');
     Route::post('/dash/sensors', 'SensorsController@store');
     Route::get('/dash/sensors/{id}', 'SensorsController@show');
-    Route::get('/dash', 'HomeController@index')->name('home');
+    Route::get('/dash', 'DashController@index')->name('dash');
 
     Route::namespace('Admin')->prefix('admin')->group(function(){
 

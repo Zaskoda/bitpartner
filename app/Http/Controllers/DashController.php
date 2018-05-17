@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Sensor;
 
-class HomeController extends Controller
+class DashController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sensors = Sensor::where('user_id','=',\Auth::user()->id)->get();
-        return view('home')->with(['sensors'=>$sensors]);
+        $sensors = Sensor::orderBy('id','desc')->where('user_id','=',\Auth::user()->id)->get();
+        return view('dash')->with(['sensors'=>$sensors]);
     }
 }
