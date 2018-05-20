@@ -23,25 +23,27 @@
                             
                         </p>
                     </div>
+                    <hr>
                     <div class=" text-left">
                         <div id="{{ $sensor->id }}-reading">
                             @if($lastreading = $sensor->lastReading())
                                 <div class="pull-right text-center" style="border-radius: 5px; color: #fff; text-shadow: -1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000; border: 2px solid #000; padding: 0.60em;background: rgb({{ $lastreading->red }},{{ $lastreading->green }},{{ $lastreading->blue }});">                               
                                     <b>{{ round($lastreading->lux,1) }}</b>
                                 </div>
-                                <div  style="font-size: 1.5em"><b>{{ round($lastreading->temperature,1) }}c /</b> {{ round($lastreading->tempInF(),1) }}f</div>
+                                <div  style="font-size: 1.5em"><b>{{ round($lastreading->temperature,1) }}c/</b>{{ round($lastreading->tempInF(),1) }}f</div>
                                 <small>
-                                <div>{{ Carbon\Carbon::parse($lastreading->timestamp)->format('M d @ H:i') }} </div>
                                 <div>{{ $lastreading->timeSince() }} ago</div>
+                                <div>{{ Carbon\Carbon::parse($lastreading->timestamp)->format('M d @ H:i') }} </div>
                                 </small>
                             @else
                                 <small>No readings found for this sensor.</small>
                             @endif
                         </div>
                     </div>                                    
+                    <hr>
                     <div class=" text-center">
-                        <small>Readings:</small> {{ number_format($sensor->readings->count()) }}
-                        <small>id</small> #{{ $sensor->id }}
+                    <small>sensor id</small> #{{ $sensor->id }} <small>with</small> {{ number_format($sensor->readings->count()) }} <small>readings:</small>
+                        
                     </div>
                 </a>
             </div>
