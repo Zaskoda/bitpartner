@@ -11,7 +11,7 @@
         </div>
         <div class="panel-body">
             <div class="text-center">
-            {{ $readings->appends(\Input::except('page'))->links() }}
+                    {{ $readings->appends(Illuminate\Support\Facades\Input::except('page'))->links() }}
             </div>
 
             <line-chart :data="{@foreach ($readings as $reading) '{{ $reading->timestamp }}': {{ $reading->tempInF() }},  @endforeach}"></line-chart>

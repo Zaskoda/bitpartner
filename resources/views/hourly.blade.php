@@ -12,7 +12,7 @@
         </div>
         <div class="panel-body">
             <div class="text-center">
-            {{ $readings->appends(\Input::except('page'))->links() }}
+                    {{ $readings->appends(Illuminate\Support\Facades\Input::except('page'))->links() }}
             </div>
 
             <line-chart :data="{@foreach ($readings->reverse() as $reading) '{{ Carbon\Carbon::parse($reading->datestamp)->format('m-d') }} {{ $reading->hourstamp }}:00': {{ $reading->tempInF() }},  @endforeach}"></line-chart>
