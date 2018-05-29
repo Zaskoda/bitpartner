@@ -46197,6 +46197,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_chartkick__["a" /* default */], { Chartk
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+Vue.component('rico-graph-hourly', __webpack_require__(79));
 Vue.component('rico-graph', __webpack_require__(74));
 Vue.component('rico', __webpack_require__(45));
 
@@ -46290,7 +46291,7 @@ exports = module.exports = __webpack_require__(39)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.doghouse {\n  margin: 0.5em 1em;\n  padding: 0.5em;\n  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n  background: #ffe;\n  border: 2px solid #ffe;\n}\n.loading {\n  border: 2px solid #f88;\n  background: #edd;\n}\n", ""]);
 
 // exports
 
@@ -46303,6 +46304,24 @@ exports.push([module.i, "", ""]);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -46457,6 +46476,7 @@ function rgbToHex(r, g, b) {
     data: function data() {
         return {
             sensor: {},
+            thingsLoading: 0,
             readings: {
                 realtime: null,
                 daily: null,
@@ -46465,8 +46485,8 @@ function rgbToHex(r, g, b) {
             drawdata: {},
             page: 1,
             sensorid: 0,
-            showRealtime: true,
-            showHourly: false,
+            showRealtime: false,
+            showHourly: true,
             showDaily: false,
             from: '',
             to: '',
@@ -46485,10 +46505,13 @@ function rgbToHex(r, g, b) {
 
             //the slug is a number
             if (!isNaN(this.sensorid)) {
+                this.thingsLoading++;
                 getSensor(this.sensorid, this.page).then(function (x) {
+                    _this.thingsLoading--;
                     _this.loadSensor(x);
                 }).catch(function (err) {
-                    alert('error loading product: ' + JSON.stringify(err.message));
+                    _this.thingsLoading--;
+                    alert('error loading sensor: ' + JSON.stringify(err.message));
                 });
             }
         },
@@ -46520,15 +46543,31 @@ function rgbToHex(r, g, b) {
 
             if (isNaN(sensor.id)) return;
             history.pushState({ id: sensor.id }, "Sensor", "/dash/sensors/" + sensor.id);
+
+            this.thingsLoading++;
             getRealtimeReadings(this.sensorid, this.from, this.to).then(function (x) {
                 _this2.readings.realtime = x;
+                _this2.thingsLoading--;
+            }).catch(function (err) {
+                _this2.thingsLoading--;
             });
+
+            this.thingsLoading++;
             getHourlyReadings(this.sensorid, this.from, this.to).then(function (x) {
                 _this2.readings.hourly = x;
+                _this2.thingsLoading--;
+            }).catch(function (err) {
+                _this2.thingsLoading--;
             });
+
+            this.thingsLoading++;
             getDailyReadings(this.sensorid, this.from, this.to).then(function (x) {
                 _this2.readings.daily = x;
+                _this2.thingsLoading--;
+            }).catch(function (err) {
+                _this2.thingsLoading--;
             });
+
             this.sensor = this.renderGraphData(sensor);
         },
         renderGraphData: function renderGraphData(sensor) {
@@ -46575,11 +46614,11 @@ function rgbToHex(r, g, b) {
 
             return sensor;
         },
-        pageLeft: function pageLeft() {
+        pageRight: function pageRight() {
             this.page++;
             this.fetchSensor();
         },
-        pageRight: function pageRight() {
+        pageLeft: function pageLeft() {
             if (this.page > 1) {
                 this.page--;
             }
@@ -46606,315 +46645,346 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "doghouse" }, [
-    _c("h1", [_vm._v("sensor: "), _c("b", [_vm._v(_vm._s(this.sensor.name))])]),
-    _vm._v(" "),
-    _c("ul", { staticClass: "nav nav-tabs nav-justified" }, [
-      _c("li", { class: { active: _vm.showRealtime } }, [
-        _c(
-          "a",
-          {
-            on: {
-              click: function($event) {
-                _vm.switchRealtime()
-              }
-            }
-          },
-          [_vm._v("Realtime Readings")]
-        )
+  return _c(
+    "div",
+    { staticClass: "doghouse", class: { loading: this.thingsLoading > 0 } },
+    [
+      _c("h1", [
+        _vm._v("sensor: "),
+        _c("b", [_vm._v(_vm._s(this.sensor.name))])
       ]),
       _vm._v(" "),
-      _c("li", { class: { active: _vm.showHourly } }, [
-        _c(
-          "a",
-          {
-            on: {
-              click: function($event) {
-                _vm.switchHourly()
-              }
-            }
-          },
-          [_vm._v("Hourly Digest")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("li", { class: { active: _vm.showDaily } }, [
-        _c(
-          "a",
-          {
-            staticClass: "nav-tab",
-            on: {
-              click: function($event) {
-                _vm.switchDaily()
-              }
-            }
-          },
-          [_vm._v("Daily digest")]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-body" }, [
-        this.showRealtime
-          ? _c("div", [
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-heading" }, [
+          _c("ul", { staticClass: "nav nav-pills nav-justified" }, [
+            _c("li", { class: { active: _vm.showRealtime } }, [
               _c(
-                "svg",
+                "a",
                 {
-                  attrs: {
-                    width: "100%",
-                    viewBox: "0 0 480 160",
-                    xmlns: "http://www.w3.org/2000/svg",
-                    "xmlns:xlink": "http://www.w3.org/1999/xlink"
+                  staticClass: "nav-tab",
+                  on: {
+                    click: function($event) {
+                      _vm.switchRealtime()
+                    }
                   }
                 },
-                [
-                  _c("rect", {
-                    staticStyle: { fill: "#ffe09d" },
-                    attrs: { x: "25", width: "455", height: "180" }
-                  }),
-                  _vm._v(" "),
-                  _vm._l(12, function(n, index) {
-                    return _c("g", [
+                [_vm._v("Realtime Readings")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { class: { active: _vm.showHourly } }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-tab",
+                  on: {
+                    click: function($event) {
+                      _vm.switchHourly()
+                    }
+                  }
+                },
+                [_vm._v("Hourly Digest")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { class: { active: _vm.showDaily } }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-tab",
+                  on: {
+                    click: function($event) {
+                      _vm.switchDaily()
+                    }
+                  }
+                },
+                [_vm._v("Daily digest")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-body" }, [
+          this.showRealtime
+            ? _c("div", [
+                _c(
+                  "svg",
+                  {
+                    attrs: {
+                      width: "100%",
+                      viewBox: "0 0 480 160",
+                      xmlns: "http://www.w3.org/2000/svg",
+                      "xmlns:xlink": "http://www.w3.org/1999/xlink"
+                    }
+                  },
+                  [
+                    _c("rect", {
+                      staticStyle: { fill: "#ffe09d" },
+                      attrs: { x: "25", width: "455", height: "180" }
+                    }),
+                    _vm._v(" "),
+                    _vm._l(12, function(n, index) {
+                      return _c("g", [
+                        _c("line", {
+                          staticStyle: { "stroke-width": "0.3" },
+                          attrs: {
+                            x1: "0",
+                            y1: n * 10,
+                            x2: "480",
+                            y2: n * 10,
+                            stroke: "#886622"
+                          }
+                        })
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c("g", [
+                      _c(
+                        "text",
+                        {
+                          attrs: {
+                            x: "2",
+                            y: "7",
+                            "font-family": "Verdana",
+                            "font-size": "4"
+                          }
+                        },
+                        [_vm._v(" " + _vm._s(this.graph.toptemp) + "c ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "text",
+                        {
+                          attrs: {
+                            x: "2",
+                            y: "115",
+                            "font-family": "Verdana",
+                            "font-size": "4"
+                          }
+                        },
+                        [_vm._v(" " + _vm._s(this.graph.bottomtemp) + "c ")]
+                      ),
+                      _vm._v(" "),
                       _c("line", {
-                        staticStyle: { "stroke-width": "0.3" },
+                        staticStyle: { "stroke-width": "1" },
                         attrs: {
-                          x1: "0",
-                          y1: n * 10,
-                          x2: "480",
-                          y2: n * 10,
-                          stroke: "#886622"
+                          x1: "25",
+                          y1: "0",
+                          x2: 25,
+                          y2: 120,
+                          stroke: "#cc8866"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("line", {
+                        staticStyle: { "stroke-width": "1" },
+                        attrs: {
+                          x1: "480",
+                          y1: "0",
+                          x2: 480,
+                          y2: 120,
+                          stroke: "#cc8866"
                         }
                       })
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _c("g", [
-                    _c(
-                      "text",
-                      {
-                        attrs: {
-                          x: "2",
-                          y: "7",
-                          "font-family": "Verdana",
-                          "font-size": "4"
-                        }
-                      },
-                      [_vm._v(" " + _vm._s(this.graph.toptemp) + "c ")]
-                    ),
+                    ]),
                     _vm._v(" "),
                     _c(
-                      "text",
-                      {
-                        attrs: {
-                          x: "2",
-                          y: "115",
-                          "font-family": "Verdana",
-                          "font-size": "4"
-                        }
-                      },
-                      [_vm._v(" " + _vm._s(this.graph.bottomtemp) + "c ")]
+                      "g",
+                      [
+                        _vm._l(this.sensor.readings, function(reading) {
+                          return _c("line", {
+                            key: reading.id,
+                            staticStyle: { "stroke-width": "4" },
+                            attrs: {
+                              x1: reading.bar.x,
+                              y1: reading.bar.top,
+                              x2: reading.bar.x,
+                              y2: reading.bar.bottom,
+                              "stroke-linecap": "round",
+                              stroke: reading.bar.color
+                            }
+                          })
+                        }),
+                        _vm._v(" "),
+                        _vm._l(this.sensor.readings, function(reading) {
+                          return _c(
+                            "text",
+                            {
+                              key: reading.id,
+                              attrs: {
+                                "font-color": "#fff",
+                                x: reading.bar.x + 2,
+                                y: reading.bar.top + 1,
+                                transform:
+                                  "rotate(-90," +
+                                  reading.bar.x +
+                                  "," +
+                                  reading.bar.top +
+                                  ")",
+                                "font-family": "Verdana",
+                                "font-size": "4"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(reading.temperature) +
+                                  "c / " +
+                                  _vm._s(reading.temperatureF) +
+                                  "f"
+                              )
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _vm._l(this.sensor.readings, function(reading) {
+                          return _c("circle", {
+                            key: reading.id,
+                            staticStyle: { "stroke-width": "4" },
+                            attrs: {
+                              cx: reading.bar.x,
+                              cy: reading.bar.y,
+                              r: "2",
+                              fill: reading.bar.color
+                            }
+                          })
+                        })
+                      ],
+                      2
                     ),
                     _vm._v(" "),
-                    _c("line", {
-                      staticStyle: { "stroke-width": "1" },
+                    _c("polyline", {
+                      staticStyle: { "stroke-linejoin": "round" },
                       attrs: {
-                        x1: "25",
-                        y1: "0",
-                        x2: 25,
-                        y2: 120,
-                        stroke: "#cc8866"
+                        points: this.sensor.points,
+                        fill: "none",
+                        stroke: "#cc6600",
+                        "stroke-width": "1px"
                       }
                     }),
                     _vm._v(" "),
-                    _c("line", {
-                      staticStyle: { "stroke-width": "1" },
-                      attrs: {
-                        x1: "480",
-                        y1: "0",
-                        x2: 480,
-                        y2: 120,
-                        stroke: "#cc8866"
-                      }
+                    _c("rect", {
+                      staticStyle: { fill: "rgb(128,92,64)" },
+                      attrs: { x: "0", y: "120", width: "480", height: "40" }
                     })
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "g",
-                    [
-                      _vm._l(this.sensor.readings, function(reading) {
-                        return _c("line", {
-                          key: reading.id,
-                          staticStyle: { "stroke-width": "4" },
-                          attrs: {
-                            x1: reading.bar.x,
-                            y1: reading.bar.top,
-                            x2: reading.bar.x,
-                            y2: reading.bar.bottom,
-                            "stroke-linecap": "round",
-                            stroke: reading.bar.color
-                          }
-                        })
-                      }),
-                      _vm._v(" "),
-                      _vm._l(this.sensor.readings, function(reading) {
-                        return _c(
-                          "text",
-                          {
-                            key: reading.id,
-                            attrs: {
-                              "font-color": "#fff",
-                              x: reading.bar.x + 2,
-                              y: reading.bar.top + 1,
-                              transform:
-                                "rotate(-90," +
-                                reading.bar.x +
-                                "," +
-                                reading.bar.top +
-                                ")",
-                              "font-family": "Verdana",
-                              "font-size": "4"
-                            }
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(reading.temperature) +
-                                "c / " +
-                                _vm._s(reading.temperatureF) +
-                                "f"
-                            )
-                          ]
-                        )
-                      }),
-                      _vm._v(" "),
-                      _vm._l(this.sensor.readings, function(reading) {
-                        return _c("circle", {
-                          key: reading.id,
-                          staticStyle: { "stroke-width": "4" },
-                          attrs: {
-                            cx: reading.bar.x,
-                            cy: reading.bar.y,
-                            r: "2",
-                            fill: reading.bar.color
-                          }
-                        })
-                      })
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c("polyline", {
-                    staticStyle: { "stroke-linejoin": "round" },
-                    attrs: {
-                      points: this.sensor.points,
-                      fill: "none",
-                      stroke: "#cc6600",
-                      "stroke-width": "1px"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("rect", {
-                    staticStyle: { fill: "rgb(128,92,64)" },
-                    attrs: { x: "0", y: "120", width: "480", height: "40" }
+                  ],
+                  2
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          this.showHourly
+            ? _c(
+                "div",
+                [
+                  _c("rico-graph-hourly", {
+                    attrs: { sensor: this.sensor, graph: this.graph }
                   })
                 ],
-                2
+                1
               )
-            ])
-          : _vm._e(),
+            : _vm._e(),
+          _vm._v(" "),
+          this.showDaily
+            ? _c(
+                "div",
+                [
+                  _c("rico-graph", {
+                    attrs: {
+                      title: this.sensor.name + " Daily Readings",
+                      sensor: this.sensor,
+                      graph: this.graph
+                    }
+                  })
+                ],
+                1
+              )
+            : _vm._e()
+        ])
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-center" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            on: {
+              click: function($event) {
+                _vm.pageLeft()
+              }
+            }
+          },
+          [_vm._v("<")]
+        ),
+        _vm._v("\n            " + _vm._s(this.page) + "\n            "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            on: {
+              click: function($event) {
+                _vm.pageRight()
+              }
+            }
+          },
+          [_vm._v(">")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-inline text-center" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            on: {
+              click: function($event) {
+                _vm.sensorLeft()
+              }
+            }
+          },
+          [_vm._v("<")]
+        ),
         _vm._v(" "),
-        this.showDaily
-          ? _c("div", [_c("rico-graph", { attrs: { sensor: this.sensor } })], 1)
-          : _vm._e(),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text" },
+          domProps: { value: this.sensorid }
+        }),
         _vm._v(" "),
-        this.showHourly
-          ? _c(
-              "div",
-              [
-                _c("rico-graph", {
-                  attrs: { sensor: this.sensor, graph: this.graph }
-                })
-              ],
-              1
-            )
-          : _vm._e()
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-default",
+            on: {
+              click: function($event) {
+                _vm.sensorRight()
+              }
+            }
+          },
+          [_vm._v(">")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "date" },
+          domProps: { value: this.from }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "date" },
+          domProps: { value: this.to }
+        })
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-center" }, [
+        _vm._v(
+          "\n            [" +
+            _vm._s(this.thingsLoading) +
+            " thigns loading]\n        "
+        )
       ])
-    ]),
-    _vm._v(" "),
-    _c("p", { staticClass: "text-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-default",
-          on: {
-            click: function($event) {
-              _vm.pageLeft()
-            }
-          }
-        },
-        [_vm._v("<")]
-      ),
-      _vm._v("\n            " + _vm._s(this.page) + "\n            "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-default",
-          on: {
-            click: function($event) {
-              _vm.pageRight()
-            }
-          }
-        },
-        [_vm._v(">")]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-inline text-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-default",
-          on: {
-            click: function($event) {
-              _vm.sensorLeft()
-            }
-          }
-        },
-        [_vm._v("<")]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: this.sensorid }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-default",
-          on: {
-            click: function($event) {
-              _vm.sensorRight()
-            }
-          }
-        },
-        [_vm._v(">")]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "date" },
-        domProps: { value: this.from }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "date" },
-        domProps: { value: this.to }
-      })
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -47074,6 +47144,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -47086,7 +47159,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return "0 0 " + this.graph.width + " " + this.graph.height;
         }
     },
-    props: ['sensor', 'graph'],
+    props: ['sensor', 'title', 'graph'],
     data: function data() {
         return {};
     },
@@ -47103,7 +47176,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._v("\n    " + _vm._s(this.sensor.name) + "\n    "),
+    _vm._v("\n    " + _vm._s(_vm.title) + "\n    \n    "),
     _c(
       "svg",
       {
@@ -47123,8 +47196,24 @@ var render = function() {
         _c("rect", {
           staticStyle: { fill: "#ffe09d" },
           attrs: { x: "25", width: "455", height: "160" }
-        })
-      ]
+        }),
+        _vm._v(" "),
+        _vm._t("default", [
+          _c(
+            "text",
+            {
+              attrs: {
+                x: "30",
+                y: "30",
+                "font-family": "Verdana",
+                "font-size": "40"
+              }
+            },
+            [_vm._v(" no data ")]
+          )
+        ])
+      ],
+      2
     )
   ])
 }
@@ -47135,6 +47224,186 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-5aa5d8ee", module.exports)
+  }
+}
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(80)
+}
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(82)
+/* template */
+var __vue_template__ = __webpack_require__(83)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/rico/_rico-graph-hourly.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-440fc560", Component.options)
+  } else {
+    hotAPI.reload("data-v-440fc560", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(81);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(40)("f97061dc", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-440fc560\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./_rico-graph-hourly.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-440fc560\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./_rico-graph-hourly.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(39)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 82 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'rico-graph-hourly',
+    mounted: function mounted() {},
+
+    watch: {},
+    computed: {
+        viewbox: function viewbox() {
+            return "0 0 " + this.graph.width + " " + this.graph.height;
+        }
+    },
+    props: ['sensor', 'title', 'graph'],
+    data: function data() {
+        return {};
+    },
+
+    methods: {}
+});
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "rico-graph",
+        {
+          attrs: {
+            title: this.sensor.name + " Daily Readings",
+            sensor: this.sensor,
+            graph: this.graph
+          }
+        },
+        [
+          _c(
+            "text",
+            {
+              attrs: {
+                x: "30",
+                y: "30",
+                "font-family": "Verdana",
+                "font-size": "40"
+              }
+            },
+            [_vm._v(" Data! ")]
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-440fc560", module.exports)
   }
 }
 
