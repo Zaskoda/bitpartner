@@ -8,12 +8,18 @@ use App\Reading;
 
 class SensorController extends ApiController
 {
+    public function index()
+    {
+        $sensors = Sensor::all();
+        return $sensors;
+    }
 
     public function show(Request $request, $id)
     {
         if (is_numeric($id)) {
             $sensor = Sensor::where('id','=',$id)->with(['readings'=>function($query) {
-                    $query->paginate(20);
+                    $query->orderBy('timestamp','desc')
+                        ->paginate(80);
                 }])->firstOrFail();
             if ($sensor) return $sensor;
         }

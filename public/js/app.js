@@ -46197,6 +46197,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_chartkick__["a" /* default */], { Chartk
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+Vue.component('rico-graph', __webpack_require__(74));
 Vue.component('rico', __webpack_require__(45));
 
 var app = new Vue({
@@ -46362,6 +46363,24 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 //Sensor fetch
@@ -46369,6 +46388,48 @@ function getSensor(id) {
     var page = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
     var url = '/api/sensors/' + id + '?page=' + page;
+    return axios.get(url).then(function (x) {
+        return x.data;
+    }).catch(function (err) {
+        alert('error: ' + JSON.stringify(err.message));
+        return false;
+    });
+}
+
+//Fetch realtime readings.
+function getRealtimeReadings(id) {
+    var from = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var to = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+    var url = '/api/sensors/' + id + '/readings?from=' + from + '&to=' + to;
+    return axios.get(url).then(function (x) {
+        return x.data;
+    }).catch(function (err) {
+        alert('error: ' + JSON.stringify(err.message));
+        return false;
+    });
+}
+
+//Fetch hourly readings.
+function getHourlyReadings(id) {
+    var from = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var to = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+    var url = '/api/sensors/' + id + '/hourly?from=' + from + '&to=' + to;
+    return axios.get(url).then(function (x) {
+        return x.data;
+    }).catch(function (err) {
+        alert('error: ' + JSON.stringify(err.message));
+        return false;
+    });
+}
+
+//Fetch dail readings.
+function getDailyReadings(id) {
+    var from = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var to = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+    var url = '/api/sensors/' + id + '/hourly?from=' + from + '&to=' + to;
     return axios.get(url).then(function (x) {
         return x.data;
     }).catch(function (err) {
@@ -46396,14 +46457,21 @@ function rgbToHex(r, g, b) {
     data: function data() {
         return {
             sensor: {},
+            readings: {
+                realtime: null,
+                daily: null,
+                hourly: null
+            },
             drawdata: {},
             page: 1,
             sensorid: 0,
             showRealtime: true,
             showHourly: false,
             showDaily: false,
+            from: '',
+            to: '',
             graph: {
-                height: 120,
+                height: 160,
                 width: 480,
                 toptemp: 65,
                 bottomtemp: 0
@@ -46448,8 +46516,19 @@ function rgbToHex(r, g, b) {
             }, 50000);
         },
         loadSensor: function loadSensor(sensor) {
+            var _this2 = this;
+
             if (isNaN(sensor.id)) return;
             history.pushState({ id: sensor.id }, "Sensor", "/dash/sensors/" + sensor.id);
+            getRealtimeReadings(this.sensorid, this.from, this.to).then(function (x) {
+                _this2.readings.realtime = x;
+            });
+            getHourlyReadings(this.sensorid, this.from, this.to).then(function (x) {
+                _this2.readings.hourly = x;
+            });
+            getDailyReadings(this.sensorid, this.from, this.to).then(function (x) {
+                _this2.readings.daily = x;
+            });
             this.sensor = this.renderGraphData(sensor);
         },
         renderGraphData: function renderGraphData(sensor) {
@@ -46505,6 +46584,16 @@ function rgbToHex(r, g, b) {
                 this.page--;
             }
             this.fetchSensor();
+        },
+        sensorLeft: function sensorLeft() {
+            if (this.sensorid > 1) {
+                this.sensorid--;
+            }
+            this.fetchSensor();
+        },
+        sensorRight: function sensorRight() {
+            this.sensorid++;
+            this.fetchSensor();
         }
     }
 });
@@ -46525,7 +46614,6 @@ var render = function() {
         _c(
           "a",
           {
-            attrs: { href: "#" },
             on: {
               click: function($event) {
                 _vm.switchRealtime()
@@ -46540,7 +46628,6 @@ var render = function() {
         _c(
           "a",
           {
-            attrs: { href: "#" },
             on: {
               click: function($event) {
                 _vm.switchHourly()
@@ -46556,7 +46643,6 @@ var render = function() {
           "a",
           {
             staticClass: "nav-tab",
-            attrs: { href: "#" },
             on: {
               click: function($event) {
                 _vm.switchDaily()
@@ -46570,162 +46656,188 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "panel panel-default" }, [
       _c("div", { staticClass: "panel-body" }, [
-        _c(
-          "svg",
-          {
-            attrs: {
-              width: "100%",
-              viewBox: "0 0 480 160",
-              xmlns: "http://www.w3.org/2000/svg",
-              "xmlns:xlink": "http://www.w3.org/1999/xlink"
-            }
-          },
-          [
-            _c("rect", {
-              staticStyle: { fill: "#ffe09d" },
-              attrs: { x: "25", width: "455", height: "180" }
-            }),
-            _vm._v(" "),
-            _vm._l(12, function(n, index) {
-              return _c("g", [
-                _c("line", {
-                  staticStyle: { "stroke-width": "0.3" },
-                  attrs: {
-                    x1: "0",
-                    y1: n * 10,
-                    x2: "480",
-                    y2: n * 10,
-                    stroke: "#886622"
-                  }
-                })
-              ])
-            }),
-            _vm._v(" "),
-            _c("g", [
+        this.showRealtime
+          ? _c("div", [
               _c(
-                "text",
+                "svg",
                 {
                   attrs: {
-                    x: "2",
-                    y: "7",
-                    "font-family": "Verdana",
-                    "font-size": "4"
+                    width: "100%",
+                    viewBox: "0 0 480 160",
+                    xmlns: "http://www.w3.org/2000/svg",
+                    "xmlns:xlink": "http://www.w3.org/1999/xlink"
                   }
                 },
-                [_vm._v(" " + _vm._s(this.graph.toptemp) + "c ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "text",
-                {
-                  attrs: {
-                    x: "2",
-                    y: "115",
-                    "font-family": "Verdana",
-                    "font-size": "4"
-                  }
-                },
-                [_vm._v(" " + _vm._s(this.graph.bottomtemp) + "c ")]
-              ),
-              _vm._v(" "),
-              _c("line", {
-                staticStyle: { "stroke-width": "1" },
-                attrs: { x1: "25", y1: "0", x2: 25, y2: 120, stroke: "#cc8866" }
-              }),
-              _vm._v(" "),
-              _c("line", {
-                staticStyle: { "stroke-width": "1" },
-                attrs: {
-                  x1: "480",
-                  y1: "0",
-                  x2: 480,
-                  y2: 120,
-                  stroke: "#cc8866"
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c(
-              "g",
-              [
-                _vm._l(this.sensor.readings, function(reading) {
-                  return _c("line", {
-                    key: reading.id,
-                    staticStyle: { "stroke-width": "4" },
-                    attrs: {
-                      x1: reading.bar.x,
-                      y1: reading.bar.top,
-                      x2: reading.bar.x,
-                      y2: reading.bar.bottom,
-                      "stroke-linecap": "round",
-                      stroke: reading.bar.color
-                    }
-                  })
-                }),
-                _vm._v(" "),
-                _vm._l(this.sensor.readings, function(reading) {
-                  return _c(
-                    "text",
-                    {
-                      key: reading.id,
+                [
+                  _c("rect", {
+                    staticStyle: { fill: "#ffe09d" },
+                    attrs: { x: "25", width: "455", height: "180" }
+                  }),
+                  _vm._v(" "),
+                  _vm._l(12, function(n, index) {
+                    return _c("g", [
+                      _c("line", {
+                        staticStyle: { "stroke-width": "0.3" },
+                        attrs: {
+                          x1: "0",
+                          y1: n * 10,
+                          x2: "480",
+                          y2: n * 10,
+                          stroke: "#886622"
+                        }
+                      })
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("g", [
+                    _c(
+                      "text",
+                      {
+                        attrs: {
+                          x: "2",
+                          y: "7",
+                          "font-family": "Verdana",
+                          "font-size": "4"
+                        }
+                      },
+                      [_vm._v(" " + _vm._s(this.graph.toptemp) + "c ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "text",
+                      {
+                        attrs: {
+                          x: "2",
+                          y: "115",
+                          "font-family": "Verdana",
+                          "font-size": "4"
+                        }
+                      },
+                      [_vm._v(" " + _vm._s(this.graph.bottomtemp) + "c ")]
+                    ),
+                    _vm._v(" "),
+                    _c("line", {
+                      staticStyle: { "stroke-width": "1" },
                       attrs: {
-                        "font-color": "#fff",
-                        x: reading.bar.x + 2,
-                        y: reading.bar.top + 1,
-                        transform:
-                          "rotate(-90," +
-                          reading.bar.x +
-                          "," +
-                          reading.bar.top +
-                          ")",
-                        "font-family": "Verdana",
-                        "font-size": "4"
+                        x1: "25",
+                        y1: "0",
+                        x2: 25,
+                        y2: 120,
+                        stroke: "#cc8866"
                       }
-                    },
+                    }),
+                    _vm._v(" "),
+                    _c("line", {
+                      staticStyle: { "stroke-width": "1" },
+                      attrs: {
+                        x1: "480",
+                        y1: "0",
+                        x2: 480,
+                        y2: 120,
+                        stroke: "#cc8866"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "g",
                     [
-                      _vm._v(
-                        _vm._s(reading.temperature) +
-                          "c / " +
-                          _vm._s(reading.temperatureF) +
-                          "f"
-                      )
-                    ]
-                  )
-                }),
-                _vm._v(" "),
-                _vm._l(this.sensor.readings, function(reading) {
-                  return _c("circle", {
-                    key: reading.id,
-                    staticStyle: { "stroke-width": "4" },
+                      _vm._l(this.sensor.readings, function(reading) {
+                        return _c("line", {
+                          key: reading.id,
+                          staticStyle: { "stroke-width": "4" },
+                          attrs: {
+                            x1: reading.bar.x,
+                            y1: reading.bar.top,
+                            x2: reading.bar.x,
+                            y2: reading.bar.bottom,
+                            "stroke-linecap": "round",
+                            stroke: reading.bar.color
+                          }
+                        })
+                      }),
+                      _vm._v(" "),
+                      _vm._l(this.sensor.readings, function(reading) {
+                        return _c(
+                          "text",
+                          {
+                            key: reading.id,
+                            attrs: {
+                              "font-color": "#fff",
+                              x: reading.bar.x + 2,
+                              y: reading.bar.top + 1,
+                              transform:
+                                "rotate(-90," +
+                                reading.bar.x +
+                                "," +
+                                reading.bar.top +
+                                ")",
+                              "font-family": "Verdana",
+                              "font-size": "4"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(reading.temperature) +
+                                "c / " +
+                                _vm._s(reading.temperatureF) +
+                                "f"
+                            )
+                          ]
+                        )
+                      }),
+                      _vm._v(" "),
+                      _vm._l(this.sensor.readings, function(reading) {
+                        return _c("circle", {
+                          key: reading.id,
+                          staticStyle: { "stroke-width": "4" },
+                          attrs: {
+                            cx: reading.bar.x,
+                            cy: reading.bar.y,
+                            r: "2",
+                            fill: reading.bar.color
+                          }
+                        })
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c("polyline", {
+                    staticStyle: { "stroke-linejoin": "round" },
                     attrs: {
-                      cx: reading.bar.x,
-                      cy: reading.bar.y,
-                      r: "2",
-                      fill: reading.bar.color
+                      points: this.sensor.points,
+                      fill: "none",
+                      stroke: "#cc6600",
+                      "stroke-width": "1px"
                     }
+                  }),
+                  _vm._v(" "),
+                  _c("rect", {
+                    staticStyle: { fill: "rgb(128,92,64)" },
+                    attrs: { x: "0", y: "120", width: "480", height: "40" }
                   })
+                ],
+                2
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        this.showDaily
+          ? _c("div", [_c("rico-graph", { attrs: { sensor: this.sensor } })], 1)
+          : _vm._e(),
+        _vm._v(" "),
+        this.showHourly
+          ? _c(
+              "div",
+              [
+                _c("rico-graph", {
+                  attrs: { sensor: this.sensor, graph: this.graph }
                 })
               ],
-              2
-            ),
-            _vm._v(" "),
-            _c("polyline", {
-              staticStyle: { "stroke-linejoin": "round" },
-              attrs: {
-                points: this.sensor.points,
-                fill: "none",
-                stroke: "#cc6600",
-                "stroke-width": "1px"
-              }
-            }),
-            _vm._v(" "),
-            _c("rect", {
-              staticStyle: { fill: "rgb(128,92,64)" },
-              attrs: { x: "0", y: "120", width: "480", height: "40" }
-            })
-          ],
-          2
-        )
+              1
+            )
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
@@ -46757,10 +46869,49 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("p", [
+    _c("div", { staticClass: "form-inline text-center" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default",
+          on: {
+            click: function($event) {
+              _vm.sensorLeft()
+            }
+          }
+        },
+        [_vm._v("<")]
+      ),
+      _vm._v(" "),
       _c("input", {
+        staticClass: "form-control",
         attrs: { type: "text" },
         domProps: { value: this.sensorid }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default",
+          on: {
+            click: function($event) {
+              _vm.sensorRight()
+            }
+          }
+        },
+        [_vm._v(">")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "date" },
+        domProps: { value: this.from }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "date" },
+        domProps: { value: this.to }
       })
     ])
   ])
@@ -46786,6 +46937,206 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(75)
+}
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(77)
+/* template */
+var __vue_template__ = __webpack_require__(78)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/rico/_rico-graph.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5aa5d8ee", Component.options)
+  } else {
+    hotAPI.reload("data-v-5aa5d8ee", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(76);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(40)("697c85e8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5aa5d8ee\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./_rico-graph.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5aa5d8ee\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./_rico-graph.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(39)(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'rico-graph',
+    mounted: function mounted() {},
+
+    watch: {},
+    computed: {
+        viewbox: function viewbox() {
+            return "0 0 " + this.graph.width + " " + this.graph.height;
+        }
+    },
+    props: ['sensor', 'graph'],
+    data: function data() {
+        return {};
+    },
+
+    methods: {}
+});
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._v("\n    " + _vm._s(this.sensor.name) + "\n    "),
+    _c(
+      "svg",
+      {
+        attrs: {
+          width: "100%",
+          viewBox: _vm.viewbox,
+          xmlns: "http://www.w3.org/2000/svg",
+          "xmlns:xlink": "http://www.w3.org/1999/xlink"
+        }
+      },
+      [
+        _c("rect", {
+          staticStyle: { fill: "#000000" },
+          attrs: { x: "0", y: "0", width: "480", height: "160" }
+        }),
+        _vm._v(" "),
+        _c("rect", {
+          staticStyle: { fill: "#ffe09d" },
+          attrs: { x: "25", width: "455", height: "160" }
+        })
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5aa5d8ee", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -81,7 +81,11 @@ Auth::routes();
 Route::get('monitor', 'MonitorController@index');
 Route::namespace('Api')->prefix('api')->group(function(){
     Route::post('sensors/store-reading', 'SensorController@storeReading');
+    Route::get('sensors/', 'SensorController@index');
     Route::get('sensors/{id}', 'SensorController@show');
+    Route::get('sensors/{id}/readings', 'SensorReadingController@index');
+    Route::get('sensors/{id}/hourly', 'SensorHourlyController@index');
+    Route::get('sensors/{id}/daily', 'SensorDailyController@index');
 });
 Route::get('monitor/daily', 'DailyAverageController@index');
 Route::get('monitor/hourly', 'HourlyAverageController@index');

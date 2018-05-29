@@ -24,6 +24,7 @@ Vue.use(VueChartkick, { Chartkick });
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+Vue.component('rico-graph', require('./components/rico/_rico-graph.vue'));
 Vue.component('rico', require('./components/_rico.vue'));
 
 const app = new Vue({
